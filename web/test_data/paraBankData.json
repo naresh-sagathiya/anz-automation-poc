@@ -1,0 +1,47 @@
+{
+  "registration": {
+    "firstName": "Alpha",
+    "lastName": "Nova",
+    "address": "101 Test Lane",
+    "city": "MockCity",
+    "state": "TestState",
+    "zipCode": "12345",
+    "phone": "5551234567",
+    "ssn": "111223333",
+    "usernamePrefix": "alpha",
+    "password": "Alpha@123",
+    "confirmPassword": "Alpha@123"
+  },
+
+  "account": {
+    "accountType": "SAVINGS"
+  },
+
+  "transfer": {
+    "amount": "25"
+  },
+
+  "billPay": {
+    "payeeName": "Demo Utilities",
+    "address": "202 Sample Road",
+    "city": "MockCity",
+    "state": "TestState",
+    "zipCode": "12345",
+    "phone": "5559876543",
+    "account": "ACC10001",
+    "verifyAccount": "ACC10001",
+    "amount": "15"
+  },
+
+  "loan": {
+    "amount": "5000",
+    "downPayment": "500"
+  },
+
+  "customerCare": {
+    "name": "Alpha Nova",
+    "email": "alpha.nova@test.example",
+    "phone": "5551234567",
+    "message": "Automated test inquiry for validation."
+  }
+}
