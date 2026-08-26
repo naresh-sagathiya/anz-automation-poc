@@ -1,0 +1,43 @@
+{
+  "name": "anz-automation-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:api": "cucumber-js --profile api",
+    "test:web": "cucumber-js --profile web",
+    "test:mobile": "cucumber-js --profile mobile",
+    "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
+    "test:android": "cucumber-js --profile android",
+    "appium:start": "appium",
+    "appium:install-uiatomator2": "appium driver install uiautomator2",
+    "start:locale:server": "node api/mock-server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naresh-sagathiya/anz-automation-poc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naresh-sagathiya/anz-automation-poc/issues"
+  },
+  "homepage": "https://github.com/naresh-sagathiya/anz-automation-poc#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "appium": "^2.5.4",
+    "cross-env": "^10.1.0"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^13.2.1",
+    "ajv": "^8.20.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "webdriverio": "^9.15.1"
+  }
+}

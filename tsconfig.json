@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["node", "@cucumber/cucumber"]
+  },
+  "include": [
+    "features/**/*.ts",
+    "steps/**/*.ts",
+    "api/**/*.ts",
+    "support/**/*.ts",
+    "utils/**/*.ts",
+    "web/**/*.ts"
+  ]
+}
