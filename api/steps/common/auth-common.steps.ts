@@ -32,7 +32,7 @@ Then(
 When(
   "I access customer {string}",
   async function (this: CustomWorld, customerId: string) {
-    this.response = await this.customerService.getCustomer(
+    this.response = await this.authService.getCustomer(
       customerId,
       this.accessToken,
     );

@@ -85,4 +85,15 @@ export default class AuthService {
       },
     );
   }
+
+  async getCustomer(
+    customerId: string,
+    accessToken: string,
+  ): Promise<APIResponse> {
+    return await this.apiClient.get(`/customers/${customerId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  }
 }

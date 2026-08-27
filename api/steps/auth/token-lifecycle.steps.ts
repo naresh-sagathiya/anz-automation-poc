@@ -57,7 +57,7 @@ Then("a new access token should be returned", function (this: CustomWorld) {
 When(
   "I access customer {string} using the new access token",
   async function (this: CustomWorld, customerId: string) {
-    this.response = await this.customerService.getCustomer(
+    this.response = await this.authService.getCustomer(
       customerId,
       this.newAccessToken,
     );
@@ -90,7 +90,7 @@ When("I revoke the access token", async function (this: CustomWorld) {
 When(
   "I access customer {string} using the revoked access token",
   async function (this: CustomWorld, customerId: string) {
-    this.response = await this.customerService.getCustomer(
+    this.response = await this.authService.getCustomer(
       customerId,
       this.accessToken,
     );

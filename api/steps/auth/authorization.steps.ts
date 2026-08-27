@@ -4,7 +4,7 @@ import { CustomWorld } from "../../support/world";
 When(
   "I access customer {string} without an access token",
   async function (this: CustomWorld, customerId: string) {
-    this.response = await this.customerService.getCustomer(
+    this.response = await this.authService.getCustomer(
       customerId,
       "",
     );
@@ -15,7 +15,7 @@ When(
 When(
   "I access customer {string} with malformed token",
   async function (this: CustomWorld, customerId: string) {
-    this.response = await this.customerService.getCustomer(customerId, "abc.invalid.token");
+    this.response = await this.authService.getCustomer(customerId, "abc.invalid.token");
   
     this.errorBody = await this.response.json();
   },
