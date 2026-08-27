@@ -2,6 +2,10 @@
   "name": "anz-automation-poc",
   "version": "1.0.0",
   "description": "",
+  "allowScripts": {
+    "appium-uiautomator2-driver": true,
+    "appium-chromium-driver": true
+  },
   "main": "index.js",
   "scripts": {
     "test:api": "cucumber-js --profile api",
@@ -27,10 +31,12 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
+    "appium": "^3.7.0",
+    "appium-chromium-driver": "^3.0.8",
+    "appium-uiautomator2-driver": "^8.5.0",
+    "cross-env": "^10.1.0",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2",
-    "appium": "^2.5.4",
-    "cross-env": "^10.1.0"
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "@cucumber/cucumber": "^13.2.1",
