@@ -1,5 +1,5 @@
 import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
-
+import { AccountService } from "../services/AccountService";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
 import AuthService from "../services/AuthService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
@@ -36,6 +36,16 @@ export class CustomWorld extends World {
 
   customerService!: CustomerService;
 
+  accountService!: AccountService;
+  customerId!: number;
+  accounts: Array<{ id: number; customerId: number; type: "CHECKING" | "SAVINGS" | "LOAN"; balance: number }> = [];
+  selectedAccount!: { id: number; customerId: number; type: "CHECKING" | "SAVINGS" | "LOAN"; balance: number };
+  transactions: Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }> = [];
+  filteredTransactions: Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }> = [];
+  filteredAmount!: number;
+  pages: Array<Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }>> = [];
+
+
   constructor(options: IWorldOptions) {
     super(options);
   }
@@ -47,6 +57,7 @@ export class CustomWorld extends World {
 
     this.authService = new AuthService(this.requestContext);
     this.customerService = new CustomerService(this.requestContext);
+    this.accountService = new AccountService(this.requestContext);
   }
 
   async dispose(): Promise<void> {
