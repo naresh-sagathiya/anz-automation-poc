@@ -18,9 +18,8 @@ export class MobileWorld extends World {
   }
 
   async initialize() {
-    // Launch a chromium instance with the specified device profile
+    // Launch a chromium instance suitable for phone-sized mobile testing.
     this.browser = await chromium.launch({ headless });
-    
     // Use device from environment or default device config
     let deviceConfig: any = {
       viewport: { width: 768, height: 1024 },
