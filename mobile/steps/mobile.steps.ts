@@ -21,15 +21,19 @@ After(async function (this: MobileWorld) {
 });
 
 Given('I open the parabank mobile site', async function (this: MobileWorld) {
-  await this.page.goto('https://parabank.parasoft.com/parabank', {
+  const apiBaseUrl = process.env.API_BASE_URL;
+  const derivedBaseUrl = apiBaseUrl ? apiBaseUrl.replace(/\/services\/bank\/?$/, '') : undefined;
+  const mobileBaseUrl = process.env.MOBILE_BASE_URL || process.env.PARABANK_BASE_URL || derivedBaseUrl || 'https://parabank.parasoft.com/parabank';
+
+  await this.page.goto(mobileBaseUrl, {
     waitUntil: 'domcontentloaded',
     timeout: 30000,
   });
 });
 
 Given('I login with valid mobile credentials', async function (this: MobileWorld) {
-  const user = process.env.PARABANK_USER || 'demo';
-  const pass = process.env.PARABANK_PASS || 'password';
+  const user = process.env.PARABANK_USER || 'john';
+  const pass = process.env.PARABANK_PASS || 'demo';
   const page = this.page;
 
   await page.fill('input[name="username"]', user);
