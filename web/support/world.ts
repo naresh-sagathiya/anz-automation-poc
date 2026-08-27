@@ -24,6 +24,7 @@ export class CustomWorld extends World {
     password: string;
   };
   openedAccountId?: string;
+  paymentRequestCount?: number;
 
 
   constructor(options: IWorldOptions) {

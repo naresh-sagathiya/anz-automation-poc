@@ -28,8 +28,8 @@
     "state": "TestState",
     "zipCode": "12345",
     "phone": "5559876543",
-    "account": "ACC10001",
-    "verifyAccount": "ACC10001",
+    "account": "987654",
+    "verifyAccount": "987654",
     "amount": "15"
   },
 
