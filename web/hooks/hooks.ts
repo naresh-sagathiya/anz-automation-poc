@@ -17,7 +17,7 @@ Before(async function (this: CustomWorld) {
   this.page = await this.context.newPage();
 
   // Open ParaBank
-  await this.page.goto(process.env.BASE_URL!);
+  await this.page.goto(process.env.WEB_BASE_URL!);
 });
 
 After(async function (this: CustomWorld, scenario) {

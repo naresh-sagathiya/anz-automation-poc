@@ -23,6 +23,7 @@ export class CustomWorld extends World {
     username: string;
     password: string;
   };
+  openedAccountId?: string;
 
 
   constructor(options: IWorldOptions) {
