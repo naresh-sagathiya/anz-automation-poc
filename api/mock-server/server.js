@@ -7,7 +7,7 @@ app.use(express.json());
 
 const PORT = Number(process.env.PORT || 4010);
 const JWT_SECRET = process.env.JWT_SECRET || "anz-poc-secret-change-me";
-const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 60);
+const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 5);
 const REFRESH_TOKEN_SECONDS = Number(process.env.REFRESH_TOKEN_SECONDS || 900);
 const MFA_SECONDS = Number(process.env.MFA_SECONDS || 120);
 const MFA_MAX_ATTEMPTS = 3;
