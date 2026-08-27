@@ -43,5 +43,14 @@
     "email": "alpha.nova@test.example",
     "phone": "5551234567",
     "message": "Automated test inquiry for validation."
+  },
+
+  "UpdateContactInfo": {
+    "address": "101 Updated Lane",
+    "city": "UpdatedCity",
+    "state": "UpdatedState",
+    "zipCode": "98765",
+    "phone": "41234567340"
   }
+
 }
