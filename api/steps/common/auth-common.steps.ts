@@ -1,4 +1,4 @@
-import { Given, Then } from "@cucumber/cucumber";
+import { Given, Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
 
@@ -26,5 +26,21 @@ Then(
   "the API error code should be {string}",
   function (this: CustomWorld, expectedCode: string) {
     expect(this.errorBody.code).toBe(expectedCode);
+  },
+);
+
+When(
+  "I access customer {string}",
+  async function (this: CustomWorld, customerId: string) {
+    this.response = await this.customerService.getCustomer(
+      customerId,
+      this.accessToken,
+    );
+    if (this.response.status() === 200) {
+      this.responseBody = await this.response.json();
+    } else {
+      this.errorBody = await this.response.json();
+    }
+    console.log("Get customer response status:", this.response.status());
   },
 );

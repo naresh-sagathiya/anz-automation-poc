@@ -3,6 +3,7 @@ import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
 import AuthService from "../services/AuthService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
+import CustomerService from "../services/CustomerService";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -33,6 +34,8 @@ export class CustomWorld extends World {
 
   newAccessToken!: string;
 
+  customerService!: CustomerService;
+
   constructor(options: IWorldOptions) {
     super(options);
   }
@@ -43,6 +46,7 @@ export class CustomWorld extends World {
     });
 
     this.authService = new AuthService(this.requestContext);
+    this.customerService = new CustomerService(this.requestContext);
   }
 
   async dispose(): Promise<void> {

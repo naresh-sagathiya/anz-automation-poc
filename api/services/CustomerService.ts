@@ -8,8 +8,15 @@ export default class CustomerApi {
     this.apiClient = new ApiClient(request);
   }
 
-  async getCustomer(customerId: number): Promise<APIResponse> {
-    return await this.apiClient.get(`/customers/${customerId}`);
+  async getCustomer(
+    customerId: string,
+    accessToken: string,
+  ): Promise<APIResponse> {
+    return await this.apiClient.get(`/customers/${customerId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   }
 
   async getCustomerAccounts(customerId: number): Promise<APIResponse> {
