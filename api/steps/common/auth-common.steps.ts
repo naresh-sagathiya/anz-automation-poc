@@ -41,6 +41,5 @@ When(
     } else {
       this.errorBody = await this.response.json();
     }
-    console.log("Get customer response status:", this.response.status());
   },
 );
