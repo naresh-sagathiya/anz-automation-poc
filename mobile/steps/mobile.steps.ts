@@ -1,6 +1,7 @@
 import { Given, When, Then, Before, After } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { MobileWorld } from '../support/world';
+import { MobileLoginPage } from '../pages/MobileLoginPage';
 import { MobileTransferPage } from '../pages/MobileTransferPage';
 
 // Type augmentation for world
@@ -21,24 +22,13 @@ After(async function (this: MobileWorld) {
 });
 
 Given('I open the parabank mobile site', async function (this: MobileWorld) {
-  await this.page.goto('https://parabank.parasoft.com/parabank', {
-    waitUntil: 'domcontentloaded',
-    timeout: 30000,
-  });
+  await new MobileLoginPage(this.page).open();
 });
 
 Given('I login with valid mobile credentials', async function (this: MobileWorld) {
   const user = process.env.PARABANK_USER || 'demo';
   const pass = process.env.PARABANK_PASS || 'password';
-  const page = this.page;
-
-  await page.fill('input[name="username"]', user);
-  await page.fill('input[name="password"]', pass);
-  await page.click('input[value="Log In"]');
-
-  await page.waitForSelector('text=Accounts Overview', { timeout: 20000 }).catch(() => {
-    // fallback: some pages load differently; allow the page to settle before continuing
-  });
+  await new MobileLoginPage(this.page).login(user, pass);
 });
 
 When('I navigate to the Transfer Funds page', async function (this: MobileWorld) {

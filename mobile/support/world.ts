@@ -1,6 +1,6 @@
 import { World, IWorldOptions, setWorldConstructor, setDefaultTimeout } from '@cucumber/cucumber';
 import dotenv from 'dotenv';
-import { chromium, Browser, Page, BrowserContext } from 'playwright';
+import { chromium, Browser, Page, BrowserContext, devices } from 'playwright';
 
 dotenv.config();
 setDefaultTimeout(30000);
@@ -16,17 +16,15 @@ export class MobileWorld extends World {
     super(options);
   }
 
-  async initialize() {
-    // Launch a chromium instance suitable for mobile testing (iPad-like viewport)
+  async initialize(profile: 'android' | 'ios' = 'ios') {
     this.browser = await chromium.launch({ headless });
-    this.context = await this.browser.newContext({
-      viewport: { width: 768, height: 1024 },
-      deviceScaleFactor: 2,
-      isMobile: true,
-      hasTouch: true,
-      userAgent:
-        'Mozilla/5.0 (iPad; CPU OS 13_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Mobile/15E148 Safari/604.1',
-    });
+    await this.useProfile(profile);
+  }
+
+  async useProfile(profile: 'android' | 'ios'): Promise<void> {
+    if (this.context) await this.context.close();
+    const device = profile === 'android' ? devices['Pixel 5'] : devices['iPhone 12'];
+    this.context = await this.browser.newContext({ ...device });
     this.page = await this.context.newPage();
   }
 
