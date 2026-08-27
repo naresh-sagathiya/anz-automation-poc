@@ -23,7 +23,7 @@ export default class ApiClient {
     APILogger.request("POST", endpoint);
 
     const response = await this.request.post(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 
@@ -36,7 +36,7 @@ export default class ApiClient {
     APILogger.request("PUT", endpoint);
 
     const response = await this.request.put(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 
@@ -53,7 +53,7 @@ export default class ApiClient {
     APILogger.request("PATCH", endpoint);
 
     const response = await this.request.patch(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 

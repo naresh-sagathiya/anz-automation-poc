@@ -15,6 +15,8 @@ export interface LoginResponse {
   expiresIn: number;
   expiresAt: string;
   user: LoginUser;
+  message: string;
+  code: string;
 }
 
 export interface MfaChallengeResponse {

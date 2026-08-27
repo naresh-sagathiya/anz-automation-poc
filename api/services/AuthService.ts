@@ -39,7 +39,9 @@ export default class AuthService {
 
   async createMfaChallenge(accessToken: string): Promise<APIResponse> {
     return await this.apiClient.post("/auth/mfa/challenge", undefined, {
-      Authorization: `Bearer ${accessToken}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
   }
 
@@ -57,7 +59,9 @@ export default class AuthService {
         code,
       },
       {
-        Authorization: `Bearer ${accessToken}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
     );
   }
@@ -75,7 +79,9 @@ export default class AuthService {
         token,
       },
       {
-        Authorization: `Bearer ${accessToken}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
     );
   }
