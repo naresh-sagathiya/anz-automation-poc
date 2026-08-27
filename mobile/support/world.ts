@@ -17,24 +17,25 @@ export class MobileWorld extends World {
     super(options);
   }
 
-  async initialize() {
-    // Launch a chromium instance suitable for phone-sized mobile testing.
+  async initialize(profile?: 'android' | 'ios') {
+    // Launch a chromium instance suitable for mobile testing (iPad-like viewport)
     this.browser = await chromium.launch({ headless });
-    // Use device from environment or default device config
-    let deviceConfig: any = {
+    await this.useProfile(profile);
+  }
+
+  async useProfile(profile?: 'android' | 'ios'): Promise<void> {
+    if (this.context) await this.context.close();
+    const profileDevice = profile === 'android' ? 'Pixel 5' : profile === 'ios' ? 'iPhone 12' : device;
+    const deviceConfig = profileDevice in devices
+      ? devices[profileDevice as keyof typeof devices]
+      : {
       viewport: { width: 768, height: 1024 },
       deviceScaleFactor: 2,
       isMobile: true,
       hasTouch: true,
       userAgent:
         'Mozilla/5.0 (iPad; CPU OS 13_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Mobile/15E148 Safari/604.1',
-    };
-
-    // Use Playwright's built-in device definitions if available
-    if (device in devices) {
-      deviceConfig = devices[device as keyof typeof devices];
-    }
-
+      };
     this.context = await this.browser.newContext(deviceConfig);
     this.page = await this.context.newPage();
   }

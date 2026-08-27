@@ -1,6 +1,7 @@
 import { Given, When, Then, Before, After } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { MobileWorld } from '../support/world';
+import { MobileLoginPage } from '../pages/MobileLoginPage';
 import { MobileTransferPage } from '../pages/MobileTransferPage';
 
 // Type augmentation for world
