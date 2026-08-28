@@ -30,6 +30,36 @@
 			"type": "shell",
 			"command": "npm.cmd run test:mobile -- --tags @ID-M7",
 			"isBackground": false
+		},
+		{
+			"label": "run-idm9-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm9-verify-postfix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm9-final-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm9-stable-final",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm9-after-slower-throttle",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
+			"isBackground": false
 		}
 	]
 }

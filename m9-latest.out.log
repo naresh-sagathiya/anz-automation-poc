@@ -1,0 +1,19 @@
+
+> anz-automation-poc@1.0.0 test:mobile
+> cucumber-js --profile mobile --tags @ID-M9
+
+◇ injected env (11) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+..........F.
+
+Failed scenarios:
+  1) Loading state is shown and duplicate submit is blocked during slow network transfer # mobile\features\mobile_loading_state.feature:11
+       And the ID-M9 transfer completes successfully # mobile\steps\mobile.loading-state.steps.ts:254
+           page.waitForSelector: Timeout 60000ms exceeded.
+           Call log:
+           [2m  - waiting for locator('text=Transfer Complete') to be visible[22m
+           
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.loading-state.steps.ts:269:19)
+
+1 scenario (1 failed)
+12 steps (11 passed, 1 failed)
+1m 5.962s (1m 5.922s executing your code)
