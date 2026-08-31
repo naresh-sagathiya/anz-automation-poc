@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 import { MobileWorld } from '../support/world';
 import { MobileLoginPage } from '../pages/MobileLoginPage';
 import { MobileTransferPage } from '../pages/MobileTransferPage';
+import { installOfflineMobileMocks, offlineMobileUrl } from '../mocks/mobileMocks';
 
 // Type augmentation for world
 declare module '@cucumber/cucumber' {
@@ -10,6 +11,7 @@ declare module '@cucumber/cucumber' {
     browser: any;
     context: any;
     page: any;
+    deviceName: string;
   }
 }
 
@@ -30,6 +32,24 @@ Given('I open the parabank mobile site', async function (this: MobileWorld) {
     waitUntil: 'domcontentloaded',
     timeout: 30000,
   });
+});
+
+Given('I enable the mobile HAR recording and route mocks', async function (this: MobileWorld) {
+  await installOfflineMobileMocks(this.context);
+});
+
+When('I open the offline mobile ParaBank page', async function (this: MobileWorld) {
+  await this.page.goto(offlineMobileUrl, { waitUntil: 'domcontentloaded' });
+});
+
+Then('the offline mobile page should be displayed', async function (this: MobileWorld) {
+  await expect(this.page).toHaveTitle('ParaBank | Offline Mobile');
+  await expect(this.page.getByTestId('offline-status')).toHaveText('Offline mobile fixture');
+});
+
+Then('the offline mobile page should not request the live backend', async function (this: MobileWorld) {
+  expect(this.page.url()).toBe(offlineMobileUrl);
+  await expect(this.page.locator('#mobile-offline-fixture')).toBeVisible();
 });
 
 Given('I login with valid mobile credentials', async function (this: MobileWorld) {

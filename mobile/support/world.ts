@@ -6,12 +6,16 @@ dotenv.config();
 setDefaultTimeout(30000);
 
 const headless = process.env.HEADLESS !== 'false';
-const device = process.env.DEVICE || 'iPad';
+const configuredDevices = (process.env.MOBILE_DEVICES || process.env.DEVICE || 'iPad')
+  .split(',')
+  .map((name) => name.trim())
+  .filter(Boolean);
 
 export class MobileWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
+  deviceName!: string;
 
   constructor(options: IWorldOptions) {
     super(options);
@@ -25,7 +29,11 @@ export class MobileWorld extends World {
 
   async useProfile(profile?: 'android' | 'ios'): Promise<void> {
     if (this.context) await this.context.close();
-    const profileDevice = profile === 'android' ? 'Pixel 5' : profile === 'ios' ? 'iPhone 12' : device;
+    const workerId = Number.parseInt(process.env.CUCUMBER_WORKER_ID || '0', 10);
+    const deviceIndex = Number.isNaN(workerId) ? 0 : workerId % configuredDevices.length;
+    const configuredDevice = configuredDevices[deviceIndex];
+    const profileDevice = profile === 'android' ? 'Pixel 5' : profile === 'ios' ? 'iPhone 12' : configuredDevice;
+    this.deviceName = profileDevice;
     const deviceConfig = profileDevice in devices
       ? devices[profileDevice as keyof typeof devices]
       : {
