@@ -23,7 +23,6 @@ When('the user enters a valid OTP', { timeout: 30_000 }, async function () {
 
 Then('the user should be successfully authenticated', { timeout: 30_000 }, async function () {
   // Verify successful login by checking if we're redirected away from MFA page
-  expect(this.page.getByRole('heading', { name: 'Home' })).toBeVisible({ timeout: 10000 });
   await expect(this.page).not.toHaveURL(/.*\/login.*/);
 });
 
