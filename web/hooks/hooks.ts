@@ -1,5 +1,5 @@
 import { After, Before } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
+import { chromium, firefox, webkit } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { CustomWorld } from '../support/world';
@@ -8,7 +8,17 @@ import { TestUtils } from '../../utils/webTestutils';
 Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
-  this.browser = await chromium.launch({ headless: false });
+  const browserName = process.env.BROWSER?.toLowerCase();
+ 
+  if (browserName === 'chromium') {
+    this.browser = await chromium.launch({headless: false});
+  } else if (browserName === 'webkit') {
+    this.browser = await webkit.launch({headless: false});
+  }else if (browserName === 'firefox') {
+    this.browser = await firefox.launch({headless: false});
+  } else {
+    throw new Error(`Unsupported browser: ${browserName}`);
+  }
 
   // Create browser context
   this.context = await this.browser.newContext();

@@ -24,6 +24,7 @@ export class CustomWorld extends World {
     password: string;
   };
   openedAccountId?: string;
+  initialBalance?: number;
   paymentRequestCount?: number;
 
 

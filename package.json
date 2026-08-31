@@ -9,6 +9,8 @@
     "test:mobile": "cucumber-js --profile mobile",
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
     "test:android": "cucumber-js --profile android",
+    "allure:generate": "allure generate ./allure-results --output allure-report",
+    "allure:open": "allure open allure-report",
     "appium:start": "appium",
     "appium:install-uiatomator2": "appium driver install uiautomator2",
     "start:locale:server": "node api/mock-server/server.js"
@@ -27,10 +29,12 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
-    "tsx": "^4.23.12",
-    "typescript": "^7.0.2",
+    "allure": "^3.16.0",
+    "allure-cucumberjs": "^3.11.0",
     "appium": "^2.5.4",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "@cucumber/cucumber": "^13.2.1",

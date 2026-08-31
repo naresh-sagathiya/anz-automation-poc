@@ -23,7 +23,13 @@ module.exports = {
 
     requireModule: ["tsx/cjs"],
 
-    format: ["progress", "html:reports/web-cucumber-report.html"],
+    format: [
+      "progress",
+      "html:reports/web-cucumber-report.html",
+      "allure-cucumberjs/reporter",
+    ],
+
+    formatOptions: { resultsDir: "allure-results" },
 
     parallel: Number(process.env.PARALLEL_WORKERS || 1),
 
