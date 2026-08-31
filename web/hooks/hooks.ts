@@ -5,7 +5,7 @@ import path from 'path';
 import { CustomWorld } from '../support/world';
 import { TestUtils } from '../../utils/webTestutils';
 
-Before(async function (this: CustomWorld) {
+Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
   this.browser = await chromium.launch({ headless: false });
@@ -16,8 +16,10 @@ Before(async function (this: CustomWorld) {
   // Create page
   this.page = await this.context.newPage();
 
-  // Open ParaBank
-  await this.page.goto(process.env.WEB_BASE_URL!);
+  // Open ParaBank only if not an MFA test
+  if (!scenario.pickle.tags.some(tag => tag.name === '@mfa')) {
+    await this.page.goto(process.env.WEB_BASE_URL!);
+  }
 });
 
 After(async function (this: CustomWorld, scenario) {
