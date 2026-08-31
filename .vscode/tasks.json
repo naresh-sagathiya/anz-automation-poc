@@ -60,6 +60,66 @@
 			"type": "shell",
 			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
 			"isBackground": false
+		},
+		{
+			"label": "run-idm10-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-open-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-login-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-nav-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-final-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-feature-nav",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-self-contained",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-overview-nav",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-fallback-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-final-pass-check",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
 		}
 	]
 }
