@@ -1,6 +1,7 @@
 ﻿import { APIRequestContext, APIResponse } from "@playwright/test";
 
 import { APILogger } from "../utils/logger";
+import { withRetry, RetryOptions } from "../utils/retry";
 
 export default class ApiClient {
   constructor(protected request: APIRequestContext) {}
@@ -13,6 +14,14 @@ export default class ApiClient {
     APILogger.response(response.status(), endpoint);
 
     return response;
+  }
+
+  async getWithRetry(
+    endpoint: string,
+    options?: any,
+    retryOptions?: RetryOptions,
+  ): Promise<APIResponse> {
+    return withRetry(() => this.get(endpoint, options), retryOptions);
   }
 
   async post(

@@ -1,6 +1,7 @@
 import { Before, After, Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
+import { assertNoSensitiveFields } from "../../../utils/schema";
 
 Before(async function (this: CustomWorld) {
   await this.initialize();
@@ -101,6 +102,14 @@ Then(
 Then(
   "the login response should not contain the password",
   function (this: CustomWorld) {
+    assertNoSensitiveFields(this.responseBody, [
+      "password",
+      "ssn",
+      "socialSecurityNumber",
+      "dateOfBirth",
+      "cardNumber",
+      "accountNumber",
+    ]);
     const bodyText = JSON.stringify(this.responseBody).toLowerCase();
 
     expect(bodyText).not.toContain("password");

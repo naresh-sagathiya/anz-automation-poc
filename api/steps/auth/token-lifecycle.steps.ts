@@ -2,7 +2,7 @@ import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
 
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
-setDefaultTimeout(10000);
+setDefaultTimeout(120000);
 
 Given(
   "I wait for the access token to expire",

@@ -1,15 +1,18 @@
 export class APILogger {
+  private static redact(message: string) {
+    return message.replace(/(password|accessToken|refreshToken|cardNumber|accountNumber)(["']?\s*[:=]\s*["']?)[^,"'\s}]+/gi, "$1$2[REDACTED]");
+  }
   static info(message: string) {
-    console.log(`[INFO] ${message}`);
-    console.log(`[INFO] ${new Date().toISOString()} ${message}`);
+    console.log(this.redact(`[INFO] ${message}`));
+    console.log(this.redact(`[INFO] ${new Date().toISOString()} ${message}`));
   }
 
   static error(message: string) {
-    console.error(`[ERROR] ${message}`);
+    console.error(this.redact(`[ERROR] ${message}`));
   }
 
   static request(method: string, url: string) {
-    console.log(`[REQUEST] ${method} ${url}`);
+    console.log(this.redact(`[REQUEST] ${method} ${url}`));
   }
 
   static response(status: number, url: string) {

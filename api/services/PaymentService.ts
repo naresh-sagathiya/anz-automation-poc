@@ -1,83 +1,65 @@
-﻿import { APIRequestContext, expect } from '@playwright/test';
+import { APIRequestContext, APIResponse } from "@playwright/test";
+import ApiClient from "../../core/ApiClient";
+import { withRetry } from "../../utils/retry";
 
-export class PaymentService {
+export default class BankingPaymentService {
+  private readonly apiClient: ApiClient;
 
-    constructor(private request: APIRequestContext) {}
+  constructor(request: APIRequestContext) {
+    this.apiClient = new ApiClient(request);
+  }
 
-    async createPayment() {
+  create(
+    accessToken: string,
+    payload: unknown,
+    idempotencyKey?: string,
+  ): Promise<APIResponse> {
+    return this.apiClient.post("/payments", payload, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        ...(idempotencyKey ? { "Idempotency-Key": idempotencyKey } : {}),
+      },
+    });
+  }
 
-        const accountId = 12345;
-        const amount = 250.75;
+  getStatus(accessToken: string, paymentId: string): Promise<APIResponse> {
+    return this.apiClient.get(`/payments/${paymentId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }
 
-        const payload = {
-            name: 'John Utility Company',
-            address: {
-                street: '123 Main Street',
-                city: 'New York',
-                state: 'NY',
-                zipCode: '10001'
-            },
-            phoneNumber: '5551234567',
-            accountNumber: 987654321
-        };
+  getAudit(accessToken: string, paymentId: string): Promise<APIResponse> {
+    return this.apiClient.get(`/payments/${paymentId}/audit`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }
 
-        const response = await this.request.post(
-            `/billpay?accountId=${accountId}&amount=${amount}`,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: payload
-            }
-        );
+  updateStatus(
+    accessToken: string,
+    paymentId: string,
+    status: "PENDING" | "COMPLETED" | "FAILED",
+  ): Promise<APIResponse> {
+    return withRetry(
+      () =>
+        this.apiClient.post(
+          `/payments/${paymentId}/status`,
+          { status },
+          { headers: { Authorization: `Bearer ${accessToken}` } },
+        ),
+      { attempts: 2 },
+    );
+  }
 
-        expect(response.status()).toBe(201);
-
-        const responseBody = await response.json();
-
-        console.log('Payment Response:', responseBody);
-
-        expect(responseBody.payeeName)
-            .toBe(payload.name);
-
-        expect(responseBody.amount)
-            .toBe(amount);
-
-        expect(responseBody.accountId)
-            .toBe(accountId);
-
-        return responseBody;
-    }
-}
-
-
-
-
-
-
-if (require.main === module) {
-    (async () => {
-        // load env and create a Playwright API request context dynamically
-        await import('dotenv/config');
-        const { request } = await import('@playwright/test');
-
-        const baseURL = process.env.API_BASE_URL || process.env.API_BASE_URI || 'http://localhost:3000';
-
-        const apiContext = await request.newContext({
-            baseURL,
-            ignoreHTTPSErrors: true,
-            extraHTTPHeaders: { Accept: 'application/json' },
-        });
-
-        try {
-            const svc = new PaymentService(apiContext as any);
-            const result = await svc.createPayment();
-            console.log('PaymentService standalone result:', result);
-        } catch (e) {
-            console.error('PaymentService standalone error:', e);
-            process.exitCode = 1;
-        } finally {
-            await apiContext.dispose();
-        }
-    })();
+  probeRateLimit(accessToken: string, key: string): Promise<APIResponse> {
+    return withRetry(
+      () =>
+        this.apiClient.get("/rate-limit/probe", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Test-Key": key,
+          },
+        }),
+      { attempts: 4 },
+    );
+  }
 }
