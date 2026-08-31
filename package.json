@@ -17,6 +17,7 @@
     "test:mobile:parallel:headed": "cross-env HEADLESS=false cucumber-js --profile mobile --parallel 2",
     "test:mobile:devices:headed": "cross-env HEADLESS=false \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:android": "cucumber-js --profile android",
+    "test:bs": "tsx mobile/tests/parabank-login.ts",
     "test:android:parallel": "node scripts/run-android-parallel.js",
     "test:android:fold": "cross-env ANDROID_DEVICE_NAME=Pixel_10_Pro_Fold ANDROID_PLATFORM_VERSION=16 cucumber-js --profile android",
     "test:android:pixel5": "cross-env ANDROID_DEVICE_NAME=Pixel_5 ANDROID_PLATFORM_VERSION=35 cucumber-js --profile android",
