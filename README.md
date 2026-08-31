@@ -79,10 +79,15 @@ The main variables are:
 | `PARABANK_BASE_URL` | Fallback mobile base URL | Not set |
 | `HEADLESS` | Set to `false` to show mobile browser windows | `true` |
 | `DEVICE` | Playwright mobile device profile | `iPad` |
+| `MOBILE_DEVICES` | Comma-separated profiles assigned to parallel Cucumber workers | Value of `DEVICE` |
 | `BASE_URL` | URL used by web scenarios | Required for web tests |
 | `APPIUM_HOST` / `APPIUM_PORT` / `APPIUM_PATH` | Appium server connection | `127.0.0.1` / `4723` / `/` |
 | `ANDROID_DEVICE_NAME` | Android emulator name | `Pixel_10_Pro` |
 | `ANDROID_PLATFORM_VERSION` | Android version | `14` |
+| `ANDROID_UDID` | Optional ADB serial for selecting a specific emulator | Not set |
+| `ANDROID_PARABANK_URL` | URL opened in Android Chrome | Hosted ParaBank URL |
+| `ANDROID_UIAUTOMATOR2_SERVER_LAUNCH_TIMEOUT` | UiAutomator2 startup timeout in milliseconds | `120000` |
+| `ANDROID_ADB_EXEC_TIMEOUT` | ADB command timeout in milliseconds | `120000` |
 
 Mobile code also derives a base URL from `API_BASE_URL` when `MOBILE_BASE_URL` and `PARABANK_BASE_URL` are not set. The fallback is the hosted ParaBank URL.
 
@@ -99,10 +104,44 @@ npm run test:mobile
 npm run test:mobile:headed
 npm run test:mobile:parallel
 npm run test:mobile:parallel:headed
+npm run test:mobile:devices
+npm run test:mobile:devices:headed
 npm run test:android
+npm run test:android:parallel
 ```
 
-The headed mobile commands set `HEADLESS=false`. The parallel mobile commands run two Cucumber workers. Each scenario creates its own Cucumber World and browser context, so scenarios can run independently.
+The Android feature is emulator-independent. Select another AVD by setting `ANDROID_DEVICE_NAME` and `ANDROID_PLATFORM_VERSION`, or use the included examples:
+
+```powershell
+npm run test:android:pixel5
+npm run test:android:galaxy
+```
+
+The AVD name and Android version must match the emulator installed on the machine. The Pixel 5 and Galaxy commands are examples and can be overridden with environment variables when your AVD uses a different name or API level.
+
+To run Android scenarios in parallel, start the three AVDs first and then run:
+
+```powershell
+npm run test:android:parallel
+```
+
+This starts one Appium server and one Cucumber process per configured emulator. The default configuration targets `Pixel_10_Pro` on `emulator-5554`, `Pixel_6` on `emulator-5556`, and `Pixel_10` on `emulator-5558`, using Appium ports `4723`, `4725`, and `4727`. Override the definitions when your AVD names or serials differ:
+
+```powershell
+$env:ANDROID_DEVICES = "Pixel_10_Pro:emulator-5554:14:4723,Pixel_6:emulator-5556:17:4725,Pixel_10:emulator-5558:14:4727"
+npm.cmd run test:android:parallel -- --tags @chrome
+```
+
+Every emulator must have a unique ADB serial and Appium port. Use `adb devices` to confirm the serials before running.
+
+The headed mobile commands set `HEADLESS=false`. The parallel mobile commands run independent Cucumber workers. To run the same scenarios across multiple Playwright mobile profiles, use `test:mobile:devices`; it assigns workers to `iPad`, `iPhone 12`, and `Pixel 5`. You can provide a custom comma-separated profile list and matching worker count:
+
+```powershell
+$env:MOBILE_DEVICES = "iPad,iPhone 12,Galaxy S9"
+npm.cmd run test:mobile -- --parallel 3
+```
+
+Each scenario creates its own Cucumber World and browser context, so scenarios can run independently.
 
 Run a tagged subset by passing Cucumber options after the npm script:
 
@@ -164,8 +203,10 @@ npm run appium:install-uiatomator2
 4. Start Appium in one terminal:
 
 ```powershell
-npm run appium:start
+npm run appium:start:android
 ```
+
+The Android scenarios use Appium's `mobile: deepLink` command for Chrome launch, so the standard Appium server is sufficient. The older `appium:start:android` command remains available for other tests that explicitly require ADB shell access.
 
 5. Run the Android scenarios in a second terminal:
 
@@ -173,7 +214,41 @@ npm run appium:start
 npm run test:android
 ```
 
+### Pixel 10 Pro Fold (Android 16)
+
+The Pixel 10 Pro Fold AVD is supported with these properties:
+
+```text
+AVD name: Pixel_10_Pro_Fold
+Display name: Pixel 10 Pro Fold
+Android: 16 (API 36.1, Baklava)
+Image: Google Play x86_64
+```
+
+Start the already-created `Pixel_10_Pro_Fold` emulator, confirm its ADB serial, and run the dedicated command:
+
+```powershell
+adb devices
+npm run test:android:fold -- --tags @chrome
+```
+
+The dedicated command uses `ANDROID_DEVICE_NAME=Pixel_10_Pro_Fold` and `ANDROID_PLATFORM_VERSION=16`. If more than one emulator is connected, select the Fold explicitly by setting its ADB serial:
+
+```powershell
+$env:ANDROID_UDID = "<pixel-10-pro-fold-adb-serial>"
+npm run test:android:fold -- --tags @chrome
+```
+
+Chrome is launched automatically at `https://parabank.parasoft.com/parabank`. Override the URL when required:
+
+```powershell
+$env:ANDROID_PARABANK_URL = "https://parabank.parasoft.com/parabank"
+npm run test:android:fold -- --tags @chrome
+```
+
 The emulator must have Chrome installed. The Android flow uses coordinate-based interactions, so display size and Chrome state can affect the test.
+
+If PowerShell cannot find `adb`, add the Android SDK `platform-tools` directory to `PATH` or use the full path to `adb.exe`. The default Windows location is usually `%LOCALAPPDATA%\Android\Sdk\platform-tools`.
 
 ## Reports and Artifacts
 

@@ -12,15 +12,26 @@ After(async function (this: AndroidWorld) {
 
 Given('I launch Chrome on the Android emulator', async function (this: AndroidWorld) {
   const driver = this.driver;
-  // Open the URL using an Android intent so Chrome is launched with the target page
-  const url = 'https://parabank.parasoft.com/parabank';
-  await driver.execute('mobile: shell', { command: `am start -a android.intent.action.VIEW -d \"${url}\" -n com.android.chrome/com.google.android.apps.chrome.Main` });
+  const url = process.env.ANDROID_PARABANK_URL || 'https://parabank.parasoft.com/parabank';
+  await driver.execute('mobile: deepLink', {
+    url,
+    package: process.env.ANDROID_CHROME_PACKAGE || 'com.android.chrome',
+  });
+  await driver.pause(5000);
 });
 
 Given('I open the ParaBank login page', async function (this: AndroidWorld) {
   const driver = this.driver;
-  // Brief wait for the page to load in Chrome
-  await driver.pause(4000);
+  await driver.$('android=new UiSelector().className("android.webkit.WebView")').waitForDisplayed({ timeout: 30000 });
+});
+
+Given('I open the Android ParaBank page {string}', async function (this: AndroidWorld, path: string) {
+  const baseUrl = process.env.ANDROID_PARABANK_URL || 'https://parabank.parasoft.com/parabank';
+  const url = new URL(path, `${baseUrl.replace(/\/$/, '')}/`).toString();
+  await this.driver.execute('mobile: deepLink', {
+    url,
+    package: process.env.ANDROID_CHROME_PACKAGE || 'com.android.chrome',
+  });
 });
 
 When('I login with the Android emulator credentials', async function (this: AndroidWorld) {
@@ -28,49 +39,44 @@ When('I login with the Android emulator credentials', async function (this: Andr
   const username = process.env.PARABANK_USER || 'john';
   const password = process.env.PARABANK_PASS || 'demo';
 
-  // Best-effort coordinate-based interactions — may be fragile across different screen sizes
-  // Get device display size to calculate tap coordinates
   const rect = await driver.getWindowRect();
   const width = rect.width;
   const height = rect.height;
+  const tap = async (x: number, y: number) => {
+    await driver.performActions([{
+      type: 'pointer',
+      id: 'finger',
+      parameters: { pointerType: 'touch' },
+      actions: [
+        { type: 'pointerMove', duration: 0, x, y },
+        { type: 'pointerDown', button: 0 },
+        { type: 'pointerUp', button: 0 },
+      ],
+    }]);
+    await driver.releaseActions();
+  };
 
-  // Heuristics for field positions (tweak if required)
-  const usernameY = Math.floor(height * 0.40);
-  const passwordY = Math.floor(height * 0.50);
-  const loginY = Math.floor(height * 0.62);
-  const centerX = Math.floor(width / 2);
-
-  // Tap username field, input text
-  await driver.execute('mobile: shell', { command: `input tap ${centerX} ${usernameY}` });
-  await driver.execute('mobile: shell', { command: `input text ${username}` });
-  await driver.execute('mobile: shell', { command: 'input keyevent 61' }); // TAB
-
-  // Tap password field, input text
-  await driver.execute('mobile: shell', { command: `input tap ${centerX} ${passwordY}` });
-  await driver.execute('mobile: shell', { command: `input text ${password}` });
-
-  // Tap login button
-  await driver.execute('mobile: shell', { command: `input tap ${centerX} ${loginY}` });
-
-  // Wait for navigation
-  await driver.pause(5000);
+  // The Chrome WebView exposes its form fields in the hierarchy but not as
+  // independently addressable UiAutomator elements on this emulator.
+  await tap(Math.floor(width * 0.187), Math.floor(height * 0.518));
+  await driver.keys(username);
+  await tap(Math.floor(width * 0.187), Math.floor(height * 0.570));
+  await driver.keys(password);
+  await tap(Math.floor(width * 0.140), Math.floor(height * 0.603));
+  await driver.$('android=new UiSelector().textContains("Accounts Overview")').waitForDisplayed({ timeout: 30000 });
 });
 
 Then('I should see the account overview page', async function (this: AndroidWorld) {
   const driver = this.driver;
-  // As a fallback, verify Chrome is still foreground (best-effort). A precise web DOM check requires Chromedriver.
-  try {
-    // For Android native sessions, driver.getCurrentPackage() may be available
-    const pkg = await (driver as any).getCurrentPackage?.();
-    if (pkg) {
-      expect(pkg).toBe('com.android.chrome');
-      return;
-    }
-  } catch (e) {
-    // ignore and continue
-  }
+  const pkg = await (driver as any).getCurrentPackage?.();
+  expect(pkg).toBe('com.android.chrome');
+  await driver.$('android=new UiSelector().textContains("Accounts Overview")').waitForDisplayed({ timeout: 30000 });
+});
 
-  // Otherwise, just ensure the app remains responsive by taking a screenshot
-  const ss = await driver.takeScreenshot();
-  expect(ss).toBeTruthy();
+When('I open the Android mobile navigation link {string}', async function (this: AndroidWorld, linkName: string) {
+  await this.driver.$(`android=new UiSelector().text("${linkName}")`).click();
+});
+
+Then('the Android mobile page should display {string}', async function (this: AndroidWorld, text: string) {
+  await this.driver.$(`android=new UiSelector().textContains("${text}")`).waitForDisplayed({ timeout: 30000 });
 });
