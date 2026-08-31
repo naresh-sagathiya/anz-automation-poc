@@ -7,62 +7,168 @@ app.use(express.json());
 
 const PORT = Number(process.env.PORT || 4010);
 const JWT_SECRET = process.env.JWT_SECRET || "anz-poc-secret-change-me";
-const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 5);
-const REFRESH_TOKEN_SECONDS = Number(process.env.REFRESH_TOKEN_SECONDS || 900);
+const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 3600);
+const REFRESH_TOKEN_SECONDS = Number(
+  process.env.REFRESH_TOKEN_SECONDS || 86400,
+);
 const MFA_SECONDS = Number(process.env.MFA_SECONDS || 120);
 const MFA_MAX_ATTEMPTS = 3;
 const VALID_MFA_CODE = process.env.MFA_CODE || "123456";
 
 const users = new Map([
-  ["alice", {
-    userId: "USER-001",
-    username: "alice",
-    password: "Password123!",
-    customerId: "CUST-001"
-  }],
-  ["bob", {
-    userId: "USER-002",
-    username: "bob",
-    password: "Password123!",
-    customerId: "CUST-002"
-  }]
+  [
+    "alice",
+    {
+      userId: "USER-001",
+      username: "alice",
+      password: "Password123!",
+      customerId: "CUST-001",
+    },
+  ],
+  [
+    "bob",
+    {
+      userId: "USER-002",
+      username: "bob",
+      password: "Password123!",
+      customerId: "CUST-002",
+    },
+  ],
 ]);
 
 const customers = new Map([
-  ["CUST-001", {
-    customerId: "CUST-001",
-    firstName: "Alice",
-    lastName: "Smith",
-    email: "alice@example.com"
-  }],
-  ["CUST-002", {
-    customerId: "CUST-002",
-    firstName: "Bob",
-    lastName: "Jones",
-    email: "bob@example.com"
-  }]
+  [
+    "CUST-001",
+    {
+      customerId: "CUST-001",
+      firstName: "Alice",
+      lastName: "Smith",
+      email: "alice@example.com",
+    },
+  ],
+  [
+    "CUST-002",
+    {
+      customerId: "CUST-002",
+      firstName: "Bob",
+      lastName: "Jones",
+      email: "bob@example.com",
+    },
+  ],
 ]);
 
 const accounts = new Map([
-  ["CUST-001", [{
-    accountId: "ACC-001",
-    customerId: "CUST-001",
-    accountType: "SAVINGS",
-    currency: "AUD",
-    balance: 5000.00
-  }]],
-  ["CUST-002", [{
-    accountId: "ACC-002",
-    customerId: "CUST-002",
-    accountType: "CHECKING",
-    currency: "AUD",
-    balance: 7500.00
-  }]]
+  [
+    "CUST-001",
+    [
+      {
+        accountId: "ACC-001",
+        accountNumber: "XXXXXX001",
+        customerId: "CUST-001",
+        accountType: "SAVINGS",
+        currency: "AUD",
+        balance: 5000.0,
+        currentBalance: 5000.0,
+        availableBalance: 5000.0,
+        pendingBalance: 0.0,
+      },
+      {
+        accountId: "ACC-003",
+        accountNumber: "XXXXXX003",
+        customerId: "CUST-001",
+        accountType: "CHECKING",
+        currency: "AUD",
+        balance: 1000.0,
+        currentBalance: 1000.0,
+        availableBalance: 1000.0,
+        pendingBalance: 0.0,
+      },
+    ],
+  ],
+  [
+    "CUST-002",
+    [
+      {
+        accountId: "ACC-002",
+        accountNumber: "XXXXXX002",
+        customerId: "CUST-002",
+        accountType: "CHECKING",
+        currency: "AUD",
+        balance: 7500.0,
+        currentBalance: 7500.0,
+        availableBalance: 7500.0,
+        pendingBalance: 0.0,
+      },
+    ],
+  ],
 ]);
 
 const refreshTokens = new Map(); // token -> { userId, expiresAt, revoked }
 const revokedAccessTokens = new Set();
 const mfaChallenges = new Map();
+const payees = new Map([
+  ["CUST-001", []],
+  ["CUST-002", []],
+]);
+const transactions = new Map([
+  [
+    "ACC-001",
+    [
+      {
+        transactionId: "TX-001",
+        accountId: "ACC-001",
+        type: "CREDIT",
+        amount: 5500,
+        currency: "AUD",
+        description: "Opening balance",
+        occurredAt: "2026-01-01T00:00:00.000Z",
+      },
+      {
+        transactionId: "TX-002",
+        accountId: "ACC-001",
+        type: "DEBIT",
+        amount: 500,
+        currency: "AUD",
+        description: "Utility payment",
+        occurredAt: "2026-01-02T00:00:00.000Z",
+      },
+    ],
+  ],
+  [
+    "ACC-002",
+    [
+      {
+        transactionId: "TX-003",
+        accountId: "ACC-002",
+        type: "CREDIT",
+        amount: 7500,
+        currency: "AUD",
+        description: "Opening balance",
+        occurredAt: "2026-01-01T00:00:00.000Z",
+      },
+    ],
+  ],
+  [
+    "ACC-003",
+    [
+      {
+        transactionId: "TX-004",
+        accountId: "ACC-003",
+        type: "CREDIT",
+        amount: 1000,
+        currency: "AUD",
+        description: "Opening balance",
+        occurredAt: "2026-01-01T00:00:00.000Z",
+      },
+    ],
+  ],
+]);
+const payments = new Map();
+const idempotencyKeys = new Map();
+const auditEntries = new Map();
+const rateLimitCounters = new Map();
+const seededCustomers = new Map();
+const validPayeeIds = new Set(["PAYEE-UTILITY"]);
 
 function nowMs() {
   return Date.now();
@@ -82,15 +188,15 @@ function createAccessToken(user) {
       sub: user.userId,
       username: user.username,
       customerId: user.customerId,
-      scope: "banking:read banking:write"
+      scope: "banking:read banking:write",
     },
     JWT_SECRET,
     {
       algorithm: "HS256",
       expiresIn: ACCESS_TOKEN_SECONDS,
       issuer: "anz-banking-mock",
-      audience: "anz-api"
-    }
+      audience: "anz-api",
+    },
   );
   return token;
 }
@@ -101,7 +207,7 @@ function createRefreshToken(user) {
     userId: user.userId,
     customerId: user.customerId,
     expiresAt: nowMs() + REFRESH_TOKEN_SECONDS * 1000,
-    revoked: false
+    revoked: false,
   });
   return token;
 }
@@ -109,8 +215,46 @@ function createRefreshToken(user) {
 function publicUser(user) {
   return {
     userId: user.userId,
-    username: user.username
+    username: user.username,
+    customerId: user.customerId,
   };
+}
+
+function accountById(accountId) {
+  for (const customerAccounts of accounts.values()) {
+    const account = customerAccounts.find(
+      (item) => item.accountId === accountId,
+    );
+    if (account) return account;
+  }
+  return undefined;
+}
+
+function userCustomerId(req) {
+  return req.auth.payload.customerId;
+}
+
+function ownedAccount(req, accountId) {
+  const account = accountById(accountId);
+  return account &&
+    (account.customerId === userCustomerId(req) ||
+      seededCustomers.get(account.customerId) === userCustomerId(req))
+    ? account
+    : undefined;
+}
+
+function accountIsOwnedByRequest(req, account) {
+  return (
+    account &&
+    (account.customerId === userCustomerId(req) ||
+      seededCustomers.get(account.customerId) === userCustomerId(req))
+  );
+}
+
+function paymentError(res, message) {
+  return error(res, 422, "PAYMENT_VALIDATION_FAILED", message, {
+    errors: [{ field: "payment", message }],
+  });
 }
 
 function authenticate(req, res, next) {
@@ -134,7 +278,7 @@ function authenticate(req, res, next) {
     const payload = jwt.verify(token, JWT_SECRET, {
       algorithms: ["HS256"],
       issuer: "anz-banking-mock",
-      audience: "anz-api"
+      audience: "anz-api",
     });
 
     req.auth = { token, payload };
@@ -144,7 +288,12 @@ function authenticate(req, res, next) {
       return error(res, 401, "TOKEN_EXPIRED", "Access token has expired");
     }
 
-    return error(res, 401, "TOKEN_INVALID", "Access token is malformed or invalid");
+    return error(
+      res,
+      401,
+      "TOKEN_INVALID",
+      "Access token is malformed or invalid",
+    );
   }
 }
 
@@ -152,12 +301,19 @@ function authorizeCustomer(req, res, next) {
   const requestedCustomerId = req.params.customerId;
   const authenticatedCustomerId = req.auth.payload.customerId;
 
-  if (requestedCustomerId !== authenticatedCustomerId) {
+  if (!customers.has(requestedCustomerId)) {
+    return error(res, 404, "CUSTOMER_NOT_FOUND", "Customer was not found");
+  }
+
+  if (
+    requestedCustomerId !== authenticatedCustomerId &&
+    seededCustomers.get(requestedCustomerId) !== authenticatedCustomerId
+  ) {
     return error(
       res,
       403,
       "ACCESS_DENIED",
-      "You are not authorized to access this customer"
+      "You are not authorized to access this customer",
     );
   }
 
@@ -168,7 +324,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "UP",
     service: "anz-banking-mock",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -177,13 +333,23 @@ app.post("/auth/login", (req, res) => {
   const { username, password } = req.body || {};
 
   if (!username || !password) {
-    return error(res, 400, "INVALID_REQUEST", "username and password are required");
+    return error(
+      res,
+      400,
+      "INVALID_REQUEST",
+      "username and password are required",
+    );
   }
 
   const user = users.get(username);
 
   if (!user || user.password !== password) {
-    return error(res, 401, "AUTH_INVALID_CREDENTIALS", "Invalid username or password");
+    return error(
+      res,
+      401,
+      "AUTH_INVALID_CREDENTIALS",
+      "Invalid username or password",
+    );
   }
 
   const accessToken = createAccessToken(user);
@@ -196,7 +362,7 @@ app.post("/auth/login", (req, res) => {
     tokenType: "Bearer",
     expiresIn: ACCESS_TOKEN_SECONDS,
     expiresAt: iso(decoded.exp * 1000),
-    user: publicUser(user)
+    user: publicUser(user),
   });
 });
 
@@ -212,7 +378,7 @@ app.post("/auth/mfa/challenge", authenticate, (req, res) => {
     expiresAt,
     attemptsRemaining: MFA_MAX_ATTEMPTS,
     used: false,
-    locked: false
+    locked: false,
   });
 
   return res.status(201).json({
@@ -220,7 +386,7 @@ app.post("/auth/mfa/challenge", authenticate, (req, res) => {
     challengeToken,
     expiresIn: MFA_SECONDS,
     expiresAt: iso(expiresAt),
-    attemptsRemaining: MFA_MAX_ATTEMPTS
+    attemptsRemaining: MFA_MAX_ATTEMPTS,
   });
 });
 
@@ -230,32 +396,55 @@ app.post("/auth/mfa/verify", authenticate, (req, res) => {
   const challenge = mfaChallenges.get(challengeId);
 
   if (!challenge) {
-    return error(res, 401, "MFA_CHALLENGE_NOT_FOUND", "MFA challenge was not found", {
-      attemptsRemaining: 0
-    });
+    return error(
+      res,
+      401,
+      "MFA_CHALLENGE_NOT_FOUND",
+      "MFA challenge was not found",
+      {
+        attemptsRemaining: 0,
+      },
+    );
   }
 
   if (challenge.userId !== req.auth.payload.sub) {
-    return error(res, 403, "MFA_ACCESS_DENIED", "Challenge belongs to another user");
+    return error(
+      res,
+      403,
+      "MFA_ACCESS_DENIED",
+      "Challenge belongs to another user",
+    );
   }
 
   if (challenge.used) {
-    return error(res, 401, "MFA_CHALLENGE_ALREADY_USED", "MFA challenge has already been used", {
-      attemptsRemaining: 0
-    });
+    return error(
+      res,
+      401,
+      "MFA_CHALLENGE_ALREADY_USED",
+      "MFA challenge has already been used",
+      {
+        attemptsRemaining: 0,
+      },
+    );
   }
 
   if (challenge.locked) {
     return error(res, 403, "MFA_CHALLENGE_LOCKED", "MFA challenge is locked", {
-      attemptsRemaining: 0
+      attemptsRemaining: 0,
     });
   }
 
   if (nowMs() >= challenge.expiresAt) {
     challenge.attemptsRemaining = 0;
-    return error(res, 401, "MFA_CHALLENGE_EXPIRED", "MFA challenge has expired", {
-      attemptsRemaining: 0
-    });
+    return error(
+      res,
+      401,
+      "MFA_CHALLENGE_EXPIRED",
+      "MFA challenge has expired",
+      {
+        attemptsRemaining: 0,
+      },
+    );
   }
 
   if (challenge.challengeToken !== challengeToken) {
@@ -263,13 +452,19 @@ app.post("/auth/mfa/verify", authenticate, (req, res) => {
 
     if (challenge.attemptsRemaining === 0) {
       challenge.locked = true;
-      return error(res, 403, "MFA_CHALLENGE_LOCKED", "MFA challenge is locked", {
-        attemptsRemaining: 0
-      });
+      return error(
+        res,
+        403,
+        "MFA_CHALLENGE_LOCKED",
+        "MFA challenge is locked",
+        {
+          attemptsRemaining: 0,
+        },
+      );
     }
 
     return error(res, 401, "MFA_INVALID_CODE", "Invalid MFA challenge token", {
-      attemptsRemaining: challenge.attemptsRemaining
+      attemptsRemaining: challenge.attemptsRemaining,
     });
   }
 
@@ -278,13 +473,19 @@ app.post("/auth/mfa/verify", authenticate, (req, res) => {
 
     if (challenge.attemptsRemaining === 0) {
       challenge.locked = true;
-      return error(res, 403, "MFA_CHALLENGE_LOCKED", "MFA challenge is locked", {
-        attemptsRemaining: 0
-      });
+      return error(
+        res,
+        403,
+        "MFA_CHALLENGE_LOCKED",
+        "MFA challenge is locked",
+        {
+          attemptsRemaining: 0,
+        },
+      );
     }
 
     return error(res, 401, "MFA_INVALID_CODE", "Invalid MFA code", {
-      attemptsRemaining: challenge.attemptsRemaining
+      attemptsRemaining: challenge.attemptsRemaining,
     });
   }
 
@@ -292,7 +493,7 @@ app.post("/auth/mfa/verify", authenticate, (req, res) => {
 
   return res.status(200).json({
     verified: true,
-    message: "MFA verification successful"
+    message: "MFA verification successful",
   });
 });
 
@@ -306,14 +507,24 @@ app.post("/auth/token/refresh", (req, res) => {
   }
 
   if (record.revoked) {
-    return error(res, 401, "REFRESH_TOKEN_REVOKED", "Refresh token has been revoked");
+    return error(
+      res,
+      401,
+      "REFRESH_TOKEN_REVOKED",
+      "Refresh token has been revoked",
+    );
   }
 
   if (nowMs() >= record.expiresAt) {
-    return error(res, 401, "REFRESH_TOKEN_EXPIRED", "Refresh token has expired");
+    return error(
+      res,
+      401,
+      "REFRESH_TOKEN_EXPIRED",
+      "Refresh token has expired",
+    );
   }
 
-  const user = [...users.values()].find(u => u.userId === record.userId);
+  const user = [...users.values()].find((u) => u.userId === record.userId);
 
   if (!user) {
     return error(res, 401, "REFRESH_TOKEN_INVALID", "Refresh token is invalid");
@@ -331,7 +542,7 @@ app.post("/auth/token/refresh", (req, res) => {
     refreshToken: newRefreshToken,
     tokenType: "Bearer",
     expiresIn: ACCESS_TOKEN_SECONDS,
-    expiresAt: iso(decoded.exp * 1000)
+    expiresAt: iso(decoded.exp * 1000),
   });
 });
 
@@ -361,21 +572,25 @@ app.post("/auth/token/revoke", authenticate, (req, res) => {
 
   return res.status(200).json({
     revoked: true,
-    message: "Token revoked successfully"
+    message: "Token revoked successfully",
   });
 });
 
 // A4: customer
-app.get("/customers/:customerId", authenticate, authorizeCustomer, (req, res) => {
-  console.log(">>>>>req.params.customerId", req.params.customerId);
-  const customer = customers.get(req.params.customerId);
+app.get(
+  "/customers/:customerId",
+  authenticate,
+  authorizeCustomer,
+  (req, res) => {
+    const customer = customers.get(req.params.customerId);
 
-  if (!customer) {
-    return error(res, 404, "CUSTOMER_NOT_FOUND", "Customer was not found");
-  }
+    if (!customer) {
+      return error(res, 404, "CUSTOMER_NOT_FOUND", "Customer was not found");
+    }
 
-  return res.status(200).json(customer);
-});
+    return res.status(200).json(customer);
+  },
+);
 
 // A4: accounts
 app.get(
@@ -390,33 +605,382 @@ app.get(
     }
 
     return res.status(200).json(customerAccounts);
-  }
+  },
 );
 
-// Protected payment
-app.post("/payments", authenticate, (req, res) => {
-  const { fromAccountId, toAccountId, amount, currency, reference } = req.body || {};
-
-  if (!fromAccountId || !toAccountId || !amount || !currency) {
+app.get("/accounts/:accountId", authenticate, (req, res) => {
+  const account = accountById(req.params.accountId);
+  if (!account)
+    return error(res, 404, "ACCOUNT_NOT_FOUND", "Account was not found");
+  if (!accountIsOwnedByRequest(req, account))
     return error(
       res,
-      400,
-      "INVALID_PAYMENT",
-      "fromAccountId, toAccountId, amount and currency are required"
+      403,
+      "ACCESS_DENIED",
+      "You are not authorized to access this account",
     );
-  }
+  if (!account)
+    return error(res, 404, "ACCOUNT_NOT_FOUND", "Account was not found");
+  return res.status(200).json(account);
+});
 
-  return res.status(201).json({
-    paymentId: `PAY-${crypto.randomBytes(5).toString("hex").toUpperCase()}`,
-    status: "COMPLETED",
-    amount,
-    currency,
-    reference: reference || ""
+app.get("/accounts/:accountId/transactions", authenticate, (req, res) => {
+  const account = accountById(req.params.accountId);
+  if (!account)
+    return error(res, 404, "ACCOUNT_NOT_FOUND", "Account was not found");
+  if (!accountIsOwnedByRequest(req, account))
+    return error(
+      res,
+      403,
+      "ACCESS_DENIED",
+      "You are not authorized to access this account",
+    );
+  if (!account)
+    return error(res, 404, "ACCOUNT_NOT_FOUND", "Account was not found");
+
+  const all = transactions.get(account.accountId) || [];
+  const type = req.query.type;
+  const minAmount =
+    req.query.minAmount === undefined ? undefined : Number(req.query.minAmount);
+  const filtered = all.filter(
+    (item) =>
+      (!type || item.type === String(type).toUpperCase()) &&
+      (minAmount === undefined || item.amount >= minAmount),
+  );
+  const page = Math.max(1, Number(req.query.page || 1));
+  const pageSize = Math.min(
+    100,
+    Math.max(1, Number(req.query.pageSize || filtered.length || 1)),
+  );
+  const start = (page - 1) * pageSize;
+
+  return res.status(200).json({
+    items: filtered.slice(start, start + pageSize),
+    page,
+    pageSize,
+    total: filtered.length,
   });
 });
 
+app.get("/payees", authenticate, (req, res) => {
+  return res.status(200).json(payees.get(userCustomerId(req)) || []);
+});
+app.get(
+  "/customers/:customerId/payees",
+  authenticate,
+  authorizeCustomer,
+  (req, res) => {
+    return res.status(200).json(payees.get(req.params.customerId) || []);
+  },
+);
+
+app.post("/payees", authenticate, (req, res) => {
+  const { name, bsb, accountNumber } = req.body || {};
+  if (
+    !name ||
+    !/^\d{6}$/.test(String(bsb)) ||
+    !/^\d{6,10}$/.test(String(accountNumber))
+  ) {
+    return error(
+      res,
+      422,
+      "PAYEE_VALIDATION_FAILED",
+      "name, six-digit BSB and valid account number are required",
+    );
+  }
+  const customerPayees = payees.get(userCustomerId(req)) || [];
+  if (
+    customerPayees.some(
+      (item) =>
+        item.bsb === String(bsb) &&
+        item.accountNumber === String(accountNumber),
+    )
+  ) {
+    return error(res, 409, "PAYEE_ALREADY_EXISTS", "Payee already exists");
+  }
+  const payee = {
+    payeeId: `PAYEE-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+    name,
+    bsb: String(bsb),
+    accountNumber: String(accountNumber),
+    createdAt: new Date().toISOString(),
+  };
+  customerPayees.push(payee);
+  validPayeeIds.add(payee.payeeId);
+  payees.set(userCustomerId(req), customerPayees);
+  return res.status(201).json(payee);
+});
+
+app.get("/payees/:payeeId", authenticate, (req, res) => {
+  const payee = (payees.get(userCustomerId(req)) || []).find(
+    (item) => item.payeeId === req.params.payeeId,
+  );
+  if (!payee) return error(res, 404, "PAYEE_NOT_FOUND", "Payee was not found");
+  return res.status(200).json(payee);
+});
+
+app.put("/payees/:payeeId", authenticate, (req, res) => {
+  const customerPayees = payees.get(userCustomerId(req)) || [];
+  const index = customerPayees.findIndex(
+    (item) => item.payeeId === req.params.payeeId,
+  );
+  if (index < 0)
+    return error(res, 404, "PAYEE_NOT_FOUND", "Payee was not found");
+  const { name, bsb, accountNumber } = req.body || {};
+  if (
+    !name ||
+    !/^\d{6}$/.test(String(bsb)) ||
+    !/^\d{6,10}$/.test(String(accountNumber))
+  ) {
+    return error(
+      res,
+      422,
+      "PAYEE_VALIDATION_FAILED",
+      "name, six-digit BSB and valid account number are required",
+    );
+  }
+  customerPayees[index] = {
+    ...customerPayees[index],
+    name,
+    bsb: String(bsb),
+    accountNumber: String(accountNumber),
+    updatedAt: new Date().toISOString(),
+  };
+  return res.status(200).json(customerPayees[index]);
+});
+
+app.delete("/payees/:payeeId", authenticate, (req, res) => {
+  const customerPayees = payees.get(userCustomerId(req)) || [];
+  const remaining = customerPayees.filter(
+    (item) => item.payeeId !== req.params.payeeId,
+  );
+  if (remaining.length === customerPayees.length)
+    return error(res, 404, "PAYEE_NOT_FOUND", "Payee was not found");
+  payees.set(userCustomerId(req), remaining);
+  validPayeeIds.delete(req.params.payeeId);
+  return res.status(204).send();
+});
+
+// Protected payment
+app.post("/payments", authenticate, (req, res) => {
+  const {
+    fromAccountId,
+    toAccountId,
+    amount,
+    currency,
+    reference,
+    bsb,
+    payeeId,
+    initialStatus,
+  } = req.body || {};
+  const idempotencyKey = req.get("Idempotency-Key");
+
+  if (
+    idempotencyKey &&
+    idempotencyKeys.has(`${userCustomerId(req)}:${idempotencyKey}`)
+  ) {
+    return res
+      .status(200)
+      .json(idempotencyKeys.get(`${userCustomerId(req)}:${idempotencyKey}`));
+  }
+
+  if (!fromAccountId || !toAccountId || amount === undefined || !currency)
+    return paymentError(
+      res,
+      "fromAccountId, toAccountId, amount and currency are required",
+    );
+  if (
+    !Number.isFinite(Number(amount)) ||
+    Number(amount) <= 0 ||
+    Math.round(Number(amount) * 100) !== Number(amount) * 100
+  )
+    return paymentError(
+      res,
+      "amount must be positive and have no more than two decimal places",
+    );
+  if (Number(amount) > 10000)
+    return paymentError(res, "amount exceeds the daily payment limit");
+  if (currency !== "AUD") return paymentError(res, "currency must be AUD");
+  if (bsb !== undefined && !/^\d{6}$/.test(String(bsb)))
+    return paymentError(res, "bsb must contain exactly six digits");
+  if (payeeId !== undefined && !validPayeeIds.has(String(payeeId)))
+    return paymentError(res, "payee was not found");
+  const source = ownedAccount(req, fromAccountId);
+  const destination = accountById(toAccountId);
+  if (!source || !destination)
+    return paymentError(res, "source or destination account was not found");
+  if (source.balance < Number(amount))
+    return paymentError(res, "insufficient funds");
+
+  source.balance -= Number(amount);
+  source.currentBalance = source.balance;
+  source.availableBalance = source.balance;
+  destination.balance += Number(amount);
+  destination.currentBalance = destination.balance;
+  destination.availableBalance = destination.balance;
+  const payment = {
+    paymentId: `PAY-${crypto.randomBytes(5).toString("hex").toUpperCase()}`,
+    status: ["PENDING", "COMPLETED", "FAILED"].includes(initialStatus)
+      ? initialStatus
+      : "COMPLETED",
+    amount: Number(amount),
+    currency,
+    fromAccountId,
+    toAccountId,
+    reference: reference || "",
+    createdAt: new Date().toISOString(),
+  };
+  payments.set(payment.paymentId, payment);
+  if (idempotencyKey)
+    idempotencyKeys.set(`${userCustomerId(req)}:${idempotencyKey}`, payment);
+  const entry = {
+    auditId: `AUD-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+    paymentId: payment.paymentId,
+    action: "PAYMENT_CREATED",
+    createdAt: new Date().toISOString(),
+  };
+  auditEntries.set(payment.paymentId, entry);
+  transactions.get(source.accountId).push({
+    transactionId: `TX-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+    accountId: source.accountId,
+    type: "DEBIT",
+    amount: Number(amount),
+    currency,
+    description: reference || "Payment",
+    occurredAt: payment.createdAt,
+  });
+  transactions.get(destination.accountId).push({
+    transactionId: `TX-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+    accountId: destination.accountId,
+    type: "CREDIT",
+    amount: Number(amount),
+    currency,
+    description: reference || "Payment",
+    occurredAt: payment.createdAt,
+  });
+  return res.status(201).json(payment);
+});
+
+app.get("/payments/:paymentId", authenticate, (req, res) => {
+  const payment = payments.get(req.params.paymentId);
+  if (!payment)
+    return error(res, 404, "PAYMENT_NOT_FOUND", "Payment was not found");
+  return res.status(200).json(payment);
+});
+
+app.get("/payments/:paymentId/audit", authenticate, (req, res) => {
+  const entry = auditEntries.get(req.params.paymentId);
+  if (!entry)
+    return error(res, 404, "AUDIT_NOT_FOUND", "Audit entry was not found");
+  return res.status(200).json(entry);
+});
+
+app.post("/payments/:paymentId/status", authenticate, (req, res) => {
+  const payment = payments.get(req.params.paymentId);
+  if (!payment)
+    return error(res, 404, "PAYMENT_NOT_FOUND", "Payment was not found");
+  const nextStatus = req.body?.status;
+  if (!["PENDING", "COMPLETED", "FAILED"].includes(nextStatus))
+    return paymentError(res, "invalid payment status");
+  if (payment.status !== "PENDING")
+    return error(
+      res,
+      409,
+      "PAYMENT_TERMINAL",
+      "Terminal payment status is immutable",
+    );
+  payment.status = nextStatus;
+  return res.status(200).json(payment);
+});
+
+app.get("/rate-limit/probe", authenticate, (req, res) => {
+  const key = `${userCustomerId(req)}:${req.get("x-test-key") || "default"}`;
+  const count = rateLimitCounters.get(key) || 0;
+  rateLimitCounters.set(key, count + 1);
+  if (count < 2)
+    return res
+      .set("Retry-After", "0")
+      .status(429)
+      .json({ code: "RATE_LIMITED", message: "Too many requests" });
+  return res.status(200).json({ status: "OK" });
+});
+
+app.post("/test-data/seed", authenticate, (req, res) => {
+  const customerId = `CUST-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
+  const accountId = `ACC-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
+  customers.set(customerId, {
+    customerId,
+    firstName: "Seed",
+    lastName: "Customer",
+    email: `${customerId.toLowerCase()}@example.com`,
+  });
+  accounts.set(customerId, [
+    {
+      accountId,
+      accountNumber: "XXXXXX999",
+      customerId,
+      accountType: "SAVINGS",
+      currency: "AUD",
+      balance: 1000,
+      currentBalance: 1000,
+      availableBalance: 1000,
+      pendingBalance: 0,
+    },
+  ]);
+  transactions.set(accountId, [
+    {
+      transactionId: `TX-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+      accountId,
+      type: "CREDIT",
+      amount: 1000,
+      currency: "AUD",
+      description: "Seed balance",
+      occurredAt: new Date().toISOString(),
+    },
+  ]);
+  payees.set(customerId, []);
+  payees
+    .get(customerId)
+    .push({
+      payeeId: `PAYEE-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+      name: "Seed Utility",
+      bsb: "123456",
+      accountNumber: "12345678",
+      createdAt: new Date().toISOString(),
+    });
+  seededCustomers.set(customerId, userCustomerId(req));
+  return res.status(201).json({ customerId, accountId });
+});
+
+app.delete("/test-data/:customerId", authenticate, (req, res) => {
+  const customerId = req.params.customerId;
+  if (
+    customerId !== userCustomerId(req) &&
+    seededCustomers.get(customerId) !== userCustomerId(req)
+  )
+    return error(
+      res,
+      403,
+      "ACCESS_DENIED",
+      "You are not authorized to clean up this customer",
+    );
+  const customerAccounts = accounts.get(customerId) || [];
+  for (const account of customerAccounts)
+    transactions.delete(account.accountId);
+  customers.delete(customerId);
+  accounts.delete(customerId);
+  payees.delete(customerId);
+  seededCustomers.delete(customerId);
+  return res.status(204).send();
+});
+
 app.use((req, res) => {
-  return error(res, 404, "NOT_FOUND", `Route ${req.method} ${req.path} was not found`);
+  return error(
+    res,
+    404,
+    "NOT_FOUND",
+    `Route ${req.method} ${req.path} was not found`,
+  );
 });
 
 app.listen(PORT, () => {

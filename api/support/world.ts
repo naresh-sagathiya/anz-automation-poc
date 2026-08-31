@@ -4,6 +4,9 @@ import { APIRequestContext, APIResponse, request } from "@playwright/test";
 import AuthService from "../services/AuthService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
 import CustomerService from "../services/CustomerService";
+import BankingPaymentService from "../services/PaymentService";
+import PayeeService from "../services/PayeeService";
+import DataFactoryService from "../services/DataFactoryService";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -17,6 +20,8 @@ export class CustomWorld extends World {
   authService!: AuthService;
 
   responseBody!: LoginResponse;
+
+  apiResponseBody!: any;
 
   loginBody!: LoginResponse;
 
@@ -37,13 +42,29 @@ export class CustomWorld extends World {
   customerService!: CustomerService;
 
   accountService!: AccountService;
-  customerId!: number;
-  accounts: Array<{ id: number; customerId: number; type: "CHECKING" | "SAVINGS" | "LOAN"; balance: number }> = [];
-  selectedAccount!: { id: number; customerId: number; type: "CHECKING" | "SAVINGS" | "LOAN"; balance: number };
-  transactions: Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }> = [];
-  filteredTransactions: Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }> = [];
+  paymentService!: BankingPaymentService;
+  payeeService!: PayeeService;
+  dataFactoryService!: DataFactoryService;
+  customerId!: string;
+  accounts: Array<any> = [];
+  selectedAccount!: any;
+  transactions: Array<any> = [];
+  filteredTransactions: Array<any> = [];
   filteredAmount!: number;
-  pages: Array<Array<{ id: number; accountId: number; type: "Credit" | "Debit"; date: number; amount: number; description: string }>> = [];
+  pages: Array<Array<any>> = [];
+  paymentId!: string;
+  firstPaymentId!: string;
+  idempotencyKey!: string;
+  sourceBalanceBefore!: number;
+  destinationBalanceBefore!: number;
+  secondPaymentId!: string;
+  repeatedPayment!: any;
+  auditBody!: any;
+  payeeBody!: any;
+  payeePayload!: { name: string; bsb: string; accountNumber: string };
+  seedBody!: any;
+  artifactPath!: string;
+  seedCleanupComplete = false;
 
 
   constructor(options: IWorldOptions) {
@@ -58,6 +79,9 @@ export class CustomWorld extends World {
     this.authService = new AuthService(this.requestContext);
     this.customerService = new CustomerService(this.requestContext);
     this.accountService = new AccountService(this.requestContext);
+    this.paymentService = new BankingPaymentService(this.requestContext);
+    this.payeeService = new PayeeService(this.requestContext);
+    this.dataFactoryService = new DataFactoryService(this.requestContext);
   }
 
   async dispose(): Promise<void> {

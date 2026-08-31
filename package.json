@@ -27,10 +27,10 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
-    "tsx": "^4.23.12",
-    "typescript": "^7.0.2",
     "appium": "^2.5.4",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "@cucumber/cucumber": "^13.2.1",
@@ -38,6 +38,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "webdriverio": "^9.15.1"
+    "webdriverio": "^9.15.1",
+    "zod": "^4.5.0-canary.20260820T155656"
   }
 }
