@@ -2,14 +2,28 @@
   "name": "anz-automation-poc",
   "version": "1.0.0",
   "description": "",
+  "allowScripts": {
+    "appium-uiautomator2-driver": true,
+    "appium-chromium-driver": true
+  },
   "main": "index.js",
   "scripts": {
     "test:api": "cucumber-js --profile api",
     "test:web": "cucumber-js --profile web",
     "test:mobile": "cucumber-js --profile mobile",
+    "test:mobile:parallel": "cucumber-js --profile mobile --parallel 2",
+    "test:mobile:devices": "cross-env \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
+    "test:mobile:parallel:headed": "cross-env HEADLESS=false cucumber-js --profile mobile --parallel 2",
+    "test:mobile:devices:headed": "cross-env HEADLESS=false \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:android": "cucumber-js --profile android",
+    "test:bs": "tsx mobile/tests/parabank-login.ts",
+    "test:android:parallel": "node scripts/run-android-parallel.js",
+    "test:android:fold": "cross-env ANDROID_DEVICE_NAME=Pixel_10_Pro_Fold ANDROID_PLATFORM_VERSION=16 cucumber-js --profile android",
+    "test:android:pixel5": "cross-env ANDROID_DEVICE_NAME=Pixel_5 ANDROID_PLATFORM_VERSION=35 cucumber-js --profile android",
+    "test:android:galaxy": "cross-env ANDROID_DEVICE_NAME=Galaxy_S9_Plus ANDROID_PLATFORM_VERSION=28 cucumber-js --profile android",
     "appium:start": "appium",
+    "appium:start:android": "appium --allow-insecure=*:adb_shell",
     "appium:install-uiatomator2": "appium driver install uiautomator2",
     "start:locale:server": "node api/mock-server/server.js"
   },
@@ -27,7 +41,9 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
-    "appium": "^2.5.4",
+    "appium": "^3.7.0",
+    "appium-chromium-driver": "^3.0.8",
+    "appium-uiautomator2-driver": "^8.5.0",
     "cross-env": "^10.1.0",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"

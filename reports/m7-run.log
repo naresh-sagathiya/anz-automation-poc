@@ -1,0 +1,32 @@
+
+> anz-automation-poc@1.0.0 test:mobile
+> cucumber-js --profile mobile --tags @ID-M7
+
+◇ injected env (11) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+....F-......F.
+
+Failed scenarios:
+  1) Additional transaction loads do not duplicate transactions # mobile\features\mobile_transaction_list.feature:7
+       Then the transaction list grows after lazy-load # mobile\steps\mobile.transaction-list.steps.ts:65
+           Error: expect(received).toBeGreaterThan(expected)
+           
+           Expected: > 0
+           Received:   0
+               at captureRawStack (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright-core\lib\coreBundle.js:9681:17)
+               at callMatcherAsStep (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright\lib\matchers\expect.js:13310:57)
+               at Object.toBeGreaterThan (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright\lib\matchers\expect.js:13300:23)
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.transaction-list.steps.ts:72:28)
+  2) Refresh reloads transaction list correctly on mobile # mobile\features\mobile_transaction_list.feature:14
+       Then refresh resets the list and keeps data consistent # mobile\steps\mobile.transaction-list.steps.ts:78
+           Error: expect(received).toBe(expected) // Object.is equality
+           
+           Expected: 9
+           Received: 8
+               at captureRawStack (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright-core\lib\coreBundle.js:9681:17)
+               at callMatcherAsStep (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright\lib\matchers\expect.js:13310:57)
+               at Object.toBe (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\node_modules\playwright\lib\matchers\expect.js:13300:23)
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.transaction-list.steps.ts:90:26)
+
+2 scenarios (2 failed)
+14 steps (11 passed, 1 skipped, 2 failed)
+0m 29.702s (0m 29.592s executing your code)
