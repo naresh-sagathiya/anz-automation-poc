@@ -26,7 +26,10 @@ Given(
   "the banking account API is available",
   async function (this: CustomWorld) {
     this.accountService = new AccountService(this.requestContext);
-    const login = await this.authService.login("alice", "Password123!");
+    const login = await this.authService.login(
+      process.env.API_USER_ALICE || "alice",
+      process.env.API_PASSWORD_ALICE || "Password123!",
+    );
     expect(login.status()).toBe(200);
     const body = await login.json();
     this.accessToken = body.accessToken;

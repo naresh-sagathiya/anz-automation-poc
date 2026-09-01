@@ -2,6 +2,7 @@ import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { errorSchema, paymentSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
+import { parseIsoDate } from "../../../utils/date";
 import { isoDateSchema, parseSchema } from "../../../utils/schema";
 
 When(
@@ -197,7 +198,6 @@ When(
 );
 Then("the audit entry references the payment", function (this: CustomWorld) {
   expect(this.auditBody.paymentId).toBe(this.paymentId);
-  expect(
-    isoDateSchema.safeParse(this.auditBody.createdAt).success,
-  ).toBeTruthy();
+  expect(isoDateSchema.safeParse(this.auditBody.createdAt).success).toBeTruthy();
+  expect(() => parseIsoDate(this.auditBody.createdAt)).not.toThrow();
 });

@@ -1,6 +1,6 @@
 import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
-import { writeFileSync, unlinkSync } from "node:fs";
+import { unlinkSync } from "node:fs";
 import { z } from "zod";
 import {
   customerSchema,
@@ -11,8 +11,10 @@ import {
   errorSchema,
 } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
+import { parseIsoDate } from "../../../utils/date";
 import { isoDateSchema, parseSchema } from "../../../utils/schema";
 import { assertDoesNotContainSecrets } from "../../../utils/fileValidation";
+import { writeTextFile } from "../../../utils/data";
 
 When(
   "I request the configured customer accounts",
@@ -87,13 +89,15 @@ When(
       `schema-${Date.now()}`,
     );
     this.paymentId = (await payment.json()).paymentId;
-    parseSchema(
-      paymentSchema,
-      await (
-        await this.paymentService.getStatus(this.accessToken, this.paymentId)
-      ).json(),
-      "payment",
-    );
+    const paymentStatusBody = await (
+      await this.paymentService.getStatus(this.accessToken, this.paymentId)
+    ).json();
+    const paymentBody = parseSchema(paymentSchema, paymentStatusBody, "payment");
+    parseIsoDate(paymentBody.createdAt);
+
+    const auditBody = await (
+      await this.paymentService.getAudit(this.accessToken, this.paymentId)
+    ).json();
     parseSchema(
       z
         .object({
@@ -103,11 +107,10 @@ When(
           createdAt: isoDateSchema,
         })
         .strict(),
-      await (
-        await this.paymentService.getAudit(this.accessToken, this.paymentId)
-      ).json(),
+      auditBody,
       "audit",
     );
+    parseIsoDate(auditBody.createdAt);
     parseSchema(
       z.object({ status: z.literal("OK") }).strict(),
       await (
@@ -137,10 +140,9 @@ Then("the retried rate limited request succeeds", function (this: CustomWorld) {
 });
 When("I write a redaction sample artefact", function (this: CustomWorld) {
   this.artifactPath = "reports/redaction-sample.log";
-  writeFileSync(
+  writeTextFile(
     this.artifactPath,
     "password=[REDACTED] accessToken=[REDACTED] accountNumber=[REDACTED]",
-    "utf8",
   );
 });
 Then("the artefact contains no secrets", function (this: CustomWorld) {

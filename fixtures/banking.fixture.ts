@@ -10,7 +10,10 @@ type BankingFixtures = {
 export const test = base.extend<BankingFixtures>({
   bankingToken: async ({ request }, use) => {
     const auth = new AuthService(request);
-    const response = await auth.login("alice", "Password123!");
+    const response = await auth.login(
+      process.env.API_USER_ALICE || "alice",
+      process.env.API_PASSWORD_ALICE || "Password123!",
+    );
     const body = await response.json();
     await use(body.accessToken);
   },

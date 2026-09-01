@@ -1,6 +1,10 @@
+require("dotenv").config();
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -14,23 +18,27 @@ const REFRESH_TOKEN_SECONDS = Number(
 const MFA_SECONDS = Number(process.env.MFA_SECONDS || 120);
 const MFA_MAX_ATTEMPTS = 3;
 const VALID_MFA_CODE = process.env.MFA_CODE || "123456";
+const API_USER_ALICE = process.env.API_USER_ALICE || "alice";
+const API_USER_BOB = process.env.API_USER_BOB || "bob";
+const API_PASSWORD_ALICE = process.env.API_PASSWORD_ALICE || "Password123!";
+const API_PASSWORD_BOB = process.env.API_PASSWORD_BOB || "Password123!";
 
 const users = new Map([
   [
-    "alice",
+    API_USER_ALICE,
     {
       userId: "USER-001",
-      username: "alice",
-      password: "Password123!",
+      username: API_USER_ALICE,
+      password: API_PASSWORD_ALICE,
       customerId: "CUST-001",
     },
   ],
   [
-    "bob",
+    API_USER_BOB,
     {
       userId: "USER-002",
-      username: "bob",
-      password: "Password123!",
+      username: API_USER_BOB,
+      password: API_PASSWORD_BOB,
       customerId: "CUST-002",
     },
   ],
@@ -212,6 +220,42 @@ function createRefreshToken(user) {
   return token;
 }
 
+function parseTextToJson(text) {
+  if (text === undefined || text === null) {
+    return {};
+  }
+
+  const normalized = String(text).trim();
+  if (!normalized) {
+    return {};
+  }
+
+  const parsedEntries = normalized
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .reduce((result, line) => {
+      const separatorIndex = line.indexOf("=");
+      const keyValueSeparator = line.indexOf(":");
+      const separatorPos =
+        separatorIndex >= 0 && (keyValueSeparator === -1 || separatorIndex < keyValueSeparator)
+          ? separatorIndex
+          : keyValueSeparator;
+
+      if (separatorPos === -1) {
+        result[line] = true;
+        return result;
+      }
+
+      const key = line.slice(0, separatorPos).trim();
+      const value = line.slice(separatorPos + 1).trim();
+      result[key] = value;
+      return result;
+    }, {});
+
+  return parsedEntries;
+}
+
 function publicUser(user) {
   return {
     userId: user.userId,
@@ -325,6 +369,34 @@ app.get("/health", (req, res) => {
     status: "UP",
     service: "anz-banking-mock",
     timestamp: new Date().toISOString(),
+  });
+});
+
+app.post("/files/text-to-json", (req, res) => {
+  const { text, fileName = "converted.json", outputDir = "locales" } = req.body || {};
+
+  if (text === undefined || text === null || String(text).trim() === "") {
+    return error(
+      res,
+      400,
+      "INVALID_TEXT",
+      "A non-empty text payload is required to convert into JSON",
+    );
+  }
+
+  const jsonData = parseTextToJson(text);
+  const folderPath = path.resolve(__dirname, "..", outputDir);
+  const outputFileName = fileName.endsWith(".json") ? fileName : `${fileName}.json`;
+  const outputPath = path.join(folderPath, outputFileName);
+
+  fs.mkdirSync(folderPath, { recursive: true });
+  fs.writeFileSync(outputPath, JSON.stringify(jsonData, null, 2), "utf8");
+
+  return res.status(200).json({
+    fileName: outputFileName,
+    filePath: outputPath,
+    outputDir: folderPath,
+    data: jsonData,
   });
 });
 
@@ -746,6 +818,43 @@ app.put("/payees/:payeeId", authenticate, (req, res) => {
     accountNumber: String(accountNumber),
     updatedAt: new Date().toISOString(),
   };
+  return res.status(200).json(customerPayees[index]);
+});
+
+app.patch("/payees/:payeeId", authenticate, (req, res) => {
+  const customerPayees = payees.get(userCustomerId(req)) || [];
+  const index = customerPayees.findIndex(
+    (item) => item.payeeId === req.params.payeeId,
+  );
+  if (index < 0)
+    return error(res, 404, "PAYEE_NOT_FOUND", "Payee was not found");
+
+  const { name, bsb, accountNumber } = req.body || {};
+  const nextName = name ?? customerPayees[index].name;
+  const nextBsb = bsb ?? customerPayees[index].bsb;
+  const nextAccountNumber = accountNumber ?? customerPayees[index].accountNumber;
+
+  if (
+    !nextName ||
+    !/^\d{6}$/.test(String(nextBsb)) ||
+    !/^\d{6,10}$/.test(String(nextAccountNumber))
+  ) {
+    return error(
+      res,
+      422,
+      "PAYEE_VALIDATION_FAILED",
+      "name, six-digit BSB and valid account number are required",
+    );
+  }
+
+  customerPayees[index] = {
+    ...customerPayees[index],
+    name: nextName,
+    bsb: String(nextBsb),
+    accountNumber: String(nextAccountNumber),
+    updatedAt: new Date().toISOString(),
+  };
+
   return res.status(200).json(customerPayees[index]);
 });
 

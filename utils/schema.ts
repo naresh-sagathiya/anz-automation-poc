@@ -1,9 +1,17 @@
 import { z } from "zod";
+import { parseIsoDate } from "./date";
 
 export const isoDateSchema = z
   .string()
   .refine(
-    (value) => !Number.isNaN(Date.parse(value)),
+    (value) => {
+      try {
+        parseIsoDate(value);
+        return true;
+      } catch {
+        return false;
+      }
+    },
     "Expected an ISO-compatible date",
   );
 
