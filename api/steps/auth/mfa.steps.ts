@@ -1,6 +1,7 @@
 import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
+import { isFutureDate, parseIsoDate } from "../../../utils/date";
 
 When("I request an MFA challenge", async function (this: CustomWorld) {
   this.response = await this.authService.createMfaChallenge(this.accessToken);
@@ -63,7 +64,10 @@ Then("the MFA challenge id should be returned", function (this: CustomWorld) {
 Then("the MFA challenge should have an expiry", function (this: CustomWorld) {
   expect(this.mfaBody.expiresIn).toBeGreaterThan(0);
 
-  expect(Date.parse(this.mfaBody.expiresAt)).toBeGreaterThan(Date.now());
+  const parsedDate = parseIsoDate(this.mfaBody.expiresAt);
+
+  expect(parsedDate.getTime()).toBeGreaterThan(Date.now());
+  expect(isFutureDate(this.mfaBody.expiresAt)).toBeTruthy();
 });
 
 Then(

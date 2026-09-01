@@ -1,6 +1,8 @@
 import { Before, After, Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
+import { assertNoSensitiveFields } from "../../../utils/schema";
+import { isFutureDate, parseIsoDate } from "../../../utils/date";
 
 Before(async function (this: CustomWorld) {
   await this.initialize();
@@ -90,17 +92,24 @@ Then(
 
     expect(expiresAt).toBeDefined();
 
-    const expiryTime = Date.parse(expiresAt);
+    const parsedDate = parseIsoDate(expiresAt);
 
-    expect(Number.isNaN(expiryTime)).toBe(false);
-
-    expect(expiryTime).toBeGreaterThan(Date.now());
+    expect(parsedDate.getTime()).toBeGreaterThan(Date.now());
+    expect(isFutureDate(expiresAt)).toBeTruthy();
   },
 );
 
 Then(
   "the login response should not contain the password",
   function (this: CustomWorld) {
+    assertNoSensitiveFields(this.responseBody, [
+      "password",
+      "ssn",
+      "socialSecurityNumber",
+      "dateOfBirth",
+      "cardNumber",
+      "accountNumber",
+    ]);
     const bodyText = JSON.stringify(this.responseBody).toLowerCase();
 
     expect(bodyText).not.toContain("password");

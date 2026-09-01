@@ -6,9 +6,12 @@ export interface LoginRequest {
 export interface LoginUser {
   userId: string;
   username: string;
+  customerId: string;
 }
 
 export interface LoginResponse {
+  data: Record<string, string | number | boolean>;
+  fileName: string;
   accessToken: string;
   refreshToken: string;
   tokenType: string;
