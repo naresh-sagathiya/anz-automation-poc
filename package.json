@@ -11,6 +11,7 @@
     "test:api": "cucumber-js --profile api",
     "test:web": "cucumber-js --profile web",
     "test:mobile": "cucumber-js --profile mobile",
+    "test:mobile:m14:report": "cucumber-js mobile/features/**/*.feature --require mobile/steps/**/*.ts --require mobile/support/**/*.ts --require-module tsx/cjs --tags @ID-M14 --format html:reports/mobile-idm14-report.html --format json:reports/mobile-idm14-report.json --publish-quiet",
     "test:mobile:parallel": "cucumber-js --profile mobile --parallel 2",
     "test:mobile:devices": "cross-env \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",

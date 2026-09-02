@@ -192,6 +192,78 @@
 				"@ID-M14"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "run-idm14-report-files",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"test:mobile:m14:report"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-report-export-check",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-no-terminal-detail",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-silent-to-file",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"npm.cmd run test:mobile:headed -- --tags @ID-M14 > reports\\id-m14-headed-run.log 2>&1"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "verify-idm14-headed-quiet-formatter",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile:headed",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "verify-exact-command-option1",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile:headed",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
 		}
 	]
 }

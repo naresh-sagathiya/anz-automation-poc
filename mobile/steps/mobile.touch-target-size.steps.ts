@@ -1,6 +1,8 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { MobileWorld } from '../support/world';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 type TouchMetric = {
   name: string;
@@ -18,6 +20,27 @@ type M14State = {
   minSpacing: number;
   metrics: TouchMetric[];
   selectors: string[];
+  sizeViolations: string[];
+  spacingViolations: string[];
+};
+
+type M14ReportRecord = {
+  id: 'ID-M14';
+  timestamp: string;
+  screen: string;
+  checkType: 'size' | 'spacing';
+  status: 'pass' | 'fail';
+  minSize: number;
+  minSpacing: number;
+  measuredCount: number;
+  violations: string[];
+  measurements: Array<{
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }>;
 };
 
 function formatNum(value: number): string {
@@ -29,6 +52,116 @@ function toPositiveInt(value: string | undefined, fallback: number): number {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function isEnabled(value: string | undefined, fallback = true): boolean {
+  if (!value) return fallback;
+  const normalized = value.trim().toLowerCase();
+  if (['0', 'false', 'no', 'off'].includes(normalized)) return false;
+  if (['1', 'true', 'yes', 'on'].includes(normalized)) return true;
+  return fallback;
+}
+
+function getReportPaths(): { jsonPath: string; csvPath: string } {
+  const reportsDir = process.env.MOBILE_TOUCH_REPORT_DIR || 'reports';
+  const baseName = process.env.MOBILE_TOUCH_REPORT_BASENAME || 'id-m14-touch-target-report';
+  return {
+    jsonPath: path.join(reportsDir, `${baseName}.json`),
+    csvPath: path.join(reportsDir, `${baseName}.csv`),
+  };
+}
+
+function getTextReportPath(): string {
+  const reportsDir = process.env.MOBILE_TOUCH_REPORT_DIR || 'reports';
+  const baseName = process.env.MOBILE_TOUCH_REPORT_BASENAME || 'id-m14-touch-target-report';
+  return path.join(reportsDir, `${baseName}.txt`);
+}
+
+function csvEscape(value: string): string {
+  const escaped = value.replace(/"/g, '""');
+  return `"${escaped}"`;
+}
+
+async function appendM14Report(record: M14ReportRecord): Promise<void> {
+  if (!isEnabled(process.env.MOBILE_TOUCH_REPORT_ENABLED, true)) {
+    return;
+  }
+
+  const { jsonPath, csvPath } = getReportPaths();
+  const reportsDir = path.dirname(jsonPath);
+  await fs.mkdir(reportsDir, { recursive: true });
+
+  let existingRecords: M14ReportRecord[] = [];
+  try {
+    const existing = await fs.readFile(jsonPath, 'utf8');
+    const parsed = JSON.parse(existing);
+    if (Array.isArray(parsed)) {
+      existingRecords = parsed as M14ReportRecord[];
+    }
+  } catch {
+    existingRecords = [];
+  }
+
+  existingRecords.push(record);
+  await fs.writeFile(jsonPath, JSON.stringify(existingRecords, null, 2), 'utf8');
+
+  const header = 'timestamp,id,screen,checkType,status,minSize,minSpacing,measuredCount,violations,measurements\n';
+  const violationsText = record.violations.join(' | ');
+  const measurementsText = record.measurements
+    .map((m) => `${m.name}:${formatNum(m.width)}x${formatNum(m.height)}@(${formatNum(m.x)},${formatNum(m.y)})`)
+    .join(' | ');
+  const row = [
+    record.timestamp,
+    record.id,
+    record.screen,
+    record.checkType,
+    record.status,
+    String(record.minSize),
+    String(record.minSpacing),
+    String(record.measuredCount),
+    violationsText,
+    measurementsText,
+  ]
+    .map(csvEscape)
+    .join(',') + '\n';
+
+  try {
+    await fs.access(csvPath);
+  } catch {
+    await fs.writeFile(csvPath, header, 'utf8');
+  }
+
+  await fs.appendFile(csvPath, row, 'utf8');
+}
+
+async function appendM14TextLine(line: string): Promise<void> {
+  if (!isEnabled(process.env.MOBILE_TOUCH_REPORT_ENABLED, true)) {
+    return;
+  }
+  const textPath = getTextReportPath();
+  await fs.mkdir(path.dirname(textPath), { recursive: true });
+  await fs.appendFile(textPath, `${line}\n`, 'utf8');
+}
+
+async function appendMeasurementSummary(state: M14State): Promise<void> {
+  const lines = state.metrics.map(
+    (metric) =>
+      `${metric.name} -> ${formatNum(metric.width)}x${formatNum(metric.height)} at (${formatNum(metric.x)}, ${formatNum(metric.y)})`,
+  );
+  const stamp = new Date().toISOString();
+  await appendM14TextLine(`[${stamp}] [ID-M14][${state.screen}] Touch targets measured:`);
+  for (const line of lines) {
+    await appendM14TextLine(`  ${line}`);
+  }
+}
+
+async function appendViolationSummary(screen: string | undefined, checkType: 'size' | 'spacing', violations: string[]): Promise<void> {
+  const stamp = new Date().toISOString();
+  const title = checkType === 'size' ? 'size' : 'spacing';
+  await appendM14TextLine(`[${stamp}] [ID-M14][${screen}] ${title} violations (${violations.length}):`);
+  for (const violation of violations) {
+    await appendM14TextLine(`  ${violation}`);
+  }
+}
+
 function getM14State(world: MobileWorld): M14State {
   const scoped = world as MobileWorld & { m14State?: M14State };
   if (!scoped.m14State) {
@@ -37,6 +170,8 @@ function getM14State(world: MobileWorld): M14State {
       minSpacing: toPositiveInt(process.env.MOBILE_TOUCH_TARGET_MIN_SPACING || process.env.TOUCH_TARGET_MIN_SPACING, 8),
       metrics: [],
       selectors: [],
+      sizeViolations: [],
+      spacingViolations: [],
     };
   }
   return scoped.m14State;
@@ -102,6 +237,8 @@ Given('I open the mobile banking touch target screen {string}', async function (
 
   state.screen = screen;
   state.metrics = [];
+  state.sizeViolations = [];
+  state.spacingViolations = [];
 });
 
 When('I measure all interactive touch targets on the screen', async function (this: MobileWorld) {
@@ -133,11 +270,7 @@ When('I measure all interactive touch targets on the screen', async function (th
   }
 
   state.metrics = metrics;
-
-  const summary = metrics
-    .map((metric) => `${metric.name} -> ${formatNum(metric.width)}x${formatNum(metric.height)} at (${formatNum(metric.x)}, ${formatNum(metric.y)})`)
-    .join('\n');
-  console.log(`[ID-M14][${state.screen}] Touch targets measured:\n${summary}`);
+  await appendMeasurementSummary(state);
 });
 
 Then('each interactive element meets the minimum touch target size', async function (this: MobileWorld) {
@@ -153,10 +286,30 @@ Then('each interactive element meets the minimum touch target size', async funct
     }
   }
 
+  state.sizeViolations = violations;
+
+  await appendM14Report({
+    id: 'ID-M14',
+    timestamp: new Date().toISOString(),
+    screen: state.screen || 'unknown',
+    checkType: 'size',
+    status: violations.length > 0 ? 'fail' : 'pass',
+    minSize: state.minSize,
+    minSpacing: state.minSpacing,
+    measuredCount: state.metrics.length,
+    violations,
+    measurements: state.metrics.map((metric) => ({
+      name: metric.name,
+      x: metric.x,
+      y: metric.y,
+      width: metric.width,
+      height: metric.height,
+    })),
+  });
+
   if (violations.length > 0) {
-    throw new Error(
-      `[ID-M14][${state.screen}] Touch target size violations (${violations.length}):\n${violations.join('\n')}`,
-    );
+    await appendViolationSummary(state.screen, 'size', violations);
+    throw new Error('[ID-M14] Touch target size validation failed. See reports/id-m14-touch-target-report.txt for details.');
   }
 });
 
@@ -185,9 +338,29 @@ Then('interactive elements have adequate spacing', async function (this: MobileW
     }
   }
 
+  state.spacingViolations = spacingViolations;
+
+  await appendM14Report({
+    id: 'ID-M14',
+    timestamp: new Date().toISOString(),
+    screen: state.screen || 'unknown',
+    checkType: 'spacing',
+    status: spacingViolations.length > 0 ? 'fail' : 'pass',
+    minSize: state.minSize,
+    minSpacing: state.minSpacing,
+    measuredCount: state.metrics.length,
+    violations: spacingViolations,
+    measurements: state.metrics.map((metric) => ({
+      name: metric.name,
+      x: metric.x,
+      y: metric.y,
+      width: metric.width,
+      height: metric.height,
+    })),
+  });
+
   if (spacingViolations.length > 0) {
-    throw new Error(
-      `[ID-M14][${state.screen}] Touch target spacing violations (${spacingViolations.length}):\n${spacingViolations.join('\n')}`,
-    );
+    await appendViolationSummary(state.screen, 'spacing', spacingViolations);
+    throw new Error('[ID-M14] Touch target spacing validation failed. See reports/id-m14-touch-target-report.txt for details.');
   }
 });
