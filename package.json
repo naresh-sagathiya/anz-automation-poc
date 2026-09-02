@@ -25,7 +25,9 @@
     "appium:start": "appium",
     "appium:start:android": "appium --allow-insecure=*:adb_shell",
     "appium:install-uiatomator2": "appium driver install uiautomator2",
-    "start:locale:server": "node api/mock-server/server.js"
+    "start:locale:server": "node api/mock-server/server.js",
+    "allure:generate": "allure generate ./allure-results --output allure-report",
+    "allure:open": "allure open allure-report"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,8 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
+    "allure": "^3.16.0",
+    "allure-cucumberjs": "^3.11.1",
     "appium": "^3.7.0",
     "appium-chromium-driver": "^3.0.8",
     "appium-uiautomator2-driver": "^8.5.0",
