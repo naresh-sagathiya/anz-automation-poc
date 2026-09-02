@@ -6,6 +6,8 @@ dotenv.config();
 setDefaultTimeout(30000);
 
 const headless = process.env.HEADLESS !== 'false';
+const launchSlowMo = Number.parseInt(process.env.MOBILE_SLOWMO_MS || process.env.PW_SLOWMO_MS || '0', 10);
+const keepOpenMs = Number.parseInt(process.env.MOBILE_KEEP_OPEN_MS || '0', 10);
 const configuredDevices = (process.env.MOBILE_DEVICES || process.env.DEVICE || 'iPad')
   .split(',')
   .map((name) => name.trim())
@@ -23,7 +25,10 @@ export class MobileWorld extends World {
 
   async initialize(profile?: 'android' | 'ios') {
     // Launch a chromium instance suitable for mobile testing (iPad-like viewport)
-    this.browser = await chromium.launch({ headless });
+    this.browser = await chromium.launch({
+      headless,
+      slowMo: Number.isFinite(launchSlowMo) && launchSlowMo > 0 ? launchSlowMo : 0,
+    });
     await this.useProfile(profile);
   }
 
@@ -50,6 +55,9 @@ export class MobileWorld extends World {
 
   async dispose() {
     try {
+      if (keepOpenMs > 0 && this.page) {
+        await this.page.waitForTimeout(keepOpenMs);
+      }
       if (this.context) await this.context.close();
       if (this.browser) await this.browser.close();
     } catch (e) {

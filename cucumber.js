@@ -30,7 +30,7 @@ module.exports = {
 
     requireModule: ["tsx/cjs"],
 
-    format: ["progress", "html:reports/mobile-cucumber-report.html"],
+    format: ["progress", "html:reports/mobile-cucumber-report.html", "allure-cucumberjs/reporter"],
 
     publishQuiet: true,
   },
@@ -41,8 +41,6 @@ module.exports = {
     require: ["android/steps/**/*.ts", "android/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
-
-    format: ["progress", "html:reports/android-cucumber-report.html"],
 
     publishQuiet: true,
   },
