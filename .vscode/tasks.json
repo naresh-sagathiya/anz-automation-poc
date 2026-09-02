@@ -120,6 +120,78 @@
 			"type": "shell",
 			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
 			"isBackground": false
+		},
+		{
+			"label": "run-idm14-touch-target",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-debug-visible",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"set PWDEBUG=1 & npm.cmd run test:mobile:headed -- --tags @ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-visible-slowmo",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"set MOBILE_SLOWMO_MS=350 & set MOBILE_KEEP_OPEN_MS=4000 & npm.cmd run test:mobile:headed -- --tags @ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-real-site-verify",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-real-site-recheck",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-detailed-report",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile:headed",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
 		}
 	]
 }
