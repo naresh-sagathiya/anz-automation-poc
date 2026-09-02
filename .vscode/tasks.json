@@ -60,6 +60,138 @@
 			"type": "shell",
 			"command": "npm.cmd run test:mobile -- --tags @ID-M9",
 			"isBackground": false
+		},
+		{
+			"label": "run-idm10-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-open-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-login-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-nav-fix",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-final-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-after-feature-nav",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-self-contained",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-overview-nav",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-fallback-verify",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm10-final-pass-check",
+			"type": "shell",
+			"command": "npm.cmd run test:mobile -- --tags @ID-M10",
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-touch-target",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-debug-visible",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"set PWDEBUG=1 & npm.cmd run test:mobile:headed -- --tags @ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-visible-slowmo",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"set MOBILE_SLOWMO_MS=350 & set MOBILE_KEEP_OPEN_MS=4000 & npm.cmd run test:mobile:headed -- --tags @ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-real-site-verify",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-real-site-recheck",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "run-idm14-headed-detailed-report",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:mobile:headed",
+				"--",
+				"--tags",
+				"@ID-M14"
+			],
+			"isBackground": false
 		}
 	]
 }
