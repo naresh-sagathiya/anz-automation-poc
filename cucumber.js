@@ -1,3 +1,7 @@
+const mobileFormat = process.env.HEADLESS === 'false'
+  ? ['./mobile/support/quietProgressFormatter.js', 'html:reports/mobile-cucumber-report.html', 'allure-cucumberjs/reporter']
+  : ['progress', 'html:reports/mobile-cucumber-report.html', 'allure-cucumberjs/reporter'];
+
 module.exports = {
   api: {
     paths: ["api/features/**/*.feature"],
@@ -30,7 +34,7 @@ module.exports = {
 
     requireModule: ["tsx/cjs"],
 
-    format: ["progress", "html:reports/mobile-cucumber-report.html", "allure-cucumberjs/reporter"],
+    format: mobileFormat,
 
     publishQuiet: true,
   },
@@ -41,6 +45,8 @@ module.exports = {
     require: ["android/steps/**/*.ts", "android/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
+
+    format: ["progress", "html:reports/android-cucumber-report.html"],
 
     publishQuiet: true,
   },
