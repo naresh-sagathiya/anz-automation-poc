@@ -9,6 +9,7 @@
     "test:mobile": "cucumber-js --profile mobile",
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
     "test:android": "cucumber-js --profile android",
+    "allure:clean": "node -e \"const fs=require('fs'); ['allure-results','allure-report'].forEach(p => fs.rmSync(p, { recursive: true, force: true }));\"",
     "allure:generate": "allure generate ./allure-results --output allure-report",
     "allure:open": "allure open allure-report",
     "appium:start": "appium",
