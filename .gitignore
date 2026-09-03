@@ -9,3 +9,4 @@ node_modules/
 /tests/reports/
 /allure-results/
 /allure-report/
+/web/downloads/
