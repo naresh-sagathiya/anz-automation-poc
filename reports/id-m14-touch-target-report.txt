@@ -628,3 +628,339 @@
   input[name="verifyAccount"]: measured 205.33x17.33, expected >= 44x44
   input[name="amount"]: measured 205.33x17.33, expected >= 44x44
   input[value="Send Payment"]: measured 109.14x19.00, expected >= 44x44
+[2026-09-02T12:47:01.044Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-02T12:47:01.073Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-02T12:47:06.174Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-02T12:47:06.201Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-02T12:47:11.343Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-02T12:47:11.372Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-02T12:49:32.370Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-02T12:49:32.398Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-02T12:49:36.742Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-02T12:49:36.770Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-02T12:49:41.977Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-02T12:49:42.008Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-02T12:54:59.403Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-02T12:54:59.550Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-02T12:55:24.935Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-02T12:55:25.042Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-02T12:55:37.303Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-02T12:55:37.355Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-03T04:47:42.997Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-03T04:47:43.032Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-03T04:47:48.940Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-03T04:47:48.974Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-03T04:47:55.390Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-03T04:47:55.426Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-03T04:51:46.813Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-03T04:51:46.860Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-03T04:51:52.274Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-03T04:51:52.325Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-03T04:51:54.519Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-03T04:51:54.559Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-03T06:21:17.239Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-03T06:21:17.576Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-03T06:21:18.911Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-03T06:21:19.070Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-03T06:21:27.593Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-03T06:21:27.643Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-03T06:24:49.694Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-03T06:24:49.784Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-03T06:24:52.500Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-03T06:24:52.551Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-03T06:24:56.709Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-03T06:24:56.735Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44
+[2026-09-03T06:46:29.118Z] [ID-M14][login] Touch targets measured:
+  input[name="username"] -> 146.00x18.00 at (143.00, 305.00)
+  input[name="password"] -> 146.00x18.00 at (143.00, 353.00)
+  input[value="Log In"] -> 66.45x19.00 at (143.00, 382.12)
+  a[href*="register"] -> 48.42x15.00 at (143.00, 432.13)
+[2026-09-03T06:46:29.252Z] [ID-M14][login] size violations (4):
+  input[name="username"]: measured 146.00x18.00, expected >= 44x44
+  input[name="password"]: measured 146.00x18.00, expected >= 44x44
+  input[value="Log In"]: measured 66.45x19.00, expected >= 44x44
+  a[href*="register"]: measured 48.42x15.00, expected >= 44x44
+[2026-09-03T06:46:30.951Z] [ID-M14][account-overview] Touch targets measured:
+  a:has-text("Open New Account") -> 164.00x24.00 at (143.00, 304.00)
+  a:has-text("Accounts Overview") -> 164.00x24.00 at (143.00, 328.00)
+  a:has-text("Transfer Funds") -> 164.00x24.00 at (143.00, 352.00)
+  a:has-text("Bill Pay") -> 164.00x24.00 at (143.00, 376.00)
+  a:has-text("Find Transactions") -> 164.00x24.00 at (143.00, 400.00)
+  a:has-text("Request Loan") -> 164.00x24.00 at (143.00, 448.00)
+  a:has-text("Log Out") -> 164.00x24.00 at (143.00, 472.00)
+[2026-09-03T06:46:31.283Z] [ID-M14][account-overview] size violations (7):
+  a:has-text("Open New Account"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Accounts Overview"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Transfer Funds"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Bill Pay"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Find Transactions"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Request Loan"): measured 164.00x24.00, expected >= 44x44
+  a:has-text("Log Out"): measured 164.00x24.00, expected >= 44x44
+[2026-09-03T06:46:42.695Z] [ID-M14][payments] Touch targets measured:
+  input[name="payee.name"] -> 206.00x18.00 at (466.92, 352.00)
+  input[name="payee.address.street"] -> 206.00x18.00 at (466.92, 376.00)
+  input[name="payee.phoneNumber"] -> 206.00x18.00 at (466.92, 472.00)
+  input[name="payee.accountNumber"] -> 206.00x18.00 at (466.92, 520.00)
+  input[name="verifyAccount"] -> 206.00x18.00 at (466.92, 544.00)
+  input[name="amount"] -> 206.00x18.00 at (466.92, 592.00)
+  input[value="Send Payment"] -> 109.80x19.00 at (466.92, 664.13)
+[2026-09-03T06:46:42.889Z] [ID-M14][payments] size violations (7):
+  input[name="payee.name"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.address.street"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.phoneNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="payee.accountNumber"]: measured 206.00x18.00, expected >= 44x44
+  input[name="verifyAccount"]: measured 206.00x18.00, expected >= 44x44
+  input[name="amount"]: measured 206.00x18.00, expected >= 44x44
+  input[value="Send Payment"]: measured 109.80x19.00, expected >= 44x44

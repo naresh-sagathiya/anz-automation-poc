@@ -17,6 +17,7 @@
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
     "test:mobile:parallel:headed": "cross-env HEADLESS=false cucumber-js --profile mobile --parallel 2",
     "test:mobile:devices:headed": "cross-env HEADLESS=false \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
+    "test:mobile:visual": "playwright test tests/mobile-visual-baselines.spec.ts",
     "test:android": "cucumber-js --profile android",
     "test:bs": "tsx mobile/tests/parabank-login.ts",
     "test:android:parallel": "node scripts/run-android-parallel.js",
