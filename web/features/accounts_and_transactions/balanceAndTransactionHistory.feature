@@ -28,7 +28,7 @@ Feature: ParaBank account balances and transaction history
     Then the transaction details should include person information
     And the transaction results should display full person details
 
-  @w10 @export-csv
+  @w8 @export-csv
   Scenario: Export transaction details to CSV report
     Given the customer navigates to Bill Pay
     And the customer submits a bill payment with amount "15"
@@ -38,7 +38,7 @@ Feature: ParaBank account balances and transaction history
     Then the CSV report should be created with person details
     And the exported file should contain person information
 
-  @w11 @export-json
+  @w8 @export-json
   Scenario: Export transaction details to JSON report
     Given the customer navigates to Bill Pay
     And the customer submits a bill payment with amount "15"
