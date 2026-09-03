@@ -1,0 +1,305 @@
+[
+  {
+    "description": "  In order to ensure accessible mobile banking interactions\n  As a mobile user\n  I want critical banking controls to meet minimum touch target size and spacing",
+    "elements": [
+      {
+        "description": "",
+        "id": "banking-mobile-touch-target-size-compliance;login-controls-meet-touch-target-size-and-spacing",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Login controls meet touch target size and spacing",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1066135800
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 4268693600
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I open the mobile banking touch target screen \"login\"",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:61"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 145593300
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I measure all interactive touch targets on the screen",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:107"
+            }
+          },
+          {
+            "result": {
+              "status": "failed",
+              "duration": 558399,
+              "error_message": "Error: [ID-M14][login] Touch target size violations (4):\ninput[name=\"username\"]: measured 146.00x18.00, expected >= 44x44\ninput[name=\"password\"]: measured 146.00x18.00, expected >= 44x44\ninput[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44\na[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44\n    at MobileWorld.<anonymous> (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\mobile\\steps\\mobile.touch-target-size.steps.ts:157:11)"
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "each interactive element meets the minimum touch target size",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:143"
+            }
+          },
+          {
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "interactive elements have adequate spacing",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:163"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 88908500
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@mobile",
+            "line": 1
+          },
+          {
+            "name": "@ID-M14",
+            "line": 1
+          },
+          {
+            "name": "@touch-target-size",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "banking-mobile-touch-target-size-compliance;account-quick-actions-meet-touch-target-size-and-spacing",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Account quick actions meet touch target size and spacing",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 623547999
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2178488199
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "I open the mobile banking touch target screen \"account-overview\"",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:61"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 95806399
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I measure all interactive touch targets on the screen",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:107"
+            }
+          },
+          {
+            "result": {
+              "status": "failed",
+              "duration": 597899,
+              "error_message": "Error: [ID-M14][account-overview] Touch target size violations (7):\na:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44\na:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44\n    at MobileWorld.<anonymous> (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\mobile\\steps\\mobile.touch-target-size.steps.ts:157:11)"
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "each interactive element meets the minimum touch target size",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:143"
+            }
+          },
+          {
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "interactive elements have adequate spacing",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:163"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 73283400
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@mobile",
+            "line": 1
+          },
+          {
+            "name": "@ID-M14",
+            "line": 1
+          },
+          {
+            "name": "@touch-target-size",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "banking-mobile-touch-target-size-compliance;payment-actions-meet-touch-target-size-and-spacing",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Payment actions meet touch target size and spacing",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 647492899
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 3212979600
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "I open the mobile banking touch target screen \"payments\"",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:61"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 101611200
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "I measure all interactive touch targets on the screen",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:107"
+            }
+          },
+          {
+            "result": {
+              "status": "failed",
+              "duration": 594600,
+              "error_message": "Error: [ID-M14][payments] Touch target size violations (7):\ninput[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44\ninput[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44\ninput[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44\ninput[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44\ninput[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44\ninput[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44\ninput[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44\n    at MobileWorld.<anonymous> (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\mobile\\steps\\mobile.touch-target-size.steps.ts:157:11)"
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "each interactive element meets the minimum touch target size",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:143"
+            }
+          },
+          {
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "interactive elements have adequate spacing",
+            "match": {
+              "location": "mobile\\steps\\mobile.touch-target-size.steps.ts:163"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 85568599
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@mobile",
+            "line": 1
+          },
+          {
+            "name": "@ID-M14",
+            "line": 1
+          },
+          {
+            "name": "@touch-target-size",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "banking-mobile-touch-target-size-compliance",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Banking mobile touch target size compliance",
+    "tags": [
+      {
+        "name": "@mobile",
+        "line": 1
+      },
+      {
+        "name": "@ID-M14",
+        "line": 1
+      },
+      {
+        "name": "@touch-target-size",
+        "line": 1
+      }
+    ],
+    "uri": "mobile\\features\\mobile_touch_target_size.feature"
+  }
+]
