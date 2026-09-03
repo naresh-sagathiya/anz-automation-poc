@@ -61,6 +61,18 @@ After(async function (this: CustomWorld, scenario) {
     }
   }
 
+  if (this.secondaryPage && !this.secondaryPage.isClosed()) {
+    try {
+      await TestUtils.logout(this.secondaryPage);
+    } catch (error) {
+      console.log('Secondary logout skipped or failed.');
+    }
+  }
+
+  if (this.secondaryContext) {
+    await this.secondaryContext.close();
+  }
+
   // Close browser context.
   if (this.context) {
     await this.context.close();

@@ -18,6 +18,9 @@ export class CustomWorld extends World {
   context!: BrowserContext;
 
   page!: Page;
+  secondaryContext?: BrowserContext;
+  secondaryPage?: Page;
+  secondaryPageData?: string;
 
   registeredCredentials?: {
     username: string;
