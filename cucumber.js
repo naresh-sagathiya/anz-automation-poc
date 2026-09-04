@@ -1,5 +1,10 @@
 require('dotenv').config();
 
+const mobileFormat = [
+  "progress",
+  "html:reports/mobile-cucumber-report.html",
+];
+
 module.exports = {
   api: {
     paths: ["api/features/**/*.feature"],
