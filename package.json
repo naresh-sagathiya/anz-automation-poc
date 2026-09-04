@@ -19,6 +19,9 @@
     "test:mobile:devices:headed": "cross-env HEADLESS=false \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:mobile:visual": "playwright test tests/mobile-visual-baselines.spec.ts",
     "test:android": "cucumber-js --profile android",
+    "allure:clean": "node -e \"const fs=require('fs'); ['allure-results','allure-report'].forEach(p => fs.rmSync(p, { recursive: true, force: true }));\"",
+    "allure:generate": "allure generate ./allure-results --output allure-report",
+    "allure:open": "allure open allure-report",
     "test:bs": "tsx mobile/tests/parabank-login.ts",
     "test:android:parallel": "node scripts/run-android-parallel.js",
     "test:android:fold": "cross-env ANDROID_DEVICE_NAME=Pixel_10_Pro_Fold ANDROID_PLATFORM_VERSION=16 cucumber-js --profile android",
@@ -47,6 +50,8 @@
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
     "allure": "^3.16.0",
+    "allure-cucumberjs": "^3.11.0",
+    "appium": "^2.5.4",
     "allure-cucumberjs": "^3.11.1",
     "appium": "^3.7.0",
     "appium-chromium-driver": "^3.0.8",
@@ -61,6 +66,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "otpauth": "^9.5.1",
     "webdriverio": "^9.15.1",
     "zod": "^4.5.0-canary.20260820T155656"
   }

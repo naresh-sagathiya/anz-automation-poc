@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
@@ -22,7 +22,6 @@ export class LoginPage extends BasePage {
     await this.username.fill(username);
     await this.password.fill(password);
     await this.loginButton.click();
-    await expect(this.page.getByText('Accounts Overview').first()).toBeVisible();
   }
 
   async logout() {

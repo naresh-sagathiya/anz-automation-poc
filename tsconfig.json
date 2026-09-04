@@ -15,6 +15,7 @@
     "api/**/*.ts",
     "support/**/*.ts",
     "utils/**/*.ts",
-    "web/**/*.ts"
+    "web/**/*.ts",
+    "fixtures/**/*.ts"
   ]
 }
