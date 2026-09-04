@@ -36,7 +36,7 @@ module.exports = {
 
     formatOptions: { resultsDir: "allure-results" },
 
-    parallel: Number(process.env.PARALLEL_WORKERS || 1),
+    parallel: Number(process.env.WEB_PARALLEL_WORKERS || 1),
 
     publishQuiet: true,
   },
