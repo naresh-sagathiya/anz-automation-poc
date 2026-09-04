@@ -1,6 +1,7 @@
 ﻿import { APIRequestContext, APIResponse } from "@playwright/test";
 
 import { APILogger } from "../utils/logger";
+import { withRetry, RetryOptions } from "../utils/retry";
 
 export default class ApiClient {
   constructor(protected request: APIRequestContext) {}
@@ -15,6 +16,14 @@ export default class ApiClient {
     return response;
   }
 
+  async getWithRetry(
+    endpoint: string,
+    options?: any,
+    retryOptions?: RetryOptions,
+  ): Promise<APIResponse> {
+    return withRetry(() => this.get(endpoint, options), retryOptions);
+  }
+
   async post(
     endpoint: string,
     data?: any,
@@ -23,7 +32,7 @@ export default class ApiClient {
     APILogger.request("POST", endpoint);
 
     const response = await this.request.post(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 
@@ -36,7 +45,7 @@ export default class ApiClient {
     APILogger.request("PUT", endpoint);
 
     const response = await this.request.put(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 
@@ -53,7 +62,7 @@ export default class ApiClient {
     APILogger.request("PATCH", endpoint);
 
     const response = await this.request.patch(endpoint, {
-      data,
+      ...(data !== undefined ? { data } : {}),
       ...options,
     });
 

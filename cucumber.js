@@ -43,7 +43,7 @@ module.exports = {
 
     requireModule: ["tsx/cjs"],
 
-    format: ["progress", "html:reports/mobile-cucumber-report.html"],
+    format: mobileFormat,
 
     publishQuiet: true,
   },

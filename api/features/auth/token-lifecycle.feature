@@ -26,3 +26,4 @@ Feature: Authentication - Token Lifecycle
     When I access customer "CUST-001" using the revoked access token
     Then the API response status should be 401
     And the API error code should be "TOKEN_REVOKED"
+    

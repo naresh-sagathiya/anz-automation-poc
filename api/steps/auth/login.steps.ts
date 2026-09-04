@@ -1,8 +1,8 @@
 import { Before, After, Given, When, Then } from "@cucumber/cucumber";
-
 import { expect } from "@playwright/test";
-
 import { CustomWorld } from "../../support/world";
+import { assertNoSensitiveFields } from "../../../utils/schema";
+import { isFutureDate, parseIsoDate } from "../../../utils/date";
 
 Before(async function (this: CustomWorld) {
   await this.initialize();
@@ -20,14 +20,14 @@ Given("the banking API is available", async function (this: CustomWorld) {
 
 Then(
   "the login response status should be {int}",
-  async function (this: CustomWorld, expectedStatus: number) {
+  function (this: CustomWorld, expectedStatus: number) {
     expect(this.response.status()).toBe(expectedStatus);
   },
 );
 
 Then(
   "the login response should contain an access token",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     expect(this.responseBody.accessToken).toBeDefined();
 
     expect(this.responseBody.accessToken).not.toBe("");
@@ -36,7 +36,7 @@ Then(
 
 Then(
   "the login response should contain a refresh token",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     expect(this.responseBody.refreshToken).toBeDefined();
 
     expect(this.responseBody.refreshToken).not.toBe("");
@@ -45,25 +45,32 @@ Then(
 
 Then(
   "the token type should be {string}",
-  async function (this: CustomWorld, expectedTokenType: string) {
+  function (this: CustomWorld, expectedTokenType: string) {
     expect(this.responseBody.tokenType).toBe(expectedTokenType);
   },
 );
 
 Then(
   "the access token expiry should be greater than zero",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     expect(this.responseBody.expiresIn).toBeGreaterThan(0);
   },
 );
 
 Then(
   "the access token should contain an expiry claim",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     const token = this.responseBody.accessToken;
+
+    expect(token).toBeDefined();
 
     const parts = token.split(".");
 
+    /**
+     * JWT should have:
+     *
+     * header.payload.signature
+     */
     expect(parts.length).toBe(3);
 
     const payload = JSON.parse(
@@ -80,22 +87,29 @@ Then(
 
 Then(
   "the login response should contain a valid expiry date",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     const expiresAt = this.responseBody.expiresAt;
 
     expect(expiresAt).toBeDefined();
 
-    const expiryTime = Date.parse(expiresAt);
+    const parsedDate = parseIsoDate(expiresAt);
 
-    expect(Number.isNaN(expiryTime)).toBe(false);
-
-    expect(expiryTime).toBeGreaterThan(Date.now());
+    expect(parsedDate.getTime()).toBeGreaterThan(Date.now());
+    expect(isFutureDate(expiresAt)).toBeTruthy();
   },
 );
 
 Then(
   "the login response should not contain the password",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
+    assertNoSensitiveFields(this.responseBody, [
+      "password",
+      "ssn",
+      "socialSecurityNumber",
+      "dateOfBirth",
+      "cardNumber",
+      "accountNumber",
+    ]);
     const bodyText = JSON.stringify(this.responseBody).toLowerCase();
 
     expect(bodyText).not.toContain("password");
@@ -106,7 +120,7 @@ Then(
 
 Then(
   "the login response should not contain sensitive personal information",
-  async function (this: CustomWorld) {
+  function (this: CustomWorld) {
     const body = this.responseBody as any;
 
     expect(body).not.toHaveProperty("ssn");
@@ -118,5 +132,33 @@ Then(
     expect(body).not.toHaveProperty("phoneNumber");
 
     expect(body).not.toHaveProperty("address");
+  },
+);
+
+Then(
+  "the login error code should be {string}",
+  function (this: CustomWorld, expectedCode: string) {
+    expect(this.responseBody.code).toBe(expectedCode);
+  },
+);
+
+Then(
+  "the login error message should be {string}",
+  function (this: CustomWorld, expectedMessage: string) {
+    expect(this.responseBody.message).toBe(expectedMessage);
+  },
+);
+
+Then(
+  "the login response should not contain an access token",
+  function (this: CustomWorld) {
+    expect(this.responseBody.accessToken).toBeUndefined();
+  },
+);
+
+Then(
+  "the login response should not contain a refresh token",
+  function (this: CustomWorld) {
+    expect(this.responseBody.refreshToken).toBeUndefined();
   },
 );
