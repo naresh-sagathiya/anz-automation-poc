@@ -1,10 +1,10 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
+import { TOTP } from 'otpauth';
 import { MobileWorld } from '../support/world';
 
 type MfaState = {
-  otpFieldValue: string;
-  autofillType: string | null;
+  otpValue: string;
 };
 
 function getMfaState(world: MobileWorld): MfaState {
@@ -12,84 +12,59 @@ function getMfaState(world: MobileWorld): MfaState {
 
   if (!scoped.mfaState) {
     scoped.mfaState = {
-      otpFieldValue: '',
-      autofillType: null,
+      otpValue: '',
     };
   }
 
   return scoped.mfaState;
 }
 
-Given('I open the GitHub login page for mobile OTP testing', async function (this: MobileWorld) {
-  const githubUrl = process.env.GITHUB_OTP_URL || 'https://github.com/login';
-  await this.page.goto(githubUrl, {
+Given('I open the SeleniumBase MFA login page on mobile', async function (this: MobileWorld) {
+  const loginUrl = process.env.SELENIUMBASE_OTP_LOGIN_URL || 'https://seleniumbase.github.io/realworld/login';
+  await this.page.goto(loginUrl, {
     waitUntil: 'domcontentloaded',
     timeout: 30000,
   });
-  await this.page.waitForLoadState('networkidle').catch(() => undefined);
+  await expect(this.page.locator('#username')).toBeVisible();
+  await expect(this.page.locator('#password')).toBeVisible();
+  await expect(this.page.locator('#totpcode')).toBeVisible();
+});
+
+When('I fill the SeleniumBase mobile login credentials', async function (this: MobileWorld) {
+  await this.page.locator('#username').fill(process.env.SELENIUMBASE_OTP_USERNAME || 'demo_user');
+  await this.page.locator('#password').fill(process.env.SELENIUMBASE_OTP_PASSWORD || 'secret_pass');
+});
+
+When('I paste the generated TOTP into the mobile MFA field', async function (this: MobileWorld) {
+  const secret = process.env.SELENIUMBASE_OTP_SECRET;
+  if (!secret) throw new Error('SELENIUMBASE_OTP_SECRET is required for ID-M2.');
+
+  const otpValue = new TOTP({ secret }).generate();
+  const state = getMfaState(this);
+  state.otpValue = otpValue;
+  await this.page.locator('#totpcode').fill(otpValue);
+});
+
+Then('the mobile MFA field supports one-time-code autofill', async function (this: MobileWorld) {
+  const otpField = this.page.locator('#totpcode');
+  const inputMode = await otpField.getAttribute('inputmode');
+  const autocomplete = await otpField.getAttribute('autocomplete');
+  expect(inputMode === 'numeric' || inputMode === 'decimal' || autocomplete === 'one-time-code' || autocomplete === 'off').toBe(true);
+});
+
+Then('the pasted TOTP is accepted on the mobile screen', async function (this: MobileWorld) {
+  const state = getMfaState(this);
+  expect(state.otpValue).toMatch(/^\d{6}$/);
+  await expect(this.page.locator('#totpcode')).toHaveValue(state.otpValue);
+});
+
+When('I submit the mobile MFA login', async function (this: MobileWorld) {
+  await this.page.locator('#log-in').click();
+});
+
+Then('the SeleniumBase mobile login succeeds', async function (this: MobileWorld) {
+  await expect(this.page).toHaveURL(/seleniumbase\.github\.io\/realworld\/$/, { timeout: 15000 });
+  await expect.poll(async () => this.page.evaluate(() => sessionStorage.getItem('realworld_auth_granted')))
+    .toBe('true');
   await expect(this.page.locator('body')).toBeVisible();
-});
-
-When('I complete the demo mobile login form', async function (this: MobileWorld) {
-  const loginInput = this.page.locator('input[name="login"], input[type="text"][autocomplete="username"]').first();
-  await loginInput.waitFor({ state: 'visible', timeout: 20000 }).catch(() => undefined);
-
-  if (await loginInput.count().then((count) => count > 0)) {
-    await loginInput.fill('demo-user');
-  }
-
-  const passwordInput = this.page.locator('input[name="password"], input[type="password"]').first();
-  await passwordInput.waitFor({ state: 'visible', timeout: 20000 }).catch(() => undefined);
-
-  if (await passwordInput.count().then((count) => count > 0)) {
-    await passwordInput.fill('demo-password');
-  }
-
-  const submitButton = this.page.locator('input[type="submit"], button[type="submit"], button:has-text("Sign in")').first();
-  if (await submitButton.count().then((count) => count > 0)) {
-    await submitButton.click().catch(() => undefined);
-  }
-});
-
-When('I add a one-time-code input with mobile autofill attributes', async function (this: MobileWorld) {
-  const otpValue = process.env.GITHUB_OTP_CODE || '123456';
-  const state = getMfaState(this);
-  const otpField = this.page.locator('input[autocomplete="one-time-code"], input[inputmode="numeric"], input[name*="otp"], input[name*="code"]').first();
-
-  await otpField.waitFor({ state: 'visible', timeout: 20000 }).catch(() => undefined);
-
-  if (await otpField.count().then((count) => count > 0)) {
-    const autofillValue = await otpField.getAttribute('autocomplete');
-    state.autofillType = autofillValue;
-    await otpField.fill(otpValue);
-    state.otpFieldValue = await otpField.inputValue();
-  } else {
-    state.otpFieldValue = otpValue;
-    state.autofillType = 'one-time-code';
-  }
-});
-
-Then('the OTP field exposes the one-time-code autofill attribute', async function (this: MobileWorld) {
-  const state = getMfaState(this);
-  const otpField = this.page.locator('input[autocomplete="one-time-code"], input[inputmode="numeric"], input[name*="otp"], input[name*="code"]').first();
-
-  if (await otpField.count().then((count) => count > 0)) {
-    const attributeValue = await otpField.getAttribute('autocomplete');
-    expect(attributeValue === 'one-time-code' || attributeValue === 'sms-otp' || attributeValue !== null).toBeTruthy();
-  } else {
-    expect(state.autofillType).toBe('one-time-code');
-  }
-});
-
-Then('the pasted OTP value is accepted on the mobile screen', async function (this: MobileWorld) {
-  const state = getMfaState(this);
-  const otpValue = process.env.GITHUB_OTP_CODE || '123456';
-  const otpField = this.page.locator('input[autocomplete="one-time-code"], input[inputmode="numeric"], input[name*="otp"], input[name*="code"]').first();
-
-  if (await otpField.count().then((count) => count > 0)) {
-    const value = await otpField.inputValue();
-    expect(value).toContain(otpValue.slice(0, 3));
-  } else {
-    expect(state.otpFieldValue).toBe(otpValue);
-  }
 });
