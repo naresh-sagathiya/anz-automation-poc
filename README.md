@@ -250,6 +250,46 @@ The emulator must have Chrome installed. The Android flow uses coordinate-based 
 
 If PowerShell cannot find `adb`, add the Android SDK `platform-tools` directory to `PATH` or use the full path to `adb.exe`. The default Windows location is usually `%LOCALAPPDATA%\Android\Sdk\platform-tools`.
 
+### My Banking App native Android flow
+
+The sample [MyBankingAppTests](https://github.com/wswebcreation/MyBankingAppTests) repository provides
+`MyBankingApp.apk`. Download it into `apps\MyBankingApp.apk`, or set `ANDROID_APP_PATH` to another
+local APK path. The native flow uses the sample app's package and accessibility IDs:
+
+```powershell
+New-Item -ItemType Directory -Force apps | Out-Null
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/wswebcreation/MyBankingAppTests/main/apps/MyBankingApp.apk" `
+  -OutFile "apps\MyBankingApp.apk"
+npm run appium:start:android
+```
+
+Run the native scenario separately from the Chrome scenarios:
+
+```powershell
+$env:ANDROID_APP_PATH = (Resolve-Path "apps\MyBankingApp.apk").Path
+npm run test:android:mybanking
+```
+
+To run the native scenario on the three configured emulators in parallel, ensure the APK is
+available at the same path for all workers and run:
+
+```powershell
+npm run test:android:mybanking:parallel
+```
+
+Override the emulator definitions with `name:udid:androidVersion:appiumPort` entries when needed:
+
+```powershell
+$env:ANDROID_DEVICES = "Pixel_10_Pro:emulator-5554:14:4723,Pixel_6:emulator-5556:17:4725,Pixel_10:emulator-5558:14:4727"
+npm run test:android:mybanking:parallel
+```
+
+The native smoke scenario verifies that the APK launches and reaches the registered-device scan
+screen. The sample's QR-image injection and biometric commands are Sauce Labs-specific and are
+not enabled by this local flow; add a provider-specific step before automating the remaining
+registration and biometric screens.
+
 ## Reports and Artifacts
 
 Cucumber HTML reports are written to:
@@ -266,6 +306,15 @@ npx playwright show-report
 ```
 
 Playwright traces are collected on the first retry. Test output and screenshots are stored under `test-results/` when produced by the runner.
+
+Mobile visual baselines for M15 can be generated or verified for the configured mobile projects with:
+
+```powershell
+npm run test:mobile:visual
+npm run test:mobile:visual -- --update-snapshots
+```
+
+Snapshots are stored under `tests/__snapshots__/` by device project. Account balances and transaction dates are masked before comparison.
 
 ## Project Layout
 

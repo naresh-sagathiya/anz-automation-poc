@@ -1,0 +1,18 @@
+{
+  "cucumber.features": [
+    "api/features/**/*.feature",
+    "web/features/**/*.feature",
+    "mobile/features/**/*.feature",
+    "android/features/**/*.feature"
+  ],
+  "cucumber.glue": [
+    "api/steps/**/*.ts",
+    "api/support/**/*.ts",
+    "web/steps/**/*.ts",
+    "web/support/**/*.ts",
+    "mobile/steps/**/*.ts",
+    "mobile/support/**/*.ts",
+    "android/steps/**/*.ts",
+    "android/support/**/*.ts"
+  ]
+}
