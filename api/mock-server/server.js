@@ -11,7 +11,7 @@ app.use(express.json());
 
 const PORT = Number(process.env.PORT || 4010);
 const JWT_SECRET = process.env.JWT_SECRET || "anz-poc-secret-change-me";
-const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 3600);
+const ACCESS_TOKEN_SECONDS = Number(process.env.ACCESS_TOKEN_SECONDS || 30);
 const REFRESH_TOKEN_SECONDS = Number(
   process.env.REFRESH_TOKEN_SECONDS || 86400,
 );
@@ -214,6 +214,7 @@ function createAccessToken(user) {
       customerId: user.customerId,
       scope: "banking:read banking:write",
       role: user.role,
+      jti: crypto.randomUUID(),
     },
     JWT_SECRET,
     {

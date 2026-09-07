@@ -11,6 +11,22 @@ module.exports = {
     publishQuiet: true,
   },
 
+  "api-ci": {
+    paths: [],
+
+    require: ["api/steps/**/*.ts", "api/support/**/*.ts"],
+
+    requireModule: ["tsx/cjs"],
+
+    format: [
+      "progress",
+      `json:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.json`,
+      `html:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.html`,
+    ],
+
+    publishQuiet: true,
+  },
+
   web: {
     paths: ["web/features/**/*.feature"],
 

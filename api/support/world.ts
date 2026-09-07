@@ -9,6 +9,7 @@ import PayeeService from "../services/PayeeService";
 import DataFactoryService from "../services/DataFactoryService";
 import ScheduledPaymentService from "../services/ScheduledPaymentService";
 import StatementService from "../services/StatementService";
+import { getApiConfig } from "../config/env";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -80,8 +81,9 @@ export class CustomWorld extends World {
   }
 
   async initialize(): Promise<void> {
+    const config = getApiConfig();
     this.requestContext = await request.newContext({
-      baseURL: process.env.API_BASE_URL || "http://localhost:4010",
+      baseURL: config.baseUrl,
     });
 
     this.authService = new AuthService(this.requestContext);
