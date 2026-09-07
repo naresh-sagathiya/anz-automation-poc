@@ -121,10 +121,11 @@ When(
       ).json(),
       "rate limit",
     );
+    this.schemaSweepCompleted = true;
   },
 );
-Then("every banking endpoint response passes its schema", function () {
-  expect(true).toBeTruthy();
+Then("every banking endpoint response passes its schema", function (this: CustomWorld) {
+  expect(this.schemaSweepCompleted).toBeTruthy();
 });
 When(
   "I call the rate limited endpoint with retry key {string}",

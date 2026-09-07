@@ -4,11 +4,6 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { CustomWorld } from "../support/world";
 
-Given("the banking API is available", async function (this: CustomWorld) {
-  const response = await this.requestContext.get("/health");
-  expect(response.status()).toBe(200);
-});
-
 When(
   "I convert the following text to JSON with file name {string} and output directory {string}",
   async function (

@@ -22,6 +22,9 @@ const API_USER_ALICE = process.env.API_USER_ALICE || "alice";
 const API_USER_BOB = process.env.API_USER_BOB || "bob";
 const API_PASSWORD_ALICE = process.env.API_PASSWORD_ALICE || "Password123!";
 const API_PASSWORD_BOB = process.env.API_PASSWORD_BOB || "Password123!";
+const API_USER_OPERATOR = process.env.API_USER_OPERATOR || "operator";
+const API_PASSWORD_OPERATOR =
+  process.env.API_PASSWORD_OPERATOR || "Operations123!";
 
 const users = new Map([
   [
@@ -31,6 +34,7 @@ const users = new Map([
       username: API_USER_ALICE,
       password: API_PASSWORD_ALICE,
       customerId: "CUST-001",
+      role: "CUSTOMER",
     },
   ],
   [
@@ -40,6 +44,17 @@ const users = new Map([
       username: API_USER_BOB,
       password: API_PASSWORD_BOB,
       customerId: "CUST-002",
+      role: "CUSTOMER",
+    },
+  ],
+  [
+    API_USER_OPERATOR,
+    {
+      userId: "USER-003",
+      username: API_USER_OPERATOR,
+      password: API_PASSWORD_OPERATOR,
+      customerId: "CUST-001",
+      role: "OPERATIONS",
     },
   ],
 ]);
@@ -174,6 +189,7 @@ const transactions = new Map([
 const payments = new Map();
 const idempotencyKeys = new Map();
 const auditEntries = new Map();
+const scheduledPayments = new Map();
 const rateLimitCounters = new Map();
 const seededCustomers = new Map();
 const validPayeeIds = new Set(["PAYEE-UTILITY"]);
@@ -197,6 +213,7 @@ function createAccessToken(user) {
       username: user.username,
       customerId: user.customerId,
       scope: "banking:read banking:write",
+      role: user.role,
     },
     JWT_SECRET,
     {
@@ -214,6 +231,7 @@ function createRefreshToken(user) {
   refreshTokens.set(token, {
     userId: user.userId,
     customerId: user.customerId,
+    role: user.role,
     expiresAt: nowMs() + REFRESH_TOKEN_SECONDS * 1000,
     revoked: false,
   });
@@ -262,6 +280,11 @@ function publicUser(user) {
     username: user.username,
     customerId: user.customerId,
   };
+}
+
+function publicScheduledPayment(payment) {
+  const { customerId, ...response } = payment;
+  return response;
 }
 
 function accountById(accountId) {
@@ -362,6 +385,21 @@ function authorizeCustomer(req, res, next) {
   }
 
   next();
+}
+
+function authorizeRole(...roles) {
+  return (req, res, next) => {
+    if (!roles.includes(req.auth.payload.role)) {
+      return error(
+        res,
+        403,
+        "ROLE_ACCESS_DENIED",
+        "Your role is not authorized for this operation",
+      );
+    }
+
+    next();
+  };
 }
 
 app.get("/health", (req, res) => {
@@ -734,6 +772,38 @@ app.get("/accounts/:accountId/transactions", authenticate, (req, res) => {
   });
 });
 
+app.get("/accounts/:accountId/statements", authenticate, (req, res) => {
+  const account = accountById(req.params.accountId);
+  if (!account)
+    return error(res, 404, "ACCOUNT_NOT_FOUND", "Account was not found");
+  if (!accountIsOwnedByRequest(req, account))
+    return error(
+      res,
+      403,
+      "ACCESS_DENIED",
+      "You are not authorized to access this account",
+    );
+
+  const statementTransactions = transactions.get(account.accountId) || [];
+  const movement = statementTransactions.reduce(
+    (total, item) => total + (item.type === "CREDIT" ? item.amount : -item.amount),
+    0,
+  );
+  const periodStart =
+    statementTransactions[0]?.occurredAt || new Date().toISOString();
+  const periodEnd = new Date().toISOString();
+
+  return res.status(200).json({
+    statementId: `STMT-${crypto.randomBytes(4).toString("hex").toUpperCase()}`,
+    accountId: account.accountId,
+    periodStart,
+    periodEnd,
+    openingBalance: Number((account.currentBalance - movement).toFixed(2)),
+    closingBalance: account.currentBalance,
+    transactions: statementTransactions,
+  });
+});
+
 app.get("/payees", authenticate, (req, res) => {
   return res.status(200).json(payees.get(userCustomerId(req)) || []);
 });
@@ -868,6 +938,92 @@ app.delete("/payees/:payeeId", authenticate, (req, res) => {
   payees.set(userCustomerId(req), remaining);
   validPayeeIds.delete(req.params.payeeId);
   return res.status(204).send();
+});
+
+app.get("/scheduled-payments", authenticate, (req, res) => {
+  return res.status(200).json(
+    [...scheduledPayments.values()].filter(
+      (item) => item.customerId === userCustomerId(req),
+    ).map(publicScheduledPayment),
+  );
+});
+
+app.post("/scheduled-payments", authenticate, (req, res) => {
+  const {
+    fromAccountId,
+    toAccountId,
+    amount,
+    currency,
+    scheduledFor,
+    reference,
+  } = req.body || {};
+  const parsedDate = scheduledFor ? new Date(scheduledFor) : undefined;
+
+  if (
+    !fromAccountId ||
+    !toAccountId ||
+    amount === undefined ||
+    currency !== "AUD" ||
+    !scheduledFor ||
+    !parsedDate ||
+    Number.isNaN(parsedDate.getTime()) ||
+    parsedDate.getTime() <= nowMs()
+  ) {
+    return error(
+      res,
+      422,
+      "SCHEDULED_PAYMENT_VALIDATION_FAILED",
+      "source, destination, AUD amount and a future scheduledFor date are required",
+      { errors: [{ field: "scheduledFor", message: "must be a future ISO date" }] },
+    );
+  }
+  if (!Number.isFinite(Number(amount)) || Number(amount) <= 0 || Number(amount) > 10000) {
+    return error(
+      res,
+      422,
+      "SCHEDULED_PAYMENT_VALIDATION_FAILED",
+      "amount must be positive and within the daily payment limit",
+      { errors: [{ field: "amount", message: "must be between 0 and 10000" }] },
+    );
+  }
+
+  const source = ownedAccount(req, fromAccountId);
+  const destination = accountById(toAccountId);
+  if (!source || !destination) {
+    return error(
+      res,
+      422,
+      "SCHEDULED_PAYMENT_VALIDATION_FAILED",
+      "source or destination account was not found",
+      { errors: [{ field: "accountId", message: "account was not found" }] },
+    );
+  }
+
+  const scheduledPayment = {
+    scheduledPaymentId: `SP-${crypto.randomBytes(5).toString("hex").toUpperCase()}`,
+    customerId: userCustomerId(req),
+    status: "SCHEDULED",
+    amount: Number(amount),
+    currency,
+    fromAccountId,
+    toAccountId,
+    scheduledFor: parsedDate.toISOString(),
+    reference: reference || "",
+    createdAt: new Date().toISOString(),
+  };
+  scheduledPayments.set(scheduledPayment.scheduledPaymentId, scheduledPayment);
+  return res.status(201).json(publicScheduledPayment(scheduledPayment));
+});
+
+app.post("/scheduled-payments/:scheduledPaymentId/cancel", authenticate, (req, res) => {
+  const scheduledPayment = scheduledPayments.get(req.params.scheduledPaymentId);
+  if (!scheduledPayment || scheduledPayment.customerId !== userCustomerId(req))
+    return error(res, 404, "SCHEDULED_PAYMENT_NOT_FOUND", "Scheduled payment was not found");
+  if (scheduledPayment.status !== "SCHEDULED")
+    return error(res, 409, "SCHEDULED_PAYMENT_TERMINAL", "Scheduled payment is no longer active");
+
+  scheduledPayment.status = "CANCELLED";
+  return res.status(200).json(publicScheduledPayment(scheduledPayment));
 });
 
 // Protected payment
@@ -1012,6 +1168,13 @@ app.get("/rate-limit/probe", authenticate, (req, res) => {
       .status(429)
       .json({ code: "RATE_LIMITED", message: "Too many requests" });
   return res.status(200).json({ status: "OK" });
+});
+
+app.get("/admin/audit", authenticate, authorizeRole("OPERATIONS"), (req, res) => {
+  return res.status(200).json({
+    entries: [...auditEntries.values()],
+    role: req.auth.payload.role,
+  });
 });
 
 app.post("/test-data/seed", authenticate, (req, res) => {
