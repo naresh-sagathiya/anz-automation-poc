@@ -1,4 +1,4 @@
-export class CleanupRegistry {
+export class cleanupRegistry {
 
     private cleanupTasks: (() => Promise<void>)[] = [];
 

@@ -1,8 +1,8 @@
-import { Before, After, Given, When, Then } from "@cucumber/cucumber";
+import { Before, After, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
 import { assertNoSensitiveFields } from "../../../utils/schema";
-import { isFutureDate, parseIsoDate } from "../../../utils/date";
+import { isFutureDate, parseIsoDate } from "../../../utils/date-utils";
 
 Before(async function (this: CustomWorld) {
   await this.initialize();
@@ -10,12 +10,6 @@ Before(async function (this: CustomWorld) {
 
 After(async function (this: CustomWorld) {
   await this.dispose();
-});
-
-Given("the banking API is available", async function (this: CustomWorld) {
-  const response = await this.requestContext.get("/health");
-
-  expect(response.status()).toBe(200);
 });
 
 Then(

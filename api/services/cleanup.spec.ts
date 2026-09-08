@@ -1,9 +1,9 @@
 import {
     test,
     expect
-} from '../../fixtures/api.fixture';
+} from '../../utils/fixtures/api.fixture';
 
-import { DataFactory } from '../../utils/DataFactory';
+import { DataFactory } from '../../utils/data-factory';
 
 test(
     'Cleanup guarantee on failure',

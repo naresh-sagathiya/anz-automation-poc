@@ -3,12 +3,12 @@
     expect
 } from '@playwright/test';
 
-import { CleanupRegistry } from '../utils/CleanupRegistry';
+import { cleanupRegistry } from '../cleanupRegistry';
 
 export { expect };
 
 type Fixtures = {
-    cleanupRegistry: CleanupRegistry;
+    cleanupRegistry: cleanupRegistry;
 };
 
 export const test = base.extend<Fixtures>({
@@ -20,7 +20,7 @@ export const test = base.extend<Fixtures>({
         );
 
         const registry =
-            new CleanupRegistry();
+            new cleanupRegistry();
 
         await use(registry);
 

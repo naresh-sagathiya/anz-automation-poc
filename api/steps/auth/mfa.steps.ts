@@ -1,7 +1,7 @@
 import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
-import { isFutureDate, parseIsoDate } from "../../../utils/date";
+import { isFutureDate, parseIsoDate } from "../../../utils/date-utils";
 
 When("I request an MFA challenge", async function (this: CustomWorld) {
   this.response = await this.authService.createMfaChallenge(this.accessToken);

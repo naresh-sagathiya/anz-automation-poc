@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:api": "cucumber-js --profile api",
+    "test:api": "tsx scripts/run-api-tests.ts",
     "test:web": "cucumber-js --profile web",
     "test:mobile": "cucumber-js --profile mobile",
     "test:mobile:headed": "cross-env HEADLESS=false cucumber-js --profile mobile",
