@@ -3,7 +3,7 @@ import {
     expect
 } from '../../fixtures/api.fixture';
 
-import { DataFactory } from '../../utils/DataFactory';
+import { DataFactory } from '../../utils/dataFactory';
 
 test(
     'Cleanup guarantee on failure',
