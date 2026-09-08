@@ -1,6 +1,9 @@
-const mobileFormat = process.env.HEADLESS === 'false'
-  ? ['./mobile/support/quietProgressFormatter.js', 'html:reports/mobile-cucumber-report.html', 'allure-cucumberjs/reporter']
-  : ['progress', 'html:reports/mobile-cucumber-report.html', 'allure-cucumberjs/reporter'];
+require('dotenv').config();
+
+const mobileFormat = [
+  "progress",
+  "html:reports/mobile-cucumber-report.html",
+];
 
 module.exports = {
   api: {
@@ -15,14 +18,41 @@ module.exports = {
     publishQuiet: true,
   },
 
-  web: {
-    paths: ["web/features/**/*.feature"],
+  "api-ci": {
+    paths: [],
 
-    require: ["web/steps/**/*.ts", "web/support/**/*.ts"],
+    require: ["api/steps/**/*.ts", "api/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
 
-    format: ["progress", "html:reports/web-cucumber-report.html"],
+    format: [
+      "progress",
+      `json:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.json`,
+      `html:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.html`,
+    ],
+
+    publishQuiet: true,
+  },
+
+  web: {
+    paths: ["web/features/**/*.feature"],
+
+    require: [
+      "web/steps/**/*.ts",
+      'web/hooks/**/*.ts', 
+      "web/support/**/*.ts"],
+
+    requireModule: ["tsx/cjs"],
+
+    format: [
+      "progress",
+      "html:reports/web-cucumber-report.html",
+      "allure-cucumberjs/reporter",
+    ],
+
+    formatOptions: { resultsDir: "allure-results" },
+
+    parallel: Number(process.env.WEB_PARALLEL_WORKERS || 1),
 
     publishQuiet: true,
   },

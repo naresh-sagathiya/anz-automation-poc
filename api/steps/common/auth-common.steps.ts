@@ -1,4 +1,4 @@
-import { Given, Then } from "@cucumber/cucumber";
+import { Given, Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
 
@@ -7,12 +7,11 @@ Given(
   async function (this: CustomWorld, username: string, password: string) {
     this.response = await this.authService.login(username, password);
 
-    expect(this.response.status()).toBe(200);
-
     this.responseBody = await this.response.json();
-
-    this.accessToken = this.responseBody.accessToken;
-    this.refreshToken = this.responseBody.refreshToken;
+    if (this.response.status() === 200) {
+      this.accessToken = this.responseBody.accessToken;
+      this.refreshToken = this.responseBody.refreshToken;
+    }
   },
 );
 
@@ -27,5 +26,20 @@ Then(
   "the API error code should be {string}",
   function (this: CustomWorld, expectedCode: string) {
     expect(this.errorBody.code).toBe(expectedCode);
+  },
+);
+
+When(
+  "I access customer {string}",
+  async function (this: CustomWorld, customerId: string) {
+    this.response = await this.authService.getCustomer(
+      customerId,
+      this.accessToken,
+    );
+    if (this.response.status() === 200) {
+      this.responseBody = await this.response.json();
+    } else {
+      this.errorBody = await this.response.json();
+    }
   },
 );

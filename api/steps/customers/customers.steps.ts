@@ -1,16 +1,13 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
-import CustomerApi from "../../services/CustomerService";
-
-Given("the Customer API is available", async function (this: CustomWorld) {
-  this.customerApi = new CustomerApi(this.request);
-});
+import { customerSchema } from "../../models/payment.model";
+import { parseSchema } from "../../../utils/schema";
 
 When(
-  "I request customer details for customer ID {int}",
-  async function (this: CustomWorld, customerId: number) {
-    this.response = await this.customerApi.getCustomer(customerId);
+  "I request customer details for customer ID {string}",
+  async function (this: CustomWorld, customerId: string) {
+    this.response = await this.authService.getCustomer(customerId, this.accessToken);
   },
 );
 
@@ -24,11 +21,6 @@ Then(
 Then(
   "the customer response should contain customer details",
   async function (this: CustomWorld) {
-    const body = await this.response.json();
-
-    expect(body).toHaveProperty("id");
-    expect(body).toHaveProperty("firstName");
-    expect(body).toHaveProperty("lastName");
-    expect(body).toHaveProperty("address");
+    parseSchema(customerSchema, await this.response.json(), "customer");
   },
 );

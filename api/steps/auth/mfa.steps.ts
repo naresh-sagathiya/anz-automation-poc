@@ -1,7 +1,7 @@
-import { Given, When, Then } from "@cucumber/cucumber";
-
+import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
+import { isFutureDate, parseIsoDate } from "../../../utils/date";
 
 When("I request an MFA challenge", async function (this: CustomWorld) {
   this.response = await this.authService.createMfaChallenge(this.accessToken);
@@ -42,10 +42,32 @@ Then(
   },
 );
 
+Then(
+  "the MFA challenge token should be returned",
+  function (this: CustomWorld) {
+    expect(this.mfaBody).toBeDefined();
+
+    expect(this.mfaBody.challengeToken).toBeDefined();
+
+    expect(this.mfaBody.challengeToken).not.toBe("");
+  },
+);
+
+Then("the MFA challenge id should be returned", function (this: CustomWorld) {
+  expect(this.mfaBody).toBeDefined();
+
+  expect(this.mfaBody.challengeId).toBeDefined();
+
+  expect(this.mfaBody.challengeId).not.toBe("");
+});
+
 Then("the MFA challenge should have an expiry", function (this: CustomWorld) {
   expect(this.mfaBody.expiresIn).toBeGreaterThan(0);
 
-  expect(Date.parse(this.mfaBody.expiresAt)).toBeGreaterThan(Date.now());
+  const parsedDate = parseIsoDate(this.mfaBody.expiresAt);
+
+  expect(parsedDate.getTime()).toBeGreaterThan(Date.now());
+  expect(isFutureDate(this.mfaBody.expiresAt)).toBeTruthy();
 });
 
 Then(
@@ -75,6 +97,25 @@ When(
   },
 );
 
+When(
+  "I verify the same MFA challenge again with code {string}",
+  async function (this: CustomWorld, code: string) {
+    this.response = await this.authService.verifyMfa(
+      this.accessToken,
+      this.challengeId,
+      this.challengeToken,
+      code,
+    );
+
+    const body = await this.response.json();
+    if (this.response.status() === 200) {
+      this.mfaBody = body;
+    } else {
+      this.errorBody = body;
+    }
+  },
+);
+
 Then(
   "the MFA error code should be {string}",
   function (this: CustomWorld, expectedCode: string) {
@@ -85,6 +126,13 @@ Then(
 Then(
   "the MFA attempts remaining should be {int}",
   function (this: CustomWorld, expectedAttempts: number) {
-    expect(this.errorBody.attemptsRemaining).toBe(expectedAttempts);
+    const body =
+      this.response.status() >= 200 && this.response.status() < 300
+        ? this.mfaBody
+        : this.errorBody;
+
+    expect(body).toBeDefined();
+
+    expect(body.attemptsRemaining).toBe(expectedAttempts);
   },
 );

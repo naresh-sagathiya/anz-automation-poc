@@ -6,15 +6,21 @@ export interface LoginRequest {
 export interface LoginUser {
   userId: string;
   username: string;
+  customerId: string;
+  role: "CUSTOMER" | "OPERATIONS";
 }
 
 export interface LoginResponse {
+  data: Record<string, string | number | boolean>;
+  fileName: string;
   accessToken: string;
   refreshToken: string;
   tokenType: string;
   expiresIn: number;
   expiresAt: string;
   user: LoginUser;
+  message: string;
+  code: string;
 }
 
 export interface MfaChallengeResponse {
