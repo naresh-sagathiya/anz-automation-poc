@@ -21,7 +21,7 @@
     "test:android": "cucumber-js --profile android",
     "test:android:mybanking": "cucumber-js --profile android-mybanking",
     "test:bs": "tsx mobile/tests/parabank-login.ts",
-    "test:android:parallel": "node scripts/run-android-parallel.js",
+    "test:android:parallel": "tsx scripts/run-android-parallel.ts",
     "test:android:mybanking:parallel": "cross-env ANDROID_CUCUMBER_PROFILE=android-mybanking node scripts/run-android-parallel.js",
     "test:android:fold": "cross-env ANDROID_DEVICE_NAME=Pixel_10_Pro_Fold ANDROID_PLATFORM_VERSION=16 cucumber-js --profile android",
     "test:android:pixel5": "cross-env ANDROID_DEVICE_NAME=Pixel_5 ANDROID_PLATFORM_VERSION=35 cucumber-js --profile android",

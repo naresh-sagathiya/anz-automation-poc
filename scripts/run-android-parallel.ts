@@ -1,8 +1,15 @@
-const { spawn } = require('node:child_process');
-const net = require('node:net');
-const path = require('node:path');
+import { spawn } from 'node:child_process';
+import net from 'node:net';
+import path from 'node:path';
 
-const definitions = (process.env.ANDROID_DEVICES ||
+type DeviceDefinition = {
+  deviceName: string;
+  udid: string;
+  platformVersion: string;
+  appiumPort: string;
+};
+
+const definitions: DeviceDefinition[] = (process.env.ANDROID_DEVICES ||
   'Pixel_10_Pro:emulator-5554:14:4723,Pixel_6:emulator-5556:17:4725,Pixel_10:emulator-5558:14:4727')
   .split(',')
   .map((value) => value.trim())
@@ -21,9 +28,9 @@ const cucumber = process.platform === 'win32'
   ? path.join(process.cwd(), 'node_modules', '.bin', 'cucumber-js.cmd')
   : path.join(process.cwd(), 'node_modules', '.bin', 'cucumber-js');
 const profile = process.env.ANDROID_CUCUMBER_PROFILE || 'android';
-const children = [];
+const children: ReturnType<typeof spawn>[] = [];
 
-function startProcess(file, args, env) {
+function startProcess(file: string, args: string[], env: Record<string, string> = {}) {
   const child = spawn(file, args, {
     cwd: process.cwd(),
     env: { ...process.env, ...env },
@@ -41,7 +48,7 @@ function stopProcesses() {
   }
 }
 
-function waitForPort(port, timeoutMs = 30000) {
+function waitForPort(port: number, timeoutMs = 30000): Promise<void> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const attempt = () => {
@@ -68,7 +75,7 @@ async function run() {
     for (const device of definitions) {
       startProcess(command, ['--port', device.appiumPort], {});
     }
-    await Promise.all(definitions.map((device) => waitForPort(device.appiumPort)));
+    await Promise.all(definitions.map((device) => waitForPort(Number(device.appiumPort))));
   }
 
   const testProcesses = definitions.map((device) =>
@@ -84,7 +91,7 @@ async function run() {
   let exitCode = 0;
   for (const child of testProcesses) {
     child.on('exit', (code) => {
-      exitCode = Math.max(exitCode, code || 0);
+      exitCode = Math.max(exitCode, code ?? 0);
       remaining -= 1;
       if (remaining === 0) {
         stopProcesses();
@@ -94,7 +101,7 @@ async function run() {
   }
 }
 
-run().catch((error) => {
+run().catch((error: Error) => {
   stopProcesses();
   console.error(error.message);
   process.exit(1);
