@@ -80,4 +80,12 @@ module.exports = {
 
     publishQuiet: true,
   },
+
+  "android-mybanking": {
+    paths: ["android-mybanking/features/**/*.feature"],
+    require: ["android-mybanking/steps/**/*.ts", "android-mybanking/support/**/*.ts"],
+    requireModule: ["tsx/cjs"],
+    format: ["progress", "html:reports/android-mybanking-cucumber-report.html"],
+    publishQuiet: true,
+  },
 };
