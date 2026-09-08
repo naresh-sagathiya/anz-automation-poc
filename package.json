@@ -9,6 +9,8 @@
   "main": "index.js",
   "scripts": {
     "test:api": "cucumber-js --profile api",
+    "test:api:shard": "node scripts/run-api-shard.js",
+    "test:api:lifecycle": "cross-env ACCESS_TOKEN_SECONDS=2 cucumber-js --profile api --tags @A3",
     "test:web": "cucumber-js --profile web",
     "test:mobile": "cucumber-js --profile mobile",
     "test:mobile:m14:report": "cucumber-js mobile/features/**/*.feature --require mobile/steps/**/*.ts --require mobile/support/**/*.ts --require-module tsx/cjs --tags @ID-M14 --format html:reports/mobile-idm14-report.html --format json:reports/mobile-idm14-report.json --publish-quiet",

@@ -7,6 +7,9 @@ import CustomerService from "../services/CustomerService";
 import BankingPaymentService from "../services/PaymentService";
 import PayeeService from "../services/PayeeService";
 import DataFactoryService from "../services/DataFactoryService";
+import ScheduledPaymentService from "../services/ScheduledPaymentService";
+import StatementService from "../services/StatementService";
+import { getApiConfig } from "../config/env";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -45,6 +48,8 @@ export class CustomWorld extends World {
   paymentService!: BankingPaymentService;
   payeeService!: PayeeService;
   dataFactoryService!: DataFactoryService;
+  scheduledPaymentService!: ScheduledPaymentService;
+  statementService!: StatementService;
   customerId!: string;
   accounts: Array<any> = [];
   selectedAccount!: any;
@@ -65,6 +70,10 @@ export class CustomWorld extends World {
   seedBody!: any;
   artifactPath!: string;
   seedCleanupComplete = false;
+  scheduledPaymentBody!: any;
+  statementBody!: any;
+  adminBody!: any;
+  schemaSweepCompleted = false;
 
 
   constructor(options: IWorldOptions) {
@@ -72,8 +81,9 @@ export class CustomWorld extends World {
   }
 
   async initialize(): Promise<void> {
+    const config = getApiConfig();
     this.requestContext = await request.newContext({
-      baseURL: process.env.API_BASE_URL || "http://localhost:4010",
+      baseURL: config.baseUrl,
     });
 
     this.authService = new AuthService(this.requestContext);
@@ -82,6 +92,8 @@ export class CustomWorld extends World {
     this.paymentService = new BankingPaymentService(this.requestContext);
     this.payeeService = new PayeeService(this.requestContext);
     this.dataFactoryService = new DataFactoryService(this.requestContext);
+    this.scheduledPaymentService = new ScheduledPaymentService(this.requestContext);
+    this.statementService = new StatementService(this.requestContext);
   }
 
   async dispose(): Promise<void> {

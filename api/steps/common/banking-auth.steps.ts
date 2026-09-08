@@ -8,7 +8,9 @@ Given(
     const password =
       username === "bob"
         ? process.env.API_PASSWORD_BOB || "Password123!"
-        : process.env.API_PASSWORD_ALICE || "Password123!";
+        : username === "operator"
+          ? process.env.API_PASSWORD_OPERATOR || "Operations123!"
+          : process.env.API_PASSWORD_ALICE || "Password123!";
 
     const response = await this.authService.login(username, password);
     expect(response.status()).toBe(200);

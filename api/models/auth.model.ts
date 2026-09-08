@@ -7,6 +7,7 @@ export interface LoginUser {
   userId: string;
   username: string;
   customerId: string;
+  role: "CUSTOMER" | "OPERATIONS";
 }
 
 export interface LoginResponse {
