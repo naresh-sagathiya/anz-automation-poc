@@ -267,6 +267,15 @@ npx playwright show-report
 
 Playwright traces are collected on the first retry. Test output and screenshots are stored under `test-results/` when produced by the runner.
 
+Mobile visual baselines for M15 can be generated or verified for the configured mobile projects with:
+
+```powershell
+npm run test:mobile:visual
+npm run test:mobile:visual -- --update-snapshots
+```
+
+Snapshots are stored under `tests/__snapshots__/` by device project. Account balances and transaction dates are masked before comparison.
+
 ## Project Layout
 
 ```text

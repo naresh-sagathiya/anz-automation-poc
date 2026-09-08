@@ -10,3 +10,7 @@ node_modules/
 /reports/api-*.log
 /reports/api-cucumber-report-*.json
 /reports/api-cucumber-report-*.html
+/tests/reports/
+/allure-results/
+/allure-report/
+/web/downloads/

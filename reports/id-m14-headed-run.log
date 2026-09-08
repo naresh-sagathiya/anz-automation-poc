@@ -1,0 +1,24 @@
+
+> anz-automation-poc@1.0.0 test:mobile:headed
+> cross-env HEADLESS=false cucumber-js --profile mobile --tags @ID-M14
+
+◇ injected env (11) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+...F-....F-....F-.
+
+Failed scenarios:
+  1) Login controls meet touch target size and spacing # mobile\features\mobile_touch_target_size.feature:7
+       Then each interactive element meets the minimum touch target size # mobile\steps\mobile.touch-target-size.steps.ts:276
+           Error: [ID-M14] Touch target size validation failed. See reports/id-m14-touch-target-report.txt for details.
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.touch-target-size.steps.ts:312:11)
+  2) Account quick actions meet touch target size and spacing # mobile\features\mobile_touch_target_size.feature:13
+       Then each interactive element meets the minimum touch target size # mobile\steps\mobile.touch-target-size.steps.ts:276
+           Error: [ID-M14] Touch target size validation failed. See reports/id-m14-touch-target-report.txt for details.
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.touch-target-size.steps.ts:312:11)
+  3) Payment actions meet touch target size and spacing # mobile\features\mobile_touch_target_size.feature:19
+       Then each interactive element meets the minimum touch target size # mobile\steps\mobile.touch-target-size.steps.ts:276
+           Error: [ID-M14] Touch target size validation failed. See reports/id-m14-touch-target-report.txt for details.
+               at MobileWorld.<anonymous> (C:\Users\dara.lavanya\OneDrive - HCL TECHNOLOGIES LIMITED\Desktop\NewFramework\anz-automation-poc\mobile\steps\mobile.touch-target-size.steps.ts:312:11)
+
+3 scenarios (3 failed)
+18 steps (12 passed, 3 skipped, 3 failed)
+0m 18.615s (0m 18.581s executing your code)
