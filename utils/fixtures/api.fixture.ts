@@ -3,7 +3,7 @@
     expect
 } from '@playwright/test';
 
-import { cleanupRegistry } from '../cleanupRegistry';
+import { cleanupRegistry } from '../../api/support/cleanupRegistry';
 
 export { expect };
 
@@ -19,8 +19,7 @@ export const test = base.extend<Fixtures>({
             'Initializing Cleanup Registry'
         );
 
-        const registry =
-            new cleanupRegistry();
+        const registry = new cleanupRegistry();
 
         await use(registry);
 

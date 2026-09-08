@@ -1,7 +1,7 @@
 ﻿import { APIRequestContext, APIResponse } from "@playwright/test";
 
 import { APILogger } from "../../utils/logger";
-import { withRetry, RetryOptions } from "../../utils/retry";
+import { withRetry, RetryOptions } from "../support/retry";
 
 export default class ApiClient {
   constructor(protected request: APIRequestContext) {}

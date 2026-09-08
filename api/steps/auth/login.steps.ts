@@ -1,7 +1,7 @@
 import { Before, After, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
-import { assertNoSensitiveFields } from "../../../utils/schema";
+import { assertNoSensitiveFields } from "../../support/schema";
 import { isFutureDate, parseIsoDate } from "../../../utils/date-utils";
 
 Before(async function (this: CustomWorld) {

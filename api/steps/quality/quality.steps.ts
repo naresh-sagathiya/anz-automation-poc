@@ -12,8 +12,8 @@ import {
 } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
 import { parseIsoDate } from "../../../utils/date-utils";
-import { isoDateSchema, parseSchema } from "../../../utils/schema";
-import { assertDoesNotContainSecrets } from "../../../utils/fileValidation";
+import { isoDateSchema, parseSchema } from "../../support/schema";
+import { assertDoesNotContainSecrets } from "../../../utils/file-utils";
 import { writeTextFile } from "../../../utils/file-utils";
 
 When(

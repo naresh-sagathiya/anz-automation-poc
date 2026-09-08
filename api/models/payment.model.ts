@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isoDateSchema } from "../../utils/schema";
+import { isoDateSchema } from "../support/schema";
 export const paymentSchema = z
   .object({
     paymentId: z.string(),
