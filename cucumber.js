@@ -70,14 +70,22 @@ module.exports = {
   },
 
   android: {
-    paths: ["android/features/**/*.feature"],
+    paths: ["mobile/android/features/**/*.feature"],
 
-    require: ["android/steps/**/*.ts", "android/support/**/*.ts"],
+    require: ["mobile/android/steps/**/*.ts", "mobile/android/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
 
     format: ["progress", "html:reports/android-cucumber-report.html"],
 
+    publishQuiet: true,
+  },
+
+  "android-mybanking": {
+    paths: ["mobile/android-mybanking/features/**/*.feature"],
+    require: ["mobile/android-mybanking/steps/**/*.ts", "mobile/android-mybanking/support/**/*.ts"],
+    requireModule: ["tsx/cjs"],
+    format: ["progress", "html:reports/android-mybanking-cucumber-report.html"],
     publishQuiet: true,
   },
 };
