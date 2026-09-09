@@ -11,10 +11,10 @@ import {
   errorSchema,
 } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseIsoDate } from "../../../utils/date-utils";
+import { parseIsoDate } from "../../../utils/dateUtils";
 import { isoDateSchema, parseSchema } from "../../support/schema";
-import { assertDoesNotContainSecrets } from "../../../utils/file-utils";
-import { writeTextFile } from "../../../utils/file-utils";
+import { assertDoesNotContainSecrets } from "../../../utils/fileUtils";
+import { writeTextFile } from "../../../utils/fileUtils";
 
 When(
   "I request the configured customer accounts",

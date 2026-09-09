@@ -2,7 +2,7 @@ import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { errorSchema, paymentSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseIsoDate } from "../../../utils/date-utils";
+import { parseIsoDate } from "../../../utils/dateUtils";
 import { isoDateSchema, parseSchema } from "../../support/schema";
 
 When(
