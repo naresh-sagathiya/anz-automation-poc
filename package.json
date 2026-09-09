@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "test:api:script": "tsx scripts/run-api-tests.ts",
     "test:api": "cucumber-js --profile api",
     "test:api:shard": "node scripts/run-api-shard.js",
     "test:api:lifecycle": "cross-env ACCESS_TOKEN_SECONDS=2 cucumber-js --profile api --tags @A3",

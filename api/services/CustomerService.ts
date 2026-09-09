@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
-import ApiClient from "../../core/ApiClient";
+import ApiClient from "../core/apiClient";
 
 export default class CustomerApi {
   private apiClient: ApiClient;

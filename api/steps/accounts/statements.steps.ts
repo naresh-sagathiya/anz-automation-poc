@@ -2,7 +2,7 @@ import { Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { statementSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseSchema } from "../../../utils/schema";
+import { parseSchema } from "../../support/schema";
 
 When(
   "I request the statement for the selected account",

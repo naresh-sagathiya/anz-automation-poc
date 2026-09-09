@@ -1,7 +1,7 @@
 import {
     test,
     expect
-} from '../../fixtures/api.fixture';
+} from '../../utils/fixtures/api.fixture';
 
 import { DataFactory } from '../../utils/dataFactory';
 

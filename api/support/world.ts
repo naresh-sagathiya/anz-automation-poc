@@ -1,15 +1,17 @@
 import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
-import { AccountService } from "../services/AccountService";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
-import AuthService from "../services/AuthService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
-import CustomerService from "../services/CustomerService";
-import BankingPaymentService from "../services/PaymentService";
-import PayeeService from "../services/PayeeService";
-import DataFactoryService from "../services/DataFactoryService";
-import ScheduledPaymentService from "../services/ScheduledPaymentService";
-import StatementService from "../services/StatementService";
+
+
 import { getApiConfig } from "../config/env";
+import AuthService from "@api/services/authService";
+import { AccountService } from "@api/services/accountService";
+import BankingPaymentService from "@api/services/paymentService";
+import PayeeService from "@api/services/payeeService";
+import DataFactoryService from "@api/services/dataFactoryService";
+import ScheduledPaymentService from "@api/services/scheduledPaymentService";
+import StatementService from "@api/services/statementService";
+import CustomerService from "@api/services/customerService";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -101,21 +103,6 @@ export class CustomWorld extends World {
       await this.requestContext.dispose();
     }
   }
-
-  // async initialize() {
-  //   this.request = await request.newContext({
-  //     baseURL: process.env.API_BASE_URL,
-  //     extraHTTPHeaders: {
-  //       Accept: "application/json",
-  //     },
-  //   });
-  // }
-
-  // async dispose() {
-  //   if (this.request) {
-  //     await this.request.dispose();
-  //   }
-  // }
 }
 
 setWorldConstructor(CustomWorld);

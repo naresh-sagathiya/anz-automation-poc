@@ -4,7 +4,7 @@ import {
   addDays,
   getTodayInTimeZone,
   rollToBusinessDay,
-} from '../../utils/dateUtil';
+} from '../../utils/dateUtils';
 import { CustomWorld } from '../support/world';
 
 type ScheduledPayment = {

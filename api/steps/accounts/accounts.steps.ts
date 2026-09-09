@@ -1,10 +1,10 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { z } from "zod";
-import { AccountService } from "../services/AccountService";
-import { CustomWorld } from "../support/world";
-import { parseSchema } from "../../utils/schema";
-import { accountSchema, transactionPageSchema } from "../models/payment.model";
+import { AccountService } from "../../services/accountService";
+import { CustomWorld } from "../../support/world";
+import { parseSchema } from "../../support/schema";
+import { accountSchema, transactionPageSchema } from "../../models/payment.model";
 
 type Account = z.infer<typeof accountSchema>;
 

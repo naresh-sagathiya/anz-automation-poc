@@ -1,24 +1,19 @@
 ﻿import {
     test as base,
-    expect
+    expect,
 } from '@playwright/test';
-import type { APIRequestContext } from '@playwright/test';
 
-import { CleanupRegistry } from '../utils/CleanupRegistry';
-import AuthService from '../api/services/AuthService';
-import DataFactoryService from '../api/services/DataFactoryService';
-import { getApiConfig } from '../api/config/env';
 
-type ApiFixtures = {
-    apiRequest: APIRequestContext;
-    apiAuthService: AuthService;
-    apiDataFactory: DataFactoryService;
-};
+import { cleanupRegistry } from '../../api/support/cleanupRegistry';
+import DataFactoryService from '@api/services/dataFactoryService';
+import { getApiConfig } from '@api/config/env';
+import AuthService from '@api/services/authService';
+
 
 export { expect };
 
-type Fixtures = ApiFixtures & {
-    cleanupRegistry: CleanupRegistry;
+type Fixtures = {
+    cleanupRegistry: cleanupRegistry;
 };
 
 export const test = base.extend<Fixtures>({
@@ -47,8 +42,7 @@ export const test = base.extend<Fixtures>({
             'Initializing Cleanup Registry'
         );
 
-        const registry =
-            new CleanupRegistry();
+        const registry = new cleanupRegistry();
 
         await use(registry);
 

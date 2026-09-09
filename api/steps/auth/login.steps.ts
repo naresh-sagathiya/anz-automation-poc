@@ -1,14 +1,8 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
-import { assertNoSensitiveFields } from "../../../utils/schema";
-import { isFutureDate, parseIsoDate } from "../../../utils/date";
-
-Given("the banking API is available", async function (this: CustomWorld) {
-  const response = await this.requestContext.get("/health");
-
-  expect(response.status()).toBe(200);
-});
+import { assertNoSensitiveFields } from "../../support/schema";
+import { isFutureDate, parseIsoDate } from "../../../utils/dateUtils";
 
 Then(
   "the login response status should be {int}",

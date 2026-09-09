@@ -2,7 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
 import { customerSchema } from "../../models/payment.model";
-import { parseSchema } from "../../../utils/schema";
+import { parseSchema } from "../../support/schema";
 
 When(
   "I request customer details for customer ID {string}",
