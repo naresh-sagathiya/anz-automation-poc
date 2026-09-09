@@ -1,7 +1,7 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import ApiClient from "../core/apiClient";
 
-export class AccountService {
+export default class AccountService {
   private readonly apiClient: ApiClient;
   constructor(request: APIRequestContext) {
     this.apiClient = new ApiClient(request);

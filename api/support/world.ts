@@ -1,11 +1,14 @@
 import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
-import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
-
+import {
+  ErrorResponse,
+  LoginResponse,
+  MfaChallengeResponse,
+} from "../models/auth.model";
 
 import { getApiConfig } from "../config/env";
 import AuthService from "@api/services/authService";
-import { AccountService } from "@api/services/accountService";
+import AccountService from "@api/services/accountService";
 import BankingPaymentService from "@api/services/paymentService";
 import PayeeService from "@api/services/payeeService";
 import DataFactoryService from "@api/services/dataFactoryService";
@@ -77,7 +80,6 @@ export class CustomWorld extends World {
   adminBody!: any;
   schemaSweepCompleted = false;
 
-
   constructor(options: IWorldOptions) {
     super(options);
   }
@@ -94,7 +96,9 @@ export class CustomWorld extends World {
     this.paymentService = new BankingPaymentService(this.requestContext);
     this.payeeService = new PayeeService(this.requestContext);
     this.dataFactoryService = new DataFactoryService(this.requestContext);
-    this.scheduledPaymentService = new ScheduledPaymentService(this.requestContext);
+    this.scheduledPaymentService = new ScheduledPaymentService(
+      this.requestContext,
+    );
     this.statementService = new StatementService(this.requestContext);
   }
 

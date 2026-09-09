@@ -48,12 +48,7 @@ Then(
 Then(
   "the generated JSON file should exist in the local output folder",
   function (this: CustomWorld) {
-    const filePath = path.join(
-      __dirname,
-      "..",
-      "locales",
-      this.responseBody.fileName,
-    );
+    const filePath = path.join(this.responseBody.outputDir, this.responseBody.fileName);
 
     expect(existsSync(filePath)).toBeTruthy();
 
