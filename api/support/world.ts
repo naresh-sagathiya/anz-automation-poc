@@ -1,15 +1,17 @@
 import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
-import { AccountService } from "../services/accountService";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
-import AuthService from "../services/authService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
-import CustomerService from "../services/customerService";
-import BankingPaymentService from "../services/paymentService";
-import PayeeService from "../services/payeeService";
-import DataFactoryService from "../services/dataFactoryService";
-import ScheduledPaymentService from "../services/scheduledPaymentService";
-import StatementService from "../services/statementService";
+
+
 import { getApiConfig } from "../config/env";
+import AuthService from "@api/services/AuthService";
+import { AccountService } from "@api/services/AccountService";
+import BankingPaymentService from "@api/services/PaymentService";
+import PayeeService from "@api/services/PayeeService";
+import DataFactoryService from "@api/services/DataFactoryService";
+import ScheduledPaymentService from "@api/services/ScheduledPaymentService";
+import StatementService from "@api/services/StatementService";
+import CustomerService from "@api/services/CustomerService";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
