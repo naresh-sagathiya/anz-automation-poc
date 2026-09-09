@@ -30,7 +30,7 @@ module.exports = {
 
     format: [
       "progress",
-      "html:reports/web-cucumber-report.html",
+      "html:reports/web/web-cucumber-report.html",
       "allure-cucumberjs/reporter",
     ],
 

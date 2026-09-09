@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 
 import { BasePage } from './BasePage';
+import { TestUtils } from '../support/webTestutils';
 
 export class RegisterPage extends BasePage {
   readonly firstName;
@@ -43,8 +44,7 @@ export class RegisterPage extends BasePage {
     await this.phone.fill(data.phone);
     await this.ssn.fill(data.ssn);
 
-    // Generate unique username
-    const username = `${data.usernamePrefix}${Date.now()}`;
+    const username = TestUtils.generateUniqueUsername(data.usernamePrefix);
     await this.username.fill(username);
     await this.password.fill(data.password);
     await this.confirmPassword.fill(data.confirmPassword);

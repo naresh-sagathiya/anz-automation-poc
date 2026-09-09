@@ -1,5 +1,8 @@
+import fs from 'fs';
+import path from 'path';
 import { expect, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { TestUtils } from '../support/webTestutils';
 
 export class AccountNumberMaskingPage extends BasePage {
   readonly heading;
@@ -42,7 +45,8 @@ export class AccountNumberMaskingPage extends BasePage {
   }
 
   async captureScreenshot(fileName: string) {
-    const screenshotPath = `tests/reports/screenshots/${fileName}.png`;
+    const screenshotPath = TestUtils.screenshotPath(fileName);
+    fs.mkdirSync(path.dirname(screenshotPath), { recursive: true });
     await this.page.screenshot({ path: screenshotPath, fullPage: true });
     return screenshotPath;
   }

@@ -1,9 +1,8 @@
 import { After, Before } from '@cucumber/cucumber';
 import { chromium, firefox, webkit } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
 import { CustomWorld } from '../support/world';
-import { TestUtils } from '../../utils/webTestutils';
+import { LoginPage } from '../pages/LoginPage';
+import { TestUtils } from '../support/webTestutils';
 
 Before(async function (this: CustomWorld, scenario) {
 
@@ -37,15 +36,11 @@ After(async function (this: CustomWorld, scenario) {
   // Take a screenshot only when the scenario fails.
   if (scenario.result?.status === 'FAILED' && this.page && !this.page.isClosed()) {
     try {
-      const screenshotDir = path.join(process.cwd(), 'tests', 'reports', 'screenshots');
-      fs.mkdirSync(screenshotDir, { recursive: true });
-
-      const scenarioName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]/g, '_');
-      const screenshotPath = path.join(screenshotDir, `${scenarioName}.png`);
-      const screenshot = await this.page.screenshot({ path: screenshotPath, fullPage: true });
+      const scenarioName = scenario.pickle.name;
+      const screenshot = await TestUtils.screenshot(this.page, scenarioName);
 
       await this.attach(screenshot, 'image/png');
-      console.log(`Failure screenshot saved: ${screenshotPath}`);
+      console.log(`Failure screenshot saved: ${TestUtils.screenshotPath(scenarioName)}`);
     } catch (error) {
       // Screenshot failure should not hide the original test failure.
       console.log('Could not capture failure screenshot:', error);
@@ -55,7 +50,7 @@ After(async function (this: CustomWorld, scenario) {
   // Logout after every scenario.
   if (this.page && !this.page.isClosed()) {
     try {
-      await TestUtils.logout(this.page);
+      await new LoginPage(this.page).logout();
     } catch (error) {
       console.log('Logout skipped or failed.');
     }
@@ -63,7 +58,7 @@ After(async function (this: CustomWorld, scenario) {
 
   if (this.secondaryPage && !this.secondaryPage.isClosed()) {
     try {
-      await TestUtils.logout(this.secondaryPage);
+      await new LoginPage(this.secondaryPage).logout();
     } catch (error) {
       console.log('Secondary logout skipped or failed.');
     }

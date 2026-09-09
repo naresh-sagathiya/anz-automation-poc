@@ -9,15 +9,6 @@ export function generateOTP(secret: string): string {
   return totp.generate();
 }
 
-export function generateExpiredOTP(secret: string): string {
-  const totp = new OTPAuth.TOTP({
-    secret: secret,
-    digits: 6,
-    period: 30,
-  });
-  return totp.generate();
-}
-  
 export function InvalidOTP(secret: string): string {
   const totp = new OTPAuth.TOTP({
     secret: secret,
