@@ -10,7 +10,7 @@ type DeviceDefinition = {
 };
 
 const definitions: DeviceDefinition[] = (process.env.ANDROID_DEVICES ||
-  'Pixel_10_Pro:emulator-5554:14:4723,Pixel_6:emulator-5556:17:4725,Pixel_10:emulator-5558:14:4727')
+  'Pixel_10_Pro:emulator-5554:17:4723,Pixel_10_Pro_Fold:emulator-5556:16:4725,Pixel_6:emulator-5558:17:4727')
   .split(',')
   .map((value) => value.trim())
   .filter(Boolean)
