@@ -1,12 +1,15 @@
 import { World, IWorldOptions, setWorldConstructor } from "@cucumber/cucumber";
-import { AccountService } from "../services/AccountService";
+import { AccountService } from "../services/accountService";
 import { APIRequestContext, APIResponse, request } from "@playwright/test";
-import AuthService from "../services/AuthService";
+import AuthService from "../services/authService";
 import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/auth.model";
-import CustomerService from "../services/CustomerService";
-import BankingPaymentService from "../services/PaymentService";
-import PayeeService from "../services/PayeeService";
-import DataFactoryService from "../services/DataFactoryService";
+import CustomerService from "../services/customerService";
+import BankingPaymentService from "../services/paymentService";
+import PayeeService from "../services/payeeService";
+import DataFactoryService from "../services/dataFactoryService";
+import ScheduledPaymentService from "../services/scheduledPaymentService";
+import StatementService from "../services/statementService";
+import { getApiConfig } from "../config/env";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
@@ -45,6 +48,8 @@ export class CustomWorld extends World {
   paymentService!: BankingPaymentService;
   payeeService!: PayeeService;
   dataFactoryService!: DataFactoryService;
+  scheduledPaymentService!: ScheduledPaymentService;
+  statementService!: StatementService;
   customerId!: string;
   accounts: Array<any> = [];
   selectedAccount!: any;
@@ -65,6 +70,10 @@ export class CustomWorld extends World {
   seedBody!: any;
   artifactPath!: string;
   seedCleanupComplete = false;
+  scheduledPaymentBody!: any;
+  statementBody!: any;
+  adminBody!: any;
+  schemaSweepCompleted = false;
 
 
   constructor(options: IWorldOptions) {
@@ -72,8 +81,9 @@ export class CustomWorld extends World {
   }
 
   async initialize(): Promise<void> {
+    const config = getApiConfig();
     this.requestContext = await request.newContext({
-      baseURL: process.env.API_BASE_URL || "http://localhost:4010",
+      baseURL: config.baseUrl,
     });
 
     this.authService = new AuthService(this.requestContext);
@@ -82,6 +92,8 @@ export class CustomWorld extends World {
     this.paymentService = new BankingPaymentService(this.requestContext);
     this.payeeService = new PayeeService(this.requestContext);
     this.dataFactoryService = new DataFactoryService(this.requestContext);
+    this.scheduledPaymentService = new ScheduledPaymentService(this.requestContext);
+    this.statementService = new StatementService(this.requestContext);
   }
 
   async dispose(): Promise<void> {
@@ -89,21 +101,6 @@ export class CustomWorld extends World {
       await this.requestContext.dispose();
     }
   }
-
-  // async initialize() {
-  //   this.request = await request.newContext({
-  //     baseURL: process.env.API_BASE_URL,
-  //     extraHTTPHeaders: {
-  //       Accept: "application/json",
-  //     },
-  //   });
-  // }
-
-  // async dispose() {
-  //   if (this.request) {
-  //     await this.request.dispose();
-  //   }
-  // }
 }
 
 setWorldConstructor(CustomWorld);

@@ -1,14 +1,24 @@
 import { After, Before } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
+import { chromium, firefox, webkit } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { CustomWorld } from '../support/world';
 import { TestUtils } from '../../utils/webTestutils';
 
-Before(async function (this: CustomWorld) {
+Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
-  this.browser = await chromium.launch({ headless: false });
+  const browserName = process.env.BROWSER?.toLowerCase();
+ 
+  if (browserName === 'chromium') {
+    this.browser = await chromium.launch({headless: false});
+  } else if (browserName === 'webkit') {
+    this.browser = await webkit.launch({headless: false});
+  }else if (browserName === 'firefox') {
+    this.browser = await firefox.launch({headless: false});
+  } else {
+    throw new Error(`Unsupported browser: ${browserName}`);
+  }
 
   // Create browser context
   this.context = await this.browser.newContext();
@@ -16,8 +26,10 @@ Before(async function (this: CustomWorld) {
   // Create page
   this.page = await this.context.newPage();
 
-  // Open ParaBank
-  await this.page.goto(process.env.BASE_URL!);
+  // Open ParaBank only if not an MFA test
+  if (!scenario.pickle.tags.some(tag => tag.name === '@mfa')) {
+    await this.page.goto(process.env.WEB_BASE_URL!);
+  }
 });
 
 After(async function (this: CustomWorld, scenario) {
@@ -47,6 +59,18 @@ After(async function (this: CustomWorld, scenario) {
     } catch (error) {
       console.log('Logout skipped or failed.');
     }
+  }
+
+  if (this.secondaryPage && !this.secondaryPage.isClosed()) {
+    try {
+      await TestUtils.logout(this.secondaryPage);
+    } catch (error) {
+      console.log('Secondary logout skipped or failed.');
+    }
+  }
+
+  if (this.secondaryContext) {
+    await this.secondaryContext.close();
   }
 
   // Close browser context.

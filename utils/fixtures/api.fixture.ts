@@ -1,9 +1,14 @@
 ﻿import {
     test as base,
-    expect
+    expect,
 } from '@playwright/test';
 
+
 import { cleanupRegistry } from '../../api/support/cleanupRegistry';
+import DataFactoryService from '@api/services/dataFactoryService';
+import { getApiConfig } from '@api/config/env';
+import AuthService from '@api/services/authService';
+
 
 export { expect };
 
@@ -12,6 +17,24 @@ type Fixtures = {
 };
 
 export const test = base.extend<Fixtures>({
+
+    apiRequest: async ({}, use) => {
+        const { request } = await import('@playwright/test');
+        const config = getApiConfig();
+        const context = await request.newContext({
+            baseURL: config.baseUrl,
+        });
+        await use(context);
+        await context.dispose();
+    },
+
+    apiAuthService: async ({ apiRequest }, use) => {
+        await use(new AuthService(apiRequest));
+    },
+
+    apiDataFactory: async ({ apiRequest }, use) => {
+        await use(new DataFactoryService(apiRequest));
+    },
 
     cleanupRegistry: async ({}, use) => {
 

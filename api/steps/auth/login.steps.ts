@@ -1,16 +1,8 @@
-import { Before, After, When, Then } from "@cucumber/cucumber";
+import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { CustomWorld } from "../../support/world";
 import { assertNoSensitiveFields } from "../../support/schema";
 import { isFutureDate, parseIsoDate } from "../../../utils/dateUtils";
-
-Before(async function (this: CustomWorld) {
-  await this.initialize();
-});
-
-After(async function (this: CustomWorld) {
-  await this.dispose();
-});
 
 Then(
   "the login response status should be {int}",

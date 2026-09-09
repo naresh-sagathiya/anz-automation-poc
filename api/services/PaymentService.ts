@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
-import ApiClient from "../core/api-client";
+import ApiClient from "../core/apiClient";
 import { withRetry } from "../support/retry";
 
 export default class BankingPaymentService {

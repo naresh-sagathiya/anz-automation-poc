@@ -3,17 +3,17 @@ import { expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { CustomWorld } from '../support/world';
 
-When('the customer logs in to ParaBank using valid credentials', async function (this: CustomWorld) {
+When('the customer logs in to ParaBank using valid credentials', { timeout: 15_000 }, async function (this: CustomWorld) {
   const loginPage = new LoginPage(this.page);
 
-  const username = process.env.LOGIN_USERNAME;
-  const password = process.env.LOGIN_PASSWORD;
+  const credentials = this.registeredCredentials;
 
-  if (!username || !password) {
-    throw new Error('LOGIN_USERNAME or LOGIN_PASSWORD is missing in .env');
+  if (!credentials) {
+    throw new Error('Registered credentials are missing. Add account registration to the feature Background.');
   }
 
-  await loginPage.login(username, password);
+  await this.page.goto(process.env.WEB_BASE_URL!);
+  await loginPage.login(credentials.username, credentials.password);
 });
 
 Then('the customer should see the Accounts Overview page', async function (this: CustomWorld) {

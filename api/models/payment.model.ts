@@ -71,3 +71,29 @@ export const transactionPageSchema = z
     total: z.number(),
   })
   .strict();
+
+export const scheduledPaymentSchema = z
+  .object({
+    scheduledPaymentId: z.string(),
+    status: z.enum(["SCHEDULED", "CANCELLED"]),
+    amount: z.number(),
+    currency: z.literal("AUD"),
+    fromAccountId: z.string(),
+    toAccountId: z.string(),
+    scheduledFor: isoDateSchema,
+    reference: z.string(),
+    createdAt: isoDateSchema,
+  })
+  .strict();
+
+export const statementSchema = z
+  .object({
+    statementId: z.string(),
+    accountId: z.string(),
+    periodStart: isoDateSchema,
+    periodEnd: isoDateSchema,
+    openingBalance: z.number(),
+    closingBalance: z.number(),
+    transactions: z.array(transactionSchema),
+  })
+  .strict();

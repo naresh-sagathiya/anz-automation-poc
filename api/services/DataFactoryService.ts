@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
-import ApiClient from "../core/api-client";
+import ApiClient from "../core/apiClient";
 
 export default class DataFactoryService {
   private readonly apiClient: ApiClient;

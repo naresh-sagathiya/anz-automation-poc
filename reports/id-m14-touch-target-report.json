@@ -1,0 +1,4652 @@
+[
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:25:14.593Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:25:18.835Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:25:23.945Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:26:21.428Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:26:27.476Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:26:34.710Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:28:46.717Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:28:49.627Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:28:53.261Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:29:59.183Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:30:04.167Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:30:09.767Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:30:50.549Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:30:56.629Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:31:04.363Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:31:41.665Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:31:47.446Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:31:53.480Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:36:24.370Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:36:29.166Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:36:34.658Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:36:53.138Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:36:58.312Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:37:05.678Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:39:06.987Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:39:12.204Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:39:17.127Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:41:55.851Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:42:00.226Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:42:05.804Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:44:16.960Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:44:21.646Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:44:27.368Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:45:30.639Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:45:35.140Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:45:40.290Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:46:05.367Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:46:10.316Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:46:16.986Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:51:33.684Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:51:37.946Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:51:42.745Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:57:57.983Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:58:04.088Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:58:11.665Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:58:45.407Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:58:50.535Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T11:58:57.017Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:00:41.318Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[name=\"password\"]: measured 145.33x17.33, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 65.78x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x14.67, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 305.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 353.6666564941406,
+        "width": 145.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.125,
+        "width": 65.78125,
+        "height": 18.999969482421875
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.416656494140625,
+        "height": 14.66668701171875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:00:45.803Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 328.0000305175781,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352.0000305175781,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 447.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:00:51.292Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[name=\"amount\"]: measured 205.33x17.33, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.14x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.5312194824219,
+        "y": 352.33331298828125,
+        "width": 205.33334350585938,
+        "height": 17.333343505859375
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.5312194824219,
+        "y": 376,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.5312194824219,
+        "y": 470.6666259765625,
+        "width": 205.33334350585938,
+        "height": 17.333404541015625
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.5312194824219,
+        "y": 518,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.5312194824219,
+        "y": 541.6666870117188,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.5312194824219,
+        "y": 589,
+        "width": 205.33334350585938,
+        "height": 17.33331298828125
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.5312194824219,
+        "y": 659.4583740234375,
+        "width": 109.13546752929688,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:47:01.061Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:47:06.192Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:47:11.362Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:49:32.386Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:49:36.761Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:49:41.997Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:54:59.515Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:55:25.009Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-02T12:55:37.338Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:47:43.017Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:47:48.962Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:47:55.413Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:51:46.843Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:51:52.305Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T04:51:54.546Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:21:17.459Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:21:19.044Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:21:27.628Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:24:49.770Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:24:52.533Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:24:56.725Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:46:29.222Z",
+    "screen": "login",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 4,
+    "violations": [
+      "input[name=\"username\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[name=\"password\"]: measured 146.00x18.00, expected >= 44x44",
+      "input[value=\"Log In\"]: measured 66.45x19.00, expected >= 44x44",
+      "a[href*=\"register\"]: measured 48.42x15.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"username\"]",
+        "x": 143,
+        "y": 304.9999694824219,
+        "width": 146,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"password\"]",
+        "x": 143,
+        "y": 352.9999694824219,
+        "width": 146,
+        "height": 18.000030517578125
+      },
+      {
+        "name": "input[value=\"Log In\"]",
+        "x": 143,
+        "y": 382.1249694824219,
+        "width": 66.45310974121094,
+        "height": 19
+      },
+      {
+        "name": "a[href*=\"register\"]",
+        "x": 143,
+        "y": 432.125,
+        "width": 48.42185974121094,
+        "height": 14.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:46:31.250Z",
+    "screen": "account-overview",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "a:has-text(\"Open New Account\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Accounts Overview\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Transfer Funds\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Bill Pay\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Find Transactions\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Request Loan\"): measured 164.00x24.00, expected >= 44x44",
+      "a:has-text(\"Log Out\"): measured 164.00x24.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "a:has-text(\"Open New Account\")",
+        "x": 143,
+        "y": 304,
+        "width": 164,
+        "height": 23.999969482421875
+      },
+      {
+        "name": "a:has-text(\"Accounts Overview\")",
+        "x": 143,
+        "y": 327.9999694824219,
+        "width": 164,
+        "height": 24.000030517578125
+      },
+      {
+        "name": "a:has-text(\"Transfer Funds\")",
+        "x": 143,
+        "y": 352,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Bill Pay\")",
+        "x": 143,
+        "y": 376,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Find Transactions\")",
+        "x": 143,
+        "y": 400,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Request Loan\")",
+        "x": 143,
+        "y": 448,
+        "width": 164,
+        "height": 24
+      },
+      {
+        "name": "a:has-text(\"Log Out\")",
+        "x": 143,
+        "y": 472,
+        "width": 164,
+        "height": 23.999969482421875
+      }
+    ]
+  },
+  {
+    "id": "ID-M14",
+    "timestamp": "2026-09-03T06:46:42.834Z",
+    "screen": "payments",
+    "checkType": "size",
+    "status": "fail",
+    "minSize": 44,
+    "minSpacing": 8,
+    "measuredCount": 7,
+    "violations": [
+      "input[name=\"payee.name\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.address.street\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.phoneNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"payee.accountNumber\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"verifyAccount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[name=\"amount\"]: measured 206.00x18.00, expected >= 44x44",
+      "input[value=\"Send Payment\"]: measured 109.80x19.00, expected >= 44x44"
+    ],
+    "measurements": [
+      {
+        "name": "input[name=\"payee.name\"]",
+        "x": 466.9218444824219,
+        "y": 352,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.address.street\"]",
+        "x": 466.9218444824219,
+        "y": 376,
+        "width": 206.00003051757812,
+        "height": 17.999969482421875
+      },
+      {
+        "name": "input[name=\"payee.phoneNumber\"]",
+        "x": 466.9218444824219,
+        "y": 472,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"payee.accountNumber\"]",
+        "x": 466.9218444824219,
+        "y": 520,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"verifyAccount\"]",
+        "x": 466.9218444824219,
+        "y": 544,
+        "width": 206.00003051757812,
+        "height": 18
+      },
+      {
+        "name": "input[name=\"amount\"]",
+        "x": 466.9218444824219,
+        "y": 592,
+        "width": 206.00003051757812,
+        "height": 17.99993896484375
+      },
+      {
+        "name": "input[value=\"Send Payment\"]",
+        "x": 466.9218444824219,
+        "y": 664.125,
+        "width": 109.79684448242188,
+        "height": 18.99993896484375
+      }
+    ]
+  }
+]

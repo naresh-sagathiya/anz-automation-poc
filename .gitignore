@@ -6,3 +6,11 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/reports/api-server.log
+/reports/api-*.log
+/reports/api-cucumber-report-*.json
+/reports/api-cucumber-report-*.html
+/tests/reports/
+/allure-results/
+/allure-report/
+/web/downloads/
