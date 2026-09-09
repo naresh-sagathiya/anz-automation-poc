@@ -1,7 +1,7 @@
 /** Step definitions for valid ParaBank login and account-overview navigation. */
 import { Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
+import { LoginPage } from '../pages/LoginPage';
 import { CustomWorld } from '../support/world';
 
 When('the customer logs in to ParaBank using valid credentials', { timeout: 15_000 }, async function (this: CustomWorld) {

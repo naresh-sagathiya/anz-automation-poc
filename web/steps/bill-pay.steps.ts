@@ -3,7 +3,7 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { BillPayDetails, BillPayPage } from '../pages/BillPayPage';
 import { CustomWorld } from '../support/world';
-import billPayData from '../test_data/paraBankData.json';
+import billPayData from '../testData/paraBankData.json';
 
 const details = billPayData.billPay as BillPayDetails;
 

@@ -3,7 +3,7 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { HorizontalAccessPage } from '../pages/HorizontalAccessPage';
 import { CustomWorld } from '../support/world';
-import testData from '../test_data/paraBankData.json';
+import testData from '../testData/paraBankData.json';
 
 Given('the customer records the first account for horizontal access testing', async function (this: CustomWorld) {
   this.openedAccountId = await new HorizontalAccessPage(this.page).getFirstAccountId();

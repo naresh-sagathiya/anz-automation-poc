@@ -6,7 +6,7 @@ import { AccountOverviewPage } from '../pages/AccountOverviewPage';
 import { BillPayDetails, BillPayPage } from '../pages/BillPayPage';
 import { FindTransactionsPage } from '../pages/FindTransactionsPage';
 import { CustomWorld } from '../support/world';
-import testData from '../test_data/paraBankData.json';
+import testData from '../testData/paraBankData.json';
 import { transactionReportGenerator } from '../support/transactionReportGenerator';
  
 const billPayDetails = testData.billPay as BillPayDetails;

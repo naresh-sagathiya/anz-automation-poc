@@ -2,8 +2,8 @@
 import fs from 'fs';
 import path from 'path';
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
-import { TestUtils } from '../support/webTestUtils';
+import { BasePage } from './BasePage';
+import { TestUtils } from '../support/webTestutils';
 
 export class AccountNumberMaskingPage extends BasePage {
   readonly heading: Locator;

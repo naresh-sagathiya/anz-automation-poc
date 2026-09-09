@@ -2,8 +2,8 @@
 import { After, Before } from '@cucumber/cucumber';
 import { chromium, firefox, webkit } from '@playwright/test';
 import { CustomWorld } from '../support/world';
-import { LoginPage } from '../pages/loginPage';
-import { TestUtils } from '../support/webTestUtils';
+import { LoginPage } from '../pages/LoginPage';
+import { TestUtils } from '../support/webTestutils';
 
 /** Starts the browser, creates the scenario context, and prepares the initial page. */
 Before(async function (this: CustomWorld, scenario) {

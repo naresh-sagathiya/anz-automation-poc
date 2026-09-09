@@ -1,6 +1,6 @@
 /** Page object for searching transactions and extracting result details. */
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './BasePage';
  
 export type PersonDetails = {
   firstName?: string;

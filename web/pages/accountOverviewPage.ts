@@ -1,6 +1,6 @@
 /** Page object for the accounts overview and account balance information. */
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './BasePage';
 
 export class AccountOverviewPage extends BasePage {
   readonly heading: Locator;

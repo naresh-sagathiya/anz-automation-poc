@@ -1,7 +1,7 @@
 /** Page object for updating a customer's contact information. */
 import { Locator, Page, expect } from '@playwright/test';
-import { BasePage } from './basePage';
-import { LoginPage } from './loginPage';
+import { BasePage } from './BasePage';
+import { LoginPage } from './LoginPage';
 
 
 export class UpdateContactInfoPage

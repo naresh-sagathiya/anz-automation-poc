@@ -1,6 +1,6 @@
 /** Page object for account activity details, transactions, and account-holder information. */
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './BasePage';
  
 export type TransactionRow = {
   date: string;

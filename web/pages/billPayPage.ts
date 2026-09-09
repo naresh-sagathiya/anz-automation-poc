@@ -1,6 +1,6 @@
 /** Page object for completing bill payments and validating payment outcomes. */
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './BasePage';
 
 export type BillPayDetails = {
   payeeName: string;

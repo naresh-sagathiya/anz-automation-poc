@@ -1,6 +1,6 @@
 /** Page object for login, logout, and registration navigation. */
 import { Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
   readonly username: Locator;

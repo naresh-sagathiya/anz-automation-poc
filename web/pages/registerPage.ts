@@ -1,8 +1,8 @@
 /** Page object for creating a new ParaBank customer account. */
 import { Locator, Page } from '@playwright/test';
 
-import { BasePage } from './basePage';
-import { TestUtils } from '../support/webTestUtils';
+import { BasePage } from './BasePage';
+import { TestUtils } from '../support/webTestutils';
 
 export class RegisterPage extends BasePage {
   readonly firstName: Locator;
