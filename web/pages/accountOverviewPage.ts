@@ -1,9 +1,10 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for the accounts overview and account balance information. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
 export class AccountOverviewPage extends BasePage {
-  readonly heading;
-  readonly accountRows;
+  readonly heading: Locator;
+  readonly accountRows: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -11,7 +12,7 @@ export class AccountOverviewPage extends BasePage {
     this.accountRows = page.locator('#accountTable tbody tr').filter({ has: page.locator('td a') });
   }
 
-  async open() {
+  async open(): Promise<void> {
     await this.page.getByRole('link', { name: 'Accounts Overview' }).click();
     await expect(this.heading).toBeVisible({ timeout: 15000 });
   }

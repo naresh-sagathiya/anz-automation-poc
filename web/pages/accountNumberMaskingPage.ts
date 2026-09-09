@@ -1,14 +1,15 @@
+/** Page object for verifying account-number visibility and masking controls. */
 import fs from 'fs';
 import path from 'path';
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
-import { TestUtils } from '../support/webTestutils';
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
+import { TestUtils } from '../support/webTestUtils';
 
 export class AccountNumberMaskingPage extends BasePage {
-  readonly heading;
-  readonly accountTable;
-  readonly firstAccountLink;
-  readonly maskOrRevealControls;
+  readonly heading: Locator;
+  readonly accountTable: Locator;
+  readonly firstAccountLink: Locator;
+  readonly maskOrRevealControls: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -18,7 +19,7 @@ export class AccountNumberMaskingPage extends BasePage {
     this.maskOrRevealControls = page.locator('button, a, input').filter({ hasText: /mask|reveal|show|hide|unmask/i });
   }
 
-  async openAccountsOverview() {
+  async openAccountsOverview(): Promise<void> {
     await this.page.getByRole('link', { name: 'Accounts Overview' }).click();
     await expect(this.heading).toBeVisible({ timeout: 15000 });
   }
@@ -44,7 +45,7 @@ export class AccountNumberMaskingPage extends BasePage {
     return controls > 0;
   }
 
-  async captureScreenshot(fileName: string) {
+  async captureScreenshot(fileName: string): Promise<string> {
     const screenshotPath = TestUtils.screenshotPath(fileName);
     fs.mkdirSync(path.dirname(screenshotPath), { recursive: true });
     await this.page.screenshot({ path: screenshotPath, fullPage: true });

@@ -1,17 +1,18 @@
-import { Page, expect } from '@playwright/test';
-import { BasePage } from './BasePage';
-import { LoginPage } from './LoginPage';
+/** Page object for updating a customer's contact information. */
+import { Locator, Page, expect } from '@playwright/test';
+import { BasePage } from './basePage';
+import { LoginPage } from './loginPage';
 
 
 export class UpdateContactInfoPage
   extends BasePage {
-  readonly address;
-  readonly city;
-  readonly state;
-  readonly zipCode;
-  readonly phone;
-  readonly updateProfileButton;
-  readonly updateContactInfoLink;
+  readonly address: Locator;
+  readonly city: Locator;
+  readonly state: Locator;
+  readonly zipCode: Locator;
+  readonly phone: Locator;
+  readonly updateProfileButton: Locator;
+  readonly updateContactInfoLink: Locator;
 
 
   
@@ -26,7 +27,7 @@ export class UpdateContactInfoPage
     this.updateContactInfoLink = page.getByRole('link', { name: 'Update Contact Info' });
   }
 
- async updateContactInfo(data: any) {
+ async updateContactInfo(data: any): Promise<void> {
     await this.updateContactInfoLink.click();
     await this.address.fill(data.address);
     await this.city.fill(data.city);

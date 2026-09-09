@@ -1,10 +1,11 @@
+/** Step definitions for scheduled-payment dates, business days, and processing status. */
 import assert from 'node:assert/strict';
 import { Given, Then, When } from '@cucumber/cucumber';
 import {
   addDays,
   getTodayInTimeZone,
   rollToBusinessDay,
-} from '../../utils/dateUtil';
+} from '../support/dateUtil';
 import { CustomWorld } from '../support/world';
 
 type ScheduledPayment = {

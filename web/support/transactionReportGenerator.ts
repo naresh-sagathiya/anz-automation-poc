@@ -1,3 +1,4 @@
+/** CSV and JSON transaction-report generation for web test evidence. */
 import { createWriteStream } from 'fs';
 import { mkdir } from 'fs/promises';
 import { join, resolve } from 'path';
@@ -23,9 +24,10 @@ export interface Transaction {
   [key: string]: any;
 }
  
-export class ReportGenerator {
+export class TransactionReportGenerator {
   private downloadsDir = resolve(__dirname, '..', 'web', 'downloads');
 
+  /** Creates the format-specific report directory and returns its output path. */
   private async getExportPath(format: 'csv' | 'json', filename: string): Promise<string> {
     const directory = join(this.downloadsDir, format);
     await mkdir(directory, { recursive: true });
@@ -189,7 +191,7 @@ export class ReportGenerator {
   }
  
   /**
-   * Escape CSV special characters
+    * Quotes CSV values that contain separators, quotes, or line breaks.
    */
   private escapeCSV(value: string): string {
     if (!value) return '';
@@ -200,6 +202,6 @@ export class ReportGenerator {
   }
 }
  
-export const reportGenerator = new ReportGenerator();
+export const transactionReportGenerator = new TransactionReportGenerator();
  
  

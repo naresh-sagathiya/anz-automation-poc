@@ -1,5 +1,6 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for searching transactions and extracting result details. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
  
 export type PersonDetails = {
   firstName?: string;
@@ -14,11 +15,11 @@ export type PersonDetails = {
 };
  
 export class FindTransactionsPage extends BasePage {
-  readonly heading;
-  readonly account;
-  readonly amount;
-  readonly amountSearchButton;
-  readonly resultsTable;
+  readonly heading: Locator;
+  readonly account: Locator;
+  readonly amount: Locator;
+  readonly amountSearchButton: Locator;
+  readonly resultsTable: Locator;
  
   constructor(page: Page) {
     super(page);
@@ -29,14 +30,14 @@ export class FindTransactionsPage extends BasePage {
     this.resultsTable = page.locator('table').last();
   }
  
-  async open(accountId: string) {
+  async open(accountId: string): Promise<void> {
     await this.page.getByRole('link', { name: 'Find Transactions' }).click();
     await this.page.waitForURL(/findtrans\.htm/);
     await expect(this.heading).toBeVisible({ timeout: 15000 });
     await this.account.selectOption({ label: accountId });
   }
  
-  async searchByAmount(amount: string) {
+  async searchByAmount(amount: string): Promise<void> {
     await this.amount.fill(amount);
     await this.amountSearchButton.click();
     await expect(this.page.getByRole('heading', { name: 'Transaction Results' })).toBeVisible({ timeout: 15000 });
@@ -98,7 +99,7 @@ export class FindTransactionsPage extends BasePage {
       date: cells[0] || '',
       description: cells[1] || '',
       amount: cells.slice(2)
-        .map((value) => Number(value.replace(/[^\\d.-]/g, '')))
+        .map((value) => Number(value.replace(/[^\d.-]/g, '')))
         .find((value) => Number.isFinite(value) && value > 0) || 0,
       rawData: cells
     }));

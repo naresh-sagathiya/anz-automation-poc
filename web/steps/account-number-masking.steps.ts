@@ -1,7 +1,7 @@
 /** Step definitions for account-number masking and evidence capture scenarios. */
 import { When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { AccountNumberMaskingPage } from '../pages/accountNumberMaskingPage';
+import { AccountNumberMaskingPage } from '../pages/AccountNumberMaskingPage';
 import { CustomWorld } from '../support/world';
 
 When('the customer navigates to Accounts Overview', async function (this: CustomWorld) {

@@ -11,7 +11,7 @@ import {
 
 import {
   FundTransferPage
-} from '../pages/immediateFundTransferPage';
+} from '../pages/ImmediateFundTransferPage';
 
 import {
   CustomWorld

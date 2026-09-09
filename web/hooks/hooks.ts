@@ -1,9 +1,11 @@
+/** Cucumber hooks that create, reset, and close the browser lifecycle for web scenarios. */
 import { After, Before } from '@cucumber/cucumber';
 import { chromium, firefox, webkit } from '@playwright/test';
 import { CustomWorld } from '../support/world';
-import { LoginPage } from '../pages/LoginPage';
-import { TestUtils } from '../support/webTestutils';
+import { LoginPage } from '../pages/loginPage';
+import { TestUtils } from '../support/webTestUtils';
 
+/** Starts the browser, creates the scenario context, and prepares the initial page. */
 Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
@@ -31,6 +33,7 @@ Before(async function (this: CustomWorld, scenario) {
   }
 });
 
+/** Captures failure evidence, logs out, and closes scenario resources. */
 After(async function (this: CustomWorld, scenario) {
   
   // Take a screenshot only when the scenario fails.

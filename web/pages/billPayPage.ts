@@ -1,5 +1,6 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for completing bill payments and validating payment outcomes. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
 export type BillPayDetails = {
   payeeName: string;
@@ -14,20 +15,20 @@ export type BillPayDetails = {
 };
 
 export class BillPayPage extends BasePage {
-  readonly billPayLink;
-  readonly payeeName;
-  readonly address;
-  readonly city;
-  readonly state;
-  readonly zipCode;
-  readonly phone;
-  readonly account;
-  readonly verifyAccount;
-  readonly amount;
-  readonly fromAccount;
-  readonly sendPaymentButton;
-  readonly paymentCompleteHeading;
-  readonly paymentError;
+  readonly billPayLink: Locator;
+  readonly payeeName: Locator;
+  readonly address: Locator;
+  readonly city: Locator;
+  readonly state: Locator;
+  readonly zipCode: Locator;
+  readonly phone: Locator;
+  readonly account: Locator;
+  readonly verifyAccount: Locator;
+  readonly amount: Locator;
+  readonly fromAccount: Locator;
+  readonly sendPaymentButton: Locator;
+  readonly paymentCompleteHeading: Locator;
+  readonly paymentError: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -47,14 +48,14 @@ export class BillPayPage extends BasePage {
     this.paymentError = page.locator('#rightPanel .error:visible, .error:visible').first();
   }
 
-  async open() {
+  async open(): Promise<void> {
     await this.billPayLink.click();
     await this.page.waitForURL(/billpay\.htm/);
     await expect(this.payeeName).toBeVisible({ timeout: 15000 });
     await expect(this.fromAccount.locator('option[value]:not([value=""])')).not.toHaveCount(0, { timeout: 15000 });
   }
 
-  async fillPayment(details: BillPayDetails, amount = details.amount) {
+  async fillPayment(details: BillPayDetails, amount = details.amount): Promise<void> {
     await this.payeeName.fill(details.payeeName);
     await this.address.fill(details.address);
     await this.city.fill(details.city);
@@ -67,31 +68,31 @@ export class BillPayPage extends BasePage {
     await this.fromAccount.selectOption({ index: 0 });
   }
 
-  async submitPayment() {
+  async submitPayment(): Promise<void> {
     await this.sendPaymentButton.click();
   }
 
-  async submitMissingPayeeName(details: BillPayDetails) {
+  async submitMissingPayeeName(details: BillPayDetails): Promise<void> {
     await this.fillPayment(details);
     await this.payeeName.fill('');
     await this.submitPayment();
   }
 
-  async submitMismatchedAccount(details: BillPayDetails) {
+  async submitMismatchedAccount(details: BillPayDetails): Promise<void> {
     await this.fillPayment(details);
     await this.verifyAccount.fill(`${details.account}9`);
     await this.submitPayment();
   }
 
-  async expectPaymentComplete() {
+  async expectPaymentComplete(): Promise<void> {
     await expect(this.paymentCompleteHeading).toBeVisible({ timeout: 15000 });
   }
 
-  async expectPaymentError() {
+  async expectPaymentError(): Promise<void> {
     await expect(this.paymentError).toBeVisible({ timeout: 15000 });
   }
 
-  async submitPaymentTwice() {
+  async submitPaymentTwice(): Promise<void> {
     await Promise.allSettled([
       this.sendPaymentButton.click({ noWaitAfter: true }),
       this.sendPaymentButton.click({ noWaitAfter: true }),

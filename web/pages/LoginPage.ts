@@ -1,12 +1,13 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for login, logout, and registration navigation. */
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
 export class LoginPage extends BasePage {
-  readonly username;
-  readonly password;
-  readonly loginButton;
-  readonly registerLink;
-  readonly logoutLink;
+  readonly username: Locator;
+  readonly password: Locator;
+  readonly loginButton: Locator;
+  readonly registerLink: Locator;
+  readonly logoutLink: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -18,19 +19,19 @@ export class LoginPage extends BasePage {
     this.logoutLink = page.getByRole('link', { name: /Log Out/i });
   }
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<void> {
     await this.username.fill(username);
     await this.password.fill(password);
     await this.loginButton.click();
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     if (await this.logoutLink.isVisible().catch(() => false)) {
       await this.logoutLink.click();
     }
   }
 
-  async openRegistration() {
+  async openRegistration(): Promise<void> {
     await this.registerLink.click();
     await this.page.waitForURL(/register\.htm/);
   }

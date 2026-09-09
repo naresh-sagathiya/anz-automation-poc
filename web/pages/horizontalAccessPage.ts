@@ -1,12 +1,13 @@
+/** Page object for registering users and checking access isolation between accounts. */
 import { expect, Page } from '@playwright/test';
-import { LoginPage } from './LoginPage';
+import { LoginPage } from './loginPage';
 import { RegisterPage } from './registerPage';
 import { AccountOverviewPage } from './accountOverviewPage';
 
 export class HorizontalAccessPage {
   constructor(private readonly page: Page) {}
 
-  async registerUser(data: Record<string, string>) {
+  async registerUser(data: Record<string, string>): Promise<{ username: string; password: string }> {
     await this.page.goto(process.env.WEB_BASE_URL!);
     await new LoginPage(this.page).openRegistration();
     return new RegisterPage(this.page).register(data);

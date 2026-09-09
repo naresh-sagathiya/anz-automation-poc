@@ -1,10 +1,11 @@
-import { Page, expect } from '@playwright/test';
+/** Page object for validating authentication, protected-page navigation, and session expiry. */
+import { BrowserContext, Cookie, Page, expect } from '@playwright/test';
 
-export class SessionPage {
+export class AuthenticationValidationPage {
   readonly page: Page;
-  readonly dashboardUrl = 'https://github.com/dashboard';
-  readonly settingsUrl = 'https://github.com/settings/profile';
-  readonly loginUrl = 'https://github.com/login';
+  readonly dashboardUrl: string = 'https://github.com/dashboard';
+  readonly settingsUrl: string = 'https://github.com/settings/profile';
+  readonly loginUrl: string = 'https://github.com/login';
 
   constructor(page: Page) {
     this.page = page;
@@ -64,14 +65,14 @@ export class SessionPage {
   /**
    * Get all cookies
    */
-  async getCookies() {
+  async getCookies(): Promise<Cookie[]> {
     return await this.page.context().cookies();
   }
 
   /**
    * Get storage state
    */
-  async getStorageState() {
+  async getStorageState(): Promise<Awaited<ReturnType<BrowserContext['storageState']>>> {
     return await this.page.context().storageState();
   }
 
@@ -123,7 +124,7 @@ export class SessionPage {
   /**
    * Get authentication-related cookies
    */
-  async getAuthenticationCookies() {
+  async getAuthenticationCookies(): Promise<Cookie[]> {
     const cookies = await this.getCookies();
     return cookies.filter(c => 
       c.name.toLowerCase().includes('auth') || 

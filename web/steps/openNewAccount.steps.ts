@@ -1,3 +1,4 @@
+/** Step definitions for opening an additional account and verifying it appears. */
 import { Then, When, setDefaultTimeout } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import {CustomWorld} from "../support/world";

@@ -1,21 +1,22 @@
+/** Step definitions for authentication validation, protected-page redirects, and session expiry. */
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { SessionPage } from '../pages/SessionPage';
+import { AuthenticationValidationPage } from '../pages/authenticationValidationPage';
 import type { Cookie } from '@playwright/test';
 
 When('the user navigates to a protected page', { timeout: 30_000 }, async function () {
-  const sessionPage = new SessionPage(this.page);
+  const authenticationPage = new AuthenticationValidationPage(this.page);
   // Navigate to dashboard or settings - protected pages
-  await sessionPage.navigateToProtectedPage();
+  await authenticationPage.navigateToProtectedPage();
   await this.page.waitForLoadState('domcontentloaded');
   this.currentUrl = this.page.url();
 });
 
 When("the session is invalidated by clearing storage", { timeout: 30_000 }, async function () {
-  const sessionPage = new SessionPage(this.page);
-  await sessionPage.clearSessionStorage();
-  await sessionPage.clearCookies();
-  await sessionPage.clearLocalStorage();
+  const authenticationPage = new AuthenticationValidationPage(this.page);
+  await authenticationPage.clearSessionStorage();
+  await authenticationPage.clearCookies();
+  await authenticationPage.clearLocalStorage();
 });
 
 When("the user's session expires", { timeout: 30_000 }, async function () {
@@ -29,9 +30,7 @@ When("the user's session expires", { timeout: 30_000 }, async function () {
 });
 
 When('the user clicks the back button', { timeout: 30_000 }, async function () {
-  await this.page.goBack();
-  //await this.page.waitForLoadState('networkidle');
-  await this.page.goBack({waitUntil: 'domcontentloaded',timeout: 10000}).catch(() => {});
+  await this.page.goBack({ waitUntil: 'domcontentloaded', timeout: 10_000 });
 });
 
 Then('the user should be redirected to the login page', { timeout: 30_000 }, async function () {
@@ -45,12 +44,15 @@ Then('the user should be redirected to the login page', { timeout: 30_000 }, asy
 Then('verify if user is logged out', { timeout: 30_000 }, async function () {
   const cookies = await this.page.context().cookies();
 
-  const loggedInCookie = cookies.find(
-    (c: Cookie) => c.name === 'logged_in'
+  const authenticationCookie = cookies.find(
+    (c: Cookie) =>
+      c.name.toLowerCase().includes('auth') ||
+      c.name.toLowerCase().includes('sid') ||
+      c.name.toLowerCase().includes('session') ||
+      c.name.toLowerCase().includes('logged_in')
   );
 
-  expect(loggedInCookie).toBeDefined();
-  expect(loggedInCookie?.value).toBe('no');
+  expect(authenticationCookie).toBeUndefined();
 });
 
 Then('the page should redirect to 2FA page', { timeout: 30_000 }, async function () {
@@ -65,7 +67,7 @@ Then('the page should redirect to 2FA page', { timeout: 30_000 }, async function
 });
 
 Then('the user should not see any authenticated content', { timeout: 30_000 }, async function () {
-  const sessionPage = new SessionPage(this.page);
+  const authenticationPage = new AuthenticationValidationPage(this.page);
   // Verify we don't see dashboard or settings specific elements
   const dashboardElements = this.page.locator('[data-testid="dashboard"]');
   await expect(dashboardElements).not.toBeVisible({ timeout: 5000 }).catch(() => {
@@ -89,10 +91,10 @@ When('the authentication cookie should be stored', { timeout: 30_000 }, async fu
 });
 
 When('the session is cleared', { timeout: 30_000 }, async function () {
-  const sessionPage = new SessionPage(this.page);
-  await sessionPage.clearSessionStorage();
-  await sessionPage.clearCookies();
-  await sessionPage.clearLocalStorage();
+  const authenticationPage = new AuthenticationValidationPage(this.page);
+  await authenticationPage.clearSessionStorage();
+  await authenticationPage.clearCookies();
+  await authenticationPage.clearLocalStorage();
 });
 
 Then('the authentication cookie should not be present', { timeout: 30_000 }, async function () {

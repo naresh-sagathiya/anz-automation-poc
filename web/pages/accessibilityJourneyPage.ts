@@ -1,11 +1,12 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for accessibility checks across the login and account overview journeys. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
 export class AccessibilityJourneyPage extends BasePage {
-  readonly loginUsername;
-  readonly loginPassword;
-  readonly loginButton;
-  readonly accountsOverviewLink;
+  readonly loginUsername: Locator;
+  readonly loginPassword: Locator;
+  readonly loginButton: Locator;
+  readonly accountsOverviewLink: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -15,13 +16,13 @@ export class AccessibilityJourneyPage extends BasePage {
     this.accountsOverviewLink = page.getByRole('link', { name: /Accounts Overview/i });
   }
 
-  async openLoginPage() {
+  async openLoginPage(): Promise<void> {
     await this.page.goto(process.env.WEB_BASE_URL || '');
     await expect(this.loginUsername).toBeVisible({ timeout: 15000 });
     await expect(this.loginPassword).toBeVisible({ timeout: 15000 });
   }
 
-  async expectLoginFormAccessible() {
+  async expectLoginFormAccessible(): Promise<void> {
     await expect(this.loginUsername).toBeVisible({ timeout: 15000 });
     await expect(this.loginPassword).toBeVisible({ timeout: 15000 });
     await expect(this.loginButton).toBeVisible({ timeout: 15000 });
@@ -30,7 +31,7 @@ export class AccessibilityJourneyPage extends BasePage {
     expect(interactiveCount).toBeGreaterThan(0);
   }
 
-  async expectDashboardAccessible() {
+  async expectDashboardAccessible(): Promise<void> {
     await expect(this.accountsOverviewLink).toBeVisible({ timeout: 15000 });
     await expect(this.page.getByRole('link', { name: /Open New Account/i })).toBeVisible({ timeout: 15000 });
     await expect(this.page.getByRole('heading', { name: /Accounts Overview/i })).toBeVisible({ timeout: 15000 });

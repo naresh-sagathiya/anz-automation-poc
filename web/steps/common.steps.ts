@@ -1,3 +1,4 @@
+/** Common navigation and page-visibility steps shared by web scenarios. */
 import { Given, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { CustomWorld } from '../support/world';

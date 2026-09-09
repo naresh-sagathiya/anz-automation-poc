@@ -1,21 +1,22 @@
-import { Page } from '@playwright/test';
+/** Page object for creating a new ParaBank customer account. */
+import { Locator, Page } from '@playwright/test';
 
-import { BasePage } from './BasePage';
-import { TestUtils } from '../support/webTestutils';
+import { BasePage } from './basePage';
+import { TestUtils } from '../support/webTestUtils';
 
 export class RegisterPage extends BasePage {
-  readonly firstName;
-  readonly lastName;
-  readonly address;
-  readonly city;
-  readonly state;
-  readonly zipCode;
-  readonly phone;
-  readonly ssn;
-  readonly username;
-  readonly password;
-  readonly confirmPassword;
-  readonly registerButton;
+  readonly firstName: Locator;
+  readonly lastName: Locator;
+  readonly address: Locator;
+  readonly city: Locator;
+  readonly state: Locator;
+  readonly zipCode: Locator;
+  readonly phone: Locator;
+  readonly ssn: Locator;
+  readonly username: Locator;
+  readonly password: Locator;
+  readonly confirmPassword: Locator;
+  readonly registerButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -34,7 +35,7 @@ export class RegisterPage extends BasePage {
     this.registerButton = page.locator('input[value="Register"]');
   }
 
-  async register(data: any) {
+  async register(data: any): Promise<{ username: string; password: string }> {
     await this.firstName.fill(data.firstName);
     await this.lastName.fill(data.lastName);
     await this.address.fill(data.address);

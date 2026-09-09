@@ -1,7 +1,8 @@
+/** Step definitions for GitHub MFA login, OTP entry, and authentication errors. */
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { generateOTP, InvalidOTP } from '../support/otpUtils';
-import { MFAPage } from '../pages/MFAPage';
+import { MFAPage } from '../pages/mfaPage';
 
 
 Given('the user is on the MFA login page', { timeout: 30000 }, async function () {

@@ -1,3 +1,4 @@
+/** Custom Cucumber world that stores browser, page, and scenario state for web tests. */
 import {
   IWorldOptions,
   World,

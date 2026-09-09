@@ -1,37 +1,38 @@
+/** Shared Playwright actions and assertions used by web page objects. */
 import { Locator, Page, expect } from '@playwright/test';
 
 export class BasePage {
   constructor(protected page: Page) {}
 
-  async click(locator: Locator) {
+  async click(locator: Locator): Promise<void> {
     await locator.click();
   }
 
-  async fill(locator: Locator, value: string) {
+  async fill(locator: Locator, value: string): Promise<void> {
     await locator.fill(value);
   }
 
-  async selectOption(locator: Locator, value: string) {
+  async selectOption(locator: Locator, value: string): Promise<void> {
     await locator.selectOption(value);
   }
 
-  async verifyVisible(locator: Locator) {
+  async verifyVisible(locator: Locator): Promise<void> {
     await expect(locator).toBeVisible();
   }
 
-  async verifyText(locator: Locator, text: string) {
+  async verifyText(locator: Locator, text: string): Promise<void> {
     await expect(locator).toContainText(text);
   }
 
-  async getText(locator: Locator) {
+  async getText(locator: Locator): Promise<string | null> {
     return await locator.textContent();
   }
 
-  async getTitle() {
+  async getTitle(): Promise<string> {
     return await this.page.title();
   }
 
-  async getUrl() {
+  async getUrl(): Promise<string> {
     return this.page.url();
   }
 }

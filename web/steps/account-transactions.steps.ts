@@ -1,12 +1,12 @@
 /** Step definitions for account balances, transaction searches, and report exports. */
 import { When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { AccountActivityPage } from '../pages/accountActivityPage';
-import { AccountOverviewPage } from '../pages/accountOverviewPage';
-import { BillPayDetails, BillPayPage } from '../pages/billPayPage';
-import { FindTransactionsPage } from '../pages/findTransactionsPage';
+import { AccountActivityPage } from '../pages/AccountActivityPage';
+import { AccountOverviewPage } from '../pages/AccountOverviewPage';
+import { BillPayDetails, BillPayPage } from '../pages/BillPayPage';
+import { FindTransactionsPage } from '../pages/FindTransactionsPage';
 import { CustomWorld } from '../support/world';
-import testData from '../testData/paraBankData.json';
+import testData from '../test_data/paraBankData.json';
 import { transactionReportGenerator } from '../support/transactionReportGenerator';
  
 const billPayDetails = testData.billPay as BillPayDetails;

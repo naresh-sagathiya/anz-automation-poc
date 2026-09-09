@@ -1,27 +1,29 @@
+/** Page object for selecting accounts and completing immediate fund transfers. */
 import {
+  Locator,
   Page,
   expect
 } from '@playwright/test';
 
 import {
   BasePage
-} from './BasePage';
+} from './basePage';
 
 
 export class FundTransferPage
   extends BasePage {
 
-  readonly transferLink;
+  readonly transferLink: Locator;
 
-  readonly fromAccount;
+  readonly fromAccount: Locator;
 
-  readonly toAccount;
+  readonly toAccount: Locator;
 
-  readonly amount;
+  readonly amount: Locator;
 
-  readonly transferButton;
+  readonly transferButton: Locator;
 
-  readonly accountsOverviewLink;
+  readonly accountsOverviewLink: Locator;
 
 
   constructor(
@@ -56,7 +58,7 @@ export class FundTransferPage
   }
 
 
-  async open() {
+  async open(): Promise<void> {
 
     await this.transferLink.click();
 
@@ -78,7 +80,7 @@ export class FundTransferPage
   }
 
 
-  async getAvailableAccounts() {
+  async getAvailableAccounts(): Promise<string[]> {
 
     const fromOptions =
       this.fromAccount.locator('option');
@@ -181,7 +183,7 @@ export class FundTransferPage
   }
 
 
-  async selectTwoDifferentAccounts() {
+  async selectTwoDifferentAccounts(): Promise<{ fromAccountId: string; toAccountId: string }> {
 
     await expect(
       this.fromAccount
@@ -274,7 +276,7 @@ export class FundTransferPage
     fromAccountId: string,
     toAccountId: string,
     transferAmount: string
-  ) {
+  ): Promise<void> {
 
     await this.fromAccount
       .selectOption(
@@ -294,7 +296,7 @@ export class FundTransferPage
   }
 
 
-  async expectTransferComplete() {
+  async expectTransferComplete(): Promise<void> {
 
     await expect(
       this.page.getByText(

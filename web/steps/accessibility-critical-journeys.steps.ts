@@ -1,6 +1,7 @@
+/** Step definitions for login-form and dashboard accessibility journeys. */
 import { Given, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { AccessibilityJourneyPage } from '../pages/accessibilityJourneyPage';
+import { AccessibilityJourneyPage } from '../pages/AccessibilityJourneyPage';
 import { CustomWorld } from '../support/world';
 
 Given('the customer is on the ParaBank login page', async function (this: CustomWorld) {

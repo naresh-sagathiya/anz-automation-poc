@@ -1,5 +1,6 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for account activity details, transactions, and account-holder information. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
  
 export type TransactionRow = {
   date: string;
@@ -24,8 +25,8 @@ export type PersonDetails = {
 };
  
 export class AccountActivityPage extends BasePage {
-  readonly accountDetailsTable;
-  readonly transactionRows;
+  readonly accountDetailsTable: Locator;
+  readonly transactionRows: Locator;
  
   constructor(page: Page) {
     super(page);
@@ -35,7 +36,7 @@ export class AccountActivityPage extends BasePage {
     }).locator('tbody tr');
   }
  
-  async open(accountId: string) {
+  async open(accountId: string): Promise<void> {
     await this.page.getByRole('link', { name: accountId, exact: true }).click();
     await this.page.waitForURL(/activity\.htm\?id=/);
     await expect(this.page.getByRole('heading', { name: 'Account Activity' })).toBeVisible({ timeout: 15000 });
