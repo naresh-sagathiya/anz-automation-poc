@@ -4,14 +4,14 @@ import { ErrorResponse, LoginResponse, MfaChallengeResponse } from "../models/au
 
 
 import { getApiConfig } from "../config/env";
-import AuthService from "@api/services/AuthService";
-import { AccountService } from "@api/services/AccountService";
-import BankingPaymentService from "@api/services/PaymentService";
-import PayeeService from "@api/services/PayeeService";
-import DataFactoryService from "@api/services/DataFactoryService";
-import ScheduledPaymentService from "@api/services/ScheduledPaymentService";
-import StatementService from "@api/services/StatementService";
-import CustomerService from "@api/services/CustomerService";
+import AuthService from "@api/services/authService";
+import { AccountService } from "@api/services/accountService";
+import BankingPaymentService from "@api/services/paymentService";
+import PayeeService from "@api/services/payeeService";
+import DataFactoryService from "@api/services/dataFactoryService";
+import ScheduledPaymentService from "@api/services/scheduledPaymentService";
+import StatementService from "@api/services/statementService";
+import CustomerService from "@api/services/customerService";
 
 export class CustomWorld extends World {
   request!: APIRequestContext;
