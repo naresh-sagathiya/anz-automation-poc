@@ -5,7 +5,7 @@ import { Browser, remote } from 'webdriverio';
 
 setDefaultTimeout(90000);
 
-export class MyBankingAndroidWorld extends World {
+export class AndroidAppWorld extends World {
   driver!: Browser;
 
   constructor(options: IWorldOptions) {
@@ -15,7 +15,7 @@ export class MyBankingAndroidWorld extends World {
   async initialize(): Promise<void> {
     const appPath = resolve(process.env.ANDROID_APP_PATH || 'apps/MyBankingApp.apk');
     if (!existsSync(appPath)) {
-      throw new Error(`MyBankingApp APK was not found at "${appPath}". Set ANDROID_APP_PATH to a local APK.`);
+      throw new Error(`Android app APK was not found at "${appPath}". Set ANDROID_APP_PATH to a local APK.`);
     }
     const capabilities: Record<string, unknown> = {
       platformName: 'Android',
@@ -23,6 +23,9 @@ export class MyBankingAndroidWorld extends World {
       'appium:deviceName': process.env.ANDROID_DEVICE_NAME || 'Pixel_10_Pro',
       'appium:platformVersion': process.env.ANDROID_PLATFORM_VERSION || '14',
       ...(process.env.ANDROID_UDID ? { 'appium:udid': process.env.ANDROID_UDID } : {}),
+      ...(process.env.ANDROID_SYSTEM_PORT
+        ? { 'appium:systemPort': Number(process.env.ANDROID_SYSTEM_PORT) }
+        : {}),
       'appium:app': appPath,
       'appium:appPackage': process.env.ANDROID_APP_PACKAGE || 'com.mybankingapp',
       'appium:appActivity': process.env.ANDROID_APP_ACTIVITY || 'com.mybankingapp.MainActivity',
@@ -51,4 +54,6 @@ export class MyBankingAndroidWorld extends World {
   }
 }
 
-setWorldConstructor(MyBankingAndroidWorld);
+export { AndroidAppWorld as MyBankingAndroidWorld };
+
+setWorldConstructor(AndroidAppWorld);

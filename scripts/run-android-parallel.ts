@@ -119,6 +119,7 @@ async function run() {
       ANDROID_UDID: device.udid,
       ANDROID_PLATFORM_VERSION: device.platformVersion,
       APPIUM_PORT: device.appiumPort,
+      ANDROID_SYSTEM_PORT: String(8200 + (Number(device.appiumPort) - 4723)),
     }, process.platform === 'win32'),
   );
 
