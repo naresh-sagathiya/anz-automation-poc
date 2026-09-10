@@ -214,6 +214,19 @@ The Android scenarios use Appium's `mobile: deepLink` command for Chrome launch,
 npm run test:android
 ```
 
+### ABC Bank native login
+
+The ABC Bank APK is launched with Appium on the `emulator-5554` device. Set the credentials and the authenticator enrollment secret in the local PowerShell session; the test generates the current TOTP code at runtime and never writes it to the repository:
+
+```powershell
+$env:ABC_USERNAME = "test8@gmail.com"
+$env:ABC_PASSWORD = "<password>"
+$env:ABC_TOTP_SECRET = "<base32-enrollment-secret>"
+npm run test:android:abc -- --tags "@login"
+```
+
+`ABC_TOTP_SECRET` is the Base32 setup key from the authenticator enrollment QR/setup screen, not a changing six-digit code. For manual verification, use the `@manual-verification` tag; the test stops on the verification screen without entering or clicking `VERIFY`.
+
 ### Pixel 10 Pro Fold (Android 16)
 
 The Pixel 10 Pro Fold AVD is supported with these properties:

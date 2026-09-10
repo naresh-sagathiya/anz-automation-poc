@@ -23,6 +23,8 @@
     "test:mobile:devices:headed": "cross-env HEADLESS=false \"MOBILE_DEVICES=iPad,iPhone 12,Pixel 5\" cucumber-js --profile mobile --parallel 3",
     "test:mobile:visual": "playwright test tests/mobile-visual-baselines.spec.ts --project=iPad --project=\"iPhone 12\" --project=\"iPhone 12 Pro Max\" --project=\"Pixel 5\" --project=\"Galaxy S9+\" --project=\"iPad Mini\"",
     "test:android": "cucumber-js --profile android",
+    "test:android:abc": "cross-env ANDROID_APP_PATH=apps/ABCbank.apk ANDROID_DEVICE_NAME=sdk_gphone16k_x86_64 ANDROID_PLATFORM_VERSION=17 ANDROID_UDID=emulator-5554 ANDROID_APP_PACKAGE=com.app.hemanthbank ANDROID_APP_ACTIVITY=com.app.hemanthbank.MainActivity ANDROID_APP_WAIT_ACTIVITY=com.app.hemanthbank.MainActivity cucumber-js --profile android-abc",
+    "test:android:abc:headed": "cross-env APPIUM_PORT=4735 HEADLESS=false ABC_KEEP_APP_OPEN=true npm run test:android:abc -- --tags @login",
     "allure:clean": "node -e \"const fs=require('fs'); ['allure-results','allure-report'].forEach(p => fs.rmSync(p, { recursive: true, force: true }));\"",
     "allure:generate": "allure generate ./allure-results --output allure-report",
     "allure:open": "allure open allure-report",
