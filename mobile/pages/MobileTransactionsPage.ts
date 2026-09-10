@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 type LoadSnapshot = {
   signatures: string[];
@@ -169,10 +169,14 @@ export class MobileTransactionsPage {
     const before = await this.getPageScrollTop();
 
     for (let index = 0; index < iterations; index += 1) {
+      const previousTop = await this.getPageScrollTop();
       await this.page.evaluate(() => {
         window.scrollBy(0, 650);
       });
-      await this.page.waitForTimeout(120);
+      await this.page.waitForFunction(
+        (previousTop) => window.scrollY !== previousTop || document.documentElement.scrollHeight <= window.innerHeight,
+        previousTop,
+      );
     }
 
     const after = await this.getPageScrollTop();
@@ -219,7 +223,6 @@ export class MobileTransactionsPage {
       }
 
       await this.page.click(this.goButtonSelector);
-      await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
       await this.waitForTransactionTable();
 
       let snapshot = await this.getCurrentLoadSnapshot();
@@ -231,7 +234,6 @@ export class MobileTransactionsPage {
           await this.page.selectOption('select#transactionType', { value: typeOptions[0] });
         }
         await this.page.click(this.goButtonSelector);
-        await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
         await this.waitForTransactionTable();
         snapshot = await this.getCurrentLoadSnapshot();
       }
@@ -244,18 +246,17 @@ export class MobileTransactionsPage {
 
   async refreshList() {
     await this.page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
-    await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
     await this.waitForTransactionTable();
   }
 
-  async expectNoDuplicateRows(signatures?: string[]) {
+  async hasDuplicateRows(signatures?: string[]): Promise<boolean> {
     const rows = signatures || (await this.getTransactionIds());
     const unique = new Set(rows);
-    expect(unique.size).toBe(rows.length);
+    return unique.size !== rows.length;
   }
 
-  async expectOnActivityPage() {
-    expect(this.page.url()).toMatch(/activity\.htm\?id=/);
+  isOnActivityPage(): boolean {
+    return /activity\.htm\?id=/.test(this.page.url());
   }
 
   async getPageScrollTop(): Promise<number> {

@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export type PaymentDraft = {
   payeeName: string;
@@ -54,7 +54,6 @@ export class MobilePaymentRotationPage {
     // Use a wider landscape viewport for demos so the form visibly reflows and shows more content.
     await this.page.setViewportSize({ width: 1024, height: 768 });
     await this.page.waitForFunction(() => window.innerWidth > window.innerHeight, { timeout: 10000 });
-    await this.page.waitForTimeout(2000);
   }
 
   async rotateToPortrait() {
@@ -62,40 +61,18 @@ export class MobilePaymentRotationPage {
     await this.page.waitForFunction(() => window.innerHeight > window.innerWidth, { timeout: 10000 });
   }
 
-  async expectDraftPreserved(expected: PaymentDraft) {
-    const actual = await this.captureDraft();
-    expect(actual).toEqual(expected);
-  }
-
-  async expectLayoutStable() {
-    const criticalFields = [
-      'input[name="payee.name"]',
-      'input[name="payee.address.street"]',
-      'input[name="amount"]',
-      'input[value="Send Payment"]',
-    ];
-
-    for (const selector of criticalFields) {
-      await expect(this.page.locator(selector)).toBeVisible();
-    }
-
-    const metrics = await this.page.evaluate(() => ({
+  async layoutMetrics() {
+    return this.page.evaluate(() => ({
       innerWidth: window.innerWidth,
       innerHeight: window.innerHeight,
       scrollWidth: document.documentElement.scrollWidth,
       scrollHeight: document.documentElement.scrollHeight,
     }));
-
-    expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.innerWidth + 20);
-    expect(metrics.scrollHeight).toBeGreaterThan(0);
   }
 
   async submitPayment() {
     await this.page.click('input[value="Send Payment"]');
-    await this.page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {});
+    await this.page.waitForLoadState('networkidle', { timeout: 20000 });
   }
 
-  async expectPaymentComplete() {
-    await expect(this.page.locator('body')).toContainText(/complete|successfully|payment/i);
-  }
 }

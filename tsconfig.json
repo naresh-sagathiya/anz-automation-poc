@@ -22,6 +22,8 @@
     "support/**/*.ts",
     "utils/**/*.ts",
     "web/**/*.ts",
-    "fixtures/**/*.ts"
+    "fixtures/**/*.ts",
+    "mobile/**/*.ts",
+    "tests/**/*.ts"
   ]
 }

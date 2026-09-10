@@ -168,6 +168,50 @@ jobs:
           retention-days: 30
 
   # =========================
+  # MOBILE CUCUMBER
+  # =========================
+  mobile:
+    name: Mobile shard ${{ matrix.shard }}
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run mobile shard
+        env:
+          MOBILE_BASE_URL: ${{ vars.MOBILE_BASE_URL }}
+          PARABANK_USER: ${{ secrets.PARABANK_USER }}
+          PARABANK_PASS: ${{ secrets.PARABANK_PASS }}
+          MOBILE_SHARD_INDEX: ${{ matrix.shard }}
+          MOBILE_SHARD_COUNT: 2
+        run: npm run test:mobile:shard
+
+      - name: Upload mobile evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-report-${{ matrix.shard }}
+          path: |
+            reports/mobile-${{ matrix.shard }}.json
+            reports/mobile-cucumber-report-${{ matrix.shard }}.html
+          retention-days: 30
+
+  # =========================
   # DEPLOY
   # =========================
   deploy:
@@ -177,6 +221,7 @@ jobs:
       - api-lifecycle
       - secret-scan
       - test
+      - mobile
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 

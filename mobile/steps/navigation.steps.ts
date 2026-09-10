@@ -18,12 +18,16 @@ When('I select the mobile {string} link', async function (this: MobileWorld, lin
 });
 
 Then('the mobile navigation menu is visible', async function (this: MobileWorld) {
-  await new MobileAccountOverviewPage(this.page).verifyNavigationMenu();
+  for (const link of new MobileAccountOverviewPage(this.page).navigationLinks()) {
+    await expect(link).toBeVisible();
+  }
 });
 
 Then('the mobile navigation menu exposes the same functions as desktop', async function (this: MobileWorld) {
   const pageModel = new MobileAccountOverviewPage(this.page);
-  await pageModel.verifyNavigationMenu();
+  for (const link of pageModel.navigationLinks()) {
+    await expect(link).toBeVisible();
+  }
 
   const requiredLabels = [
     'Accounts Overview',
@@ -43,7 +47,9 @@ Then('the mobile navigation menu exposes the same functions as desktop', async f
 
 Then('the mobile navigation menu presents the key account and transfer actions', async function (this: MobileWorld) {
   const pageModel = new MobileAccountOverviewPage(this.page);
-  await pageModel.verifyNavigationMenu();
+  for (const link of pageModel.navigationLinks()) {
+    await expect(link).toBeVisible();
+  }
 
   await this.page.getByRole('link', { name: 'Transfer Funds' }).first().click();
   await expect(this.page).toHaveURL(/transfer\.htm/);
@@ -54,8 +60,6 @@ Then('the mobile navigation menu presents the key account and transfer actions',
 
 Then('the account data remains visible after mobile viewport compression', async function (this: MobileWorld) {
   await this.page.waitForLoadState('domcontentloaded');
-  await this.page.waitForTimeout(1200);
-
   const visibleSummary = await this.page.evaluate(() => {
     const text = document.body.innerText || '';
     const accountLike = /Accounts Overview|Balance|Available|Total|Checking|Savings/i.test(text);
