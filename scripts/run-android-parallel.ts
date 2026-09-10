@@ -23,19 +23,27 @@ const definitions: DeviceDefinition[] = (process.env.ANDROID_DEVICES ||
   });
 
 const dryRun = process.argv.includes('--dry-run');
-const command = process.platform === 'win32' ? 'appium.cmd' : 'appium';
+const command = process.platform === 'win32' ? process.execPath : 'appium';
+const commandArgs = process.platform === 'win32'
+  ? [path.join(process.cwd(), 'node_modules', 'appium', 'index.js')]
+  : [];
 const cucumber = process.platform === 'win32'
   ? path.join(process.cwd(), 'node_modules', '.bin', 'cucumber-js.cmd')
   : path.join(process.cwd(), 'node_modules', '.bin', 'cucumber-js');
 const profile = process.env.ANDROID_CUCUMBER_PROFILE || 'android';
 const children: ReturnType<typeof spawn>[] = [];
 
-function startProcess(file: string, args: string[], env: Record<string, string> = {}) {
+function startProcess(
+  file: string,
+  args: string[],
+  env: Record<string, string> = {},
+  shell = false,
+) {
   const child = spawn(file, args, {
     cwd: process.cwd(),
     env: { ...process.env, ...env },
     stdio: 'inherit',
-    shell: process.platform === 'win32',
+    shell,
     windowsHide: true,
   });
   children.push(child);
@@ -70,10 +78,37 @@ function waitForPort(port: number, timeoutMs = 30000): Promise<void> {
   });
 }
 
+function isPortOpen(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const socket = net.createConnection({ host: '127.0.0.1', port });
+    socket.once('connect', () => {
+      socket.destroy();
+      resolve(true);
+    });
+    socket.once('error', () => {
+      socket.destroy();
+      resolve(false);
+    });
+  });
+}
+
 async function run() {
   if (!dryRun) {
+    const occupiedPorts = (
+      await Promise.all(
+        definitions.map(async (device) => (
+          await isPortOpen(Number(device.appiumPort)) ? device.appiumPort : undefined
+        )),
+      )
+    ).filter((port): port is string => Boolean(port));
+    if (occupiedPorts.length > 0) {
+      throw new Error(
+        `Appium port(s) already in use: ${occupiedPorts.join(', ')}. Stop the existing Appium processes or set ANDROID_DEVICES to unused ports.`,
+      );
+    }
+
     for (const device of definitions) {
-      startProcess(command, ['--port', device.appiumPort], {});
+      startProcess(command, [...commandArgs, '--port', device.appiumPort], {});
     }
     await Promise.all(definitions.map((device) => waitForPort(Number(device.appiumPort))));
   }
@@ -84,7 +119,7 @@ async function run() {
       ANDROID_UDID: device.udid,
       ANDROID_PLATFORM_VERSION: device.platformVersion,
       APPIUM_PORT: device.appiumPort,
-    }),
+    }, process.platform === 'win32'),
   );
 
   let remaining = testProcesses.length;
