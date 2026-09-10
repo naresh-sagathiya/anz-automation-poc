@@ -30,6 +30,7 @@ jobs:
         env:
           BROWSER: chromium
           HEADLESS: true
+          SLOW_MO_MS: 250
           WEB_BASE_URL: https://parabank.parasoft.com/parabank
         run: npm run test:web
 

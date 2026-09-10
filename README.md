@@ -67,6 +67,7 @@ ANDROID_CHROME_ACTIVITY=com.google.android.apps.chrome.Main
 # Web tests
 BROWSER=chromium
 HEADLESS=true
+SLOW_MO_MS=0
 WEB_BASE_URL=https://parabank.parasoft.com/parabank
 ```
 
@@ -84,6 +85,7 @@ The main variables are:
 | `MOBILE_DEVICES` | Comma-separated profiles assigned to parallel Cucumber workers | Value of `DEVICE` |
 | `BROWSER` | Browser launched by web Cucumber scenarios | `chromium` |
 | `HEADLESS` | Whether the web browser runs without a visible window | `true` |
+| `SLOW_MO_MS` | Delay applied between Playwright browser actions | `0` |
 | `WEB_BASE_URL` | URL opened by web scenarios | Required for web tests |
 | `APPIUM_HOST` / `APPIUM_PORT` / `APPIUM_PATH` | Appium server connection | `127.0.0.1` / `4723` / `/` |
 | `ANDROID_DEVICE_NAME` | Android emulator name | `Pixel_10_Pro` |
