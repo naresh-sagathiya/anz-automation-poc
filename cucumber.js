@@ -81,6 +81,17 @@ module.exports = {
     publishQuiet: true,
   },
 
+  "android-abc": {
+    paths: ["mobile/android-abc/features/**/*.feature"],
+    require: [
+      "mobile/android-abc/steps/**/*.ts",
+      "mobile/android-mybanking/support/world.ts",
+    ],
+    requireModule: ["tsx/cjs"],
+    format: ["progress", "html:reports/android-abc-cucumber-report.html"],
+    publishQuiet: true,
+  },
+
   "android-mybanking": {
     paths: ["mobile/android-mybanking/features/**/*.feature"],
     require: ["mobile/android-mybanking/steps/**/*.ts", "mobile/android-mybanking/support/**/*.ts"],
