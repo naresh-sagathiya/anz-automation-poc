@@ -181,8 +181,7 @@ When('I submit the ID-M9 transfer rapidly twice', async function (this: MobileWo
     }
   });
 
-  for (let retry = 0; retry < 25; retry += 1) {
-    const observed = await this.page.evaluate((baselineLabel) => {
+  const observed = await this.page.waitForFunction((baselineLabel) => {
       const submit = (
         document.querySelector('#transferForm input[value="Transfer"]')
         || document.querySelector('#transferForm button[type="submit"]')
@@ -210,17 +209,11 @@ When('I submit the ID-M9 transfer rapidly twice', async function (this: MobileWo
         loadingLike: resultVisible || loadingText || labelChanged || submitDisabled,
         submitLocked,
       };
-    }, state.baselineConfirmLabel);
+    }, state.baselineConfirmLabel, { timeout: 10000 });
 
-    state.sawLoadingStateInFlight = state.sawLoadingStateInFlight || observed.loadingLike;
-    state.sawDisabledInFlight = state.sawDisabledInFlight || observed.submitLocked;
-
-    if (state.sawLoadingStateInFlight && state.sawDisabledInFlight) {
-      break;
-    }
-
-    await this.page.waitForTimeout(150);
-  }
+  const result = await observed.jsonValue() as { loadingLike: boolean; submitLocked: boolean };
+  state.sawLoadingStateInFlight = result.loadingLike;
+  state.sawDisabledInFlight = result.submitLocked;
 });
 
 Then('a loading state is shown while the ID-M9 transfer is in flight', async function (this: MobileWorld) {

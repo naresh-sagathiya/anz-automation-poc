@@ -1,13 +1,9 @@
 import { World, IWorldOptions, setWorldConstructor, setDefaultTimeout } from '@cucumber/cucumber';
-import dotenv from 'dotenv';
 import { chromium, Browser, Page, BrowserContext, devices } from 'playwright';
+import { mobileConfig } from '../config';
 
-dotenv.config();
 setDefaultTimeout(90000);
 
-const headless = process.env.HEADLESS !== 'false';
-const launchSlowMo = Number.parseInt(process.env.MOBILE_SLOWMO_MS || process.env.PW_SLOWMO_MS || '0', 10);
-const keepOpenMs = Number.parseInt(process.env.MOBILE_KEEP_OPEN_MS || '0', 10);
 const configuredDevices = (process.env.MOBILE_DEVICES || process.env.DEVICE || 'iPad')
   .split(',')
   .map((name) => name.trim())
@@ -25,10 +21,9 @@ export class MobileWorld extends World {
   }
 
   async initialize(profile?: 'android' | 'ios') {
-    // Launch a chromium instance suitable for mobile testing (iPad-like viewport)
     this.browser = await chromium.launch({
-      headless,
-      slowMo: Number.isFinite(launchSlowMo) && launchSlowMo > 0 ? launchSlowMo : 0,
+      headless: mobileConfig.headless,
+      slowMo: Number.isFinite(mobileConfig.slowMoMs) && mobileConfig.slowMoMs > 0 ? mobileConfig.slowMoMs : 0,
     });
     await this.useProfile(profile);
   }
@@ -55,15 +50,8 @@ export class MobileWorld extends World {
   }
 
   async dispose() {
-    try {
-      if (keepOpenMs > 0 && this.page) {
-        await this.page.waitForTimeout(keepOpenMs);
-      }
-      if (this.context) await this.context.close();
-      if (this.browser) await this.browser.close();
-    } catch (e) {
-      // ignore
-    }
+    if (this.context) await this.context.close();
+    if (this.browser) await this.browser.close();
   }
 }
 

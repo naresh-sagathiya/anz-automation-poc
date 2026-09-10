@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const mobileFormat = [
   "./mobile/support/quietProgressFormatter.js",
-  "html:reports/mobile-cucumber-report.html",
+  `html:reports/${process.env.MOBILE_REPORT_FILE || "mobile-cucumber-report"}.html`,
 ];
 
 module.exports = {
