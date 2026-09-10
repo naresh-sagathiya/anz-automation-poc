@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from './basePage';
 import { TestUtils } from '../support/webTestutils';
 
 export class AccountNumberMaskingPage extends BasePage {

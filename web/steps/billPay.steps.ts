@@ -1,6 +1,5 @@
 /** Step definitions for successful, invalid, and duplicate bill-payment flows. */
 import { Given, Then, When } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
 import { BillPayDetails, BillPayPage } from '../pages/billPayPage';
 import { CustomWorld } from '../support/world';
 import billPayData from '../testData/paraBankData.json';

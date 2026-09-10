@@ -1,5 +1,5 @@
 /** Step definitions for authentication validation, protected-page redirects, and session expiry. */
-import { Given, When, Then } from '@cucumber/cucumber';
+import {  When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { AuthenticationValidationPage } from '../pages/authenticationValidationPage';
 import type { Cookie } from '@playwright/test';

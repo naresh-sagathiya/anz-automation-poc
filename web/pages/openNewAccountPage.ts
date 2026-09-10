@@ -1,5 +1,5 @@
 /** Page object for opening an additional bank account and reading its balance. */
-import { BasePage } from "./BasePage";
+import { BasePage } from "./basePage";
 import { Locator, Page,expect } from "@playwright/test";
 
 export class OpenNewAccountPage extends BasePage {

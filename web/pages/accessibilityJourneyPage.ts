@@ -1,6 +1,6 @@
 /** Page object for accessibility checks across the login and account overview journeys. */
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from './basePage';
 
 export class AccessibilityJourneyPage extends BasePage {
   readonly loginUsername: Locator;

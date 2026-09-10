@@ -2,7 +2,7 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { CustomWorld } from '../support/world';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { RegisterPage } from '../pages/registerPage';
 import testData from '../testData/paraBankData.json';
 

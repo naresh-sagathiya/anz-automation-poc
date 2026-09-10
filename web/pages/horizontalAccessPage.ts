@@ -1,6 +1,6 @@
 /** Page object for registering users and checking access isolation between accounts. */
 import { expect, Page } from '@playwright/test';
-import { LoginPage } from './LoginPage';
+import { LoginPage } from './loginPage';
 import { RegisterPage } from './registerPage';
 import { AccountOverviewPage } from './accountOverviewPage';
 

@@ -7,7 +7,7 @@ import {
 
 import {
   BasePage
-} from './BasePage';
+} from './basePage';
 
 
 export class FundTransferPage
