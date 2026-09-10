@@ -10,13 +10,14 @@ Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
   const browserName = process.env.BROWSER?.toLowerCase();
+  const headless = process.env.HEADLESS !== 'false';
  
   if (browserName === 'chromium') {
-    this.browser = await chromium.launch({headless: false});
+    this.browser = await chromium.launch({ headless });
   } else if (browserName === 'webkit') {
-    this.browser = await webkit.launch({headless: false});
-  }else if (browserName === 'firefox') {
-    this.browser = await firefox.launch({headless: false});
+    this.browser = await webkit.launch({ headless });
+  } else if (browserName === 'firefox') {
+    this.browser = await firefox.launch({ headless });
   } else {
     throw new Error(`Unsupported browser: ${browserName}`);
   }

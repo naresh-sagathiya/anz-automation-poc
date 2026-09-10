@@ -1,0 +1,44 @@
+name: Web Automation
+
+on:
+  push:
+    branches: [ web-workflow-test ]
+
+jobs:
+  web:
+    name: Web Cucumber tests
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run web Cucumber tests
+        env:
+          BROWSER: chromium
+          HEADLESS: true
+          WEB_BASE_URL: https://parabank.parasoft.com/parabank
+        run: npm run test:web
+
+      - name: Upload web report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-cucumber-report
+          path: |
+            reports/web/web-cucumber-report.html
+            allure-results/
+          retention-days: 30
