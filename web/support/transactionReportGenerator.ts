@@ -25,7 +25,7 @@ export interface Transaction {
 }
  
 export class TransactionReportGenerator {
-  private downloadsDir = resolve(__dirname, '..', 'web', 'downloads');
+  private downloadsDir = resolve(__dirname, '..', 'downloads');
 
   /** Creates the format-specific report directory and returns its output path. */
   private async getExportPath(format: 'csv' | 'json', filename: string): Promise<string> {

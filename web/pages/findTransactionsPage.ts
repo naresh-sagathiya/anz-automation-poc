@@ -60,7 +60,10 @@ export class FindTransactionsPage extends BasePage {
     const details: PersonDetails = {};
     
     // Try to get person details from account information section
-    const accountInfo = await this.page.locator('[class*="account-info"], [class*="person-details"]').textContent();
+    const accountInfoLocator = this.page.locator('[class*="account-info"], [class*="person-details"]');
+    const accountInfo = (await accountInfoLocator.count()) > 0
+      ? await accountInfoLocator.first().textContent()
+      : null;
     if (accountInfo) {
       const nameMatch = accountInfo.match(/(?:Name|Person|Customer):\s*([A-Za-z\s]+)/i);
       if (nameMatch) {
@@ -95,14 +98,27 @@ export class FindTransactionsPage extends BasePage {
       )
     );
     
-    return rows.filter((cells) => cells.length >= 3).map((cells) => ({
-      date: cells[0] || '',
-      description: cells[1] || '',
-      amount: cells.slice(2)
-        .map((value) => Number(value.replace(/[^\d.-]/g, '')))
-        .find((value) => Number.isFinite(value) && value > 0) || 0,
-      rawData: cells
-    }));
+    return rows.filter((cells) => cells.length >= 3).map((cells) => {
+      const debit = this.parseTransactionAmount(cells[2]);
+      const credit = this.parseTransactionAmount(cells[3]);
+      const amount = debit ?? credit ?? 0;
+
+      return {
+        date: cells[0] || '',
+        description: cells[1] || '',
+        debit,
+        credit,
+        amount,
+        transactionType: debit !== undefined ? 'DEBIT' : (credit !== undefined ? 'CREDIT' : 'OTHER'),
+        rawData: cells,
+      };
+    });
+  }
+
+  private parseTransactionAmount(value?: string): number | undefined {
+    if (!value) return undefined;
+    const amount = Number(value.replace(/[^\d.-]/g, ''));
+    return Number.isFinite(amount) && amount > 0 ? amount : undefined;
   }
  
   async verifyPersonDetailsPresent(): Promise<boolean> {
