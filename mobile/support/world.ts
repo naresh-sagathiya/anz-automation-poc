@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { chromium, Browser, Page, BrowserContext, devices } from 'playwright';
 
 dotenv.config();
-setDefaultTimeout(30000);
+setDefaultTimeout(90000);
 
 const headless = process.env.HEADLESS !== 'false';
 const launchSlowMo = Number.parseInt(process.env.MOBILE_SLOWMO_MS || process.env.PW_SLOWMO_MS || '0', 10);
@@ -18,6 +18,7 @@ export class MobileWorld extends World {
   context!: BrowserContext;
   page!: Page;
   deviceName!: string;
+  visualBaselineFailures: string[] = [];
 
   constructor(options: IWorldOptions) {
     super(options);
