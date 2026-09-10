@@ -50,7 +50,7 @@
     "@types/node": "^26.2.0",
     "allure": "^3.16.0",
     "allure-cucumberjs": "^3.11.0",
-    "appium": "^2.5.4",
+    "appium": "^3.7.0",
 
     "appium-chromium-driver": "^3.0.8",
     "appium-uiautomator2-driver": "^8.5.0",
