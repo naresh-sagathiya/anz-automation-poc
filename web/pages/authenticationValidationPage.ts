@@ -1,5 +1,5 @@
 /** Page object for validating authentication, protected-page navigation, and session expiry. */
-import { BrowserContext, Cookie, Page, expect } from '@playwright/test';
+import { BrowserContext, Cookie, Page } from '@playwright/test';
 
 export class AuthenticationValidationPage {
   readonly page: Page;
