@@ -1,26 +1,26 @@
 import { After, Before, Given, Then, When } from '@cucumber/cucumber';
 import assert from 'node:assert/strict';
 import { TOTP } from 'otpauth';
-import { MyBankingAndroidWorld } from '../../android-mybanking/support/world';
+import { AndroidAppWorld } from '../../android-mybanking/support/world';
 
-Before(async function (this: MyBankingAndroidWorld) {
+Before(async function (this: AndroidAppWorld) {
   await this.initialize();
 });
 
-After(async function (this: MyBankingAndroidWorld) {
+After(async function (this: AndroidAppWorld) {
   if (process.env.ABC_KEEP_APP_OPEN !== 'true') {
     await this.dispose();
   }
 });
 
-Given('I launch ABC Bank', async function (this: MyBankingAndroidWorld) {
+Given('I launch ABC Bank', async function (this: AndroidAppWorld) {
   await this.driver.waitUntil(
     async () => (await this.driver.getCurrentActivity()).endsWith('MainActivity'),
     { timeout: 30000, timeoutMsg: 'ABC Bank MainActivity did not become active' },
   );
 });
 
-When('I enter the ABC Bank credentials', async function (this: MyBankingAndroidWorld) {
+When('I enter the ABC Bank credentials', async function (this: AndroidAppWorld) {
   const username = process.env.ABC_USERNAME;
   const password = process.env.ABC_PASSWORD;
   if (!username || !password) {
@@ -36,11 +36,11 @@ When('I enter the ABC Bank credentials', async function (this: MyBankingAndroidW
   await passwordField.setValue(password);
 });
 
-When('I click the ABC Bank login button', async function (this: MyBankingAndroidWorld) {
+When('I click the ABC Bank login button', async function (this: AndroidAppWorld) {
   await this.driver.$('id=com.app.hemanthbank:id/button_login').click();
 });
 
-When('I enter the ABC Bank verification code', async function (this: MyBankingAndroidWorld) {
+When('I enter the ABC Bank verification code', async function (this: AndroidAppWorld) {
   const verificationCode = process.env.ABC_TOTP_SECRET
     ? new TOTP({ secret: process.env.ABC_TOTP_SECRET }).generate()
     : process.env.ABC_VERIFICATION_CODE;
@@ -55,29 +55,29 @@ When('I enter the ABC Bank verification code', async function (this: MyBankingAn
   await codeField.setValue(verificationCode);
 });
 
-When('I click the ABC Bank verify button', async function (this: MyBankingAndroidWorld) {
+When(/^I click the ABC Bank (?:verify|verification) button$/, async function (this: AndroidAppWorld) {
   await this.driver.$('id=com.app.hemanthbank:id/button_verify').click();
 });
 
-Then('the ABC Bank main activity should be displayed', async function (this: MyBankingAndroidWorld) {
+Then('the ABC Bank main activity should be displayed', async function (this: AndroidAppWorld) {
   assert.equal(await this.driver.getCurrentPackage(), 'com.app.hemanthbank');
   assert.equal(await this.driver.getCurrentActivity(), '.MainActivity');
 });
 
-Then('ABC Bank should remain active after login submission', async function (this: MyBankingAndroidWorld) {
+Then('ABC Bank should remain active after login submission', async function (this: AndroidAppWorld) {
   await this.driver.waitUntil(
     async () => (await this.driver.getCurrentPackage()) === 'com.app.hemanthbank',
     { timeout: 10000, timeoutMsg: 'ABC Bank was not active after login submission' },
   );
 });
 
-Then('the ABC Bank verification screen should be displayed', async function (this: MyBankingAndroidWorld) {
+Then('the ABC Bank verification screen should be displayed', async function (this: AndroidAppWorld) {
   await this.driver.$('id=com.app.hemanthbank:id/edit_code').waitForDisplayed({ timeout: 15000 });
   await this.driver.$('id=com.app.hemanthbank:id/button_verify').waitForDisplayed({ timeout: 10000 });
 });
 
 When('I enter the verification code manually in the emulator', { timeout: 120000 }, async function (
-  this: MyBankingAndroidWorld,
+  this: AndroidAppWorld,
 ) {
   const codeField = this.driver.$('id=com.app.hemanthbank:id/edit_code');
   const verifyButton = this.driver.$('id=com.app.hemanthbank:id/button_verify');
@@ -90,7 +90,7 @@ When('I enter the verification code manually in the emulator', { timeout: 120000
   await verifyButton.click();
 });
 
-Then('ABC Bank should remain active after verification', async function (this: MyBankingAndroidWorld) {
+Then('ABC Bank should remain active after verification', async function (this: AndroidAppWorld) {
   await this.driver.waitUntil(
     async () => (await this.driver.getCurrentPackage()) === 'com.app.hemanthbank',
     { timeout: 10000, timeoutMsg: 'ABC Bank was not active after verification' },
