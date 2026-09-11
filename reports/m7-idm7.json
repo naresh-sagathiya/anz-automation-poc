@@ -1,0 +1,290 @@
+[
+  {
+    "description": "  In order to verify transaction browsing quality on mobile banking\n  As a mobile user\n  I want additional transaction loads and refresh to behave correctly without duplicate rows",
+    "elements": [
+      {
+        "description": "",
+        "id": "mobile-banking-transaction-list-behavior;additional-transaction-loads-do-not-duplicate-transactions",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Additional transaction loads do not duplicate transactions",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2502051700
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 145594000
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I open the mobile transaction list screen for ID-M7",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:24"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 95986399
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I capture the initial transaction list snapshot",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:33"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 43030900
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I create 4 additional transfer transactions for the current mobile account",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:40"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 32241799
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I open the updated account activity from Accounts Overview",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:49"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 52895999
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I scroll through the account activity list on mobile",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:57"
+            }
+          },
+          {
+            "result": {
+              "status": "failed",
+              "duration": 35393600,
+              "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n    at captureRawStack (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright-core\\lib\\coreBundle.js:9681:17)\n    at callMatcherAsStep (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright\\lib\\matchers\\expect.js:13310:57)\n    at Object.toBeGreaterThan (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright\\lib\\matchers\\expect.js:13300:23)\n    at MobileWorld.<anonymous> (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\mobile\\steps\\mobile.transaction-list.steps.ts:109:33)"
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the transaction list grows after lazy-load",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:95"
+            }
+          },
+          {
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "the transaction list contains no duplicate rows after lazy-load",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:73"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1599673500
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@mobile",
+            "line": 1
+          },
+          {
+            "name": "@ID-M7",
+            "line": 1
+          },
+          {
+            "name": "@transaction-list",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "mobile-banking-transaction-list-behavior;refresh-reloads-transaction-list-correctly-on-mobile",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Refresh reloads transaction list correctly on mobile",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1942259600
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 72820499
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "I open the mobile transaction list screen for ID-M7",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:24"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 78196899
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I capture the initial transaction list snapshot",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:33"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 24702799
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I create 2 additional transfer transactions for the current mobile account",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:40"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 22276500
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I open the updated account activity from Accounts Overview",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:49"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 28924499
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I scroll through the account activity list on mobile",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:57"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 27272100
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "I refresh the transaction list on mobile",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:66"
+            }
+          },
+          {
+            "result": {
+              "status": "failed",
+              "duration": 17520599,
+              "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n    at captureRawStack (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright-core\\lib\\coreBundle.js:9681:17)\n    at callMatcherAsStep (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright\\lib\\matchers\\expect.js:13310:57)\n    at Object.toBeGreaterThan (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\node_modules\\playwright\\lib\\matchers\\expect.js:13300:23)\n    at MobileWorld.<anonymous> (C:\\Users\\dara.lavanya\\OneDrive - HCL TECHNOLOGIES LIMITED\\Desktop\\NewFramework\\anz-automation-poc\\mobile\\steps\\mobile.transaction-list.steps.ts:134:33)"
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "refresh resets the list and keeps data consistent",
+            "match": {
+              "location": "mobile\\steps\\mobile.transaction-list.steps.ts:113"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 184253399
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@mobile",
+            "line": 1
+          },
+          {
+            "name": "@ID-M7",
+            "line": 1
+          },
+          {
+            "name": "@transaction-list",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "mobile-banking-transaction-list-behavior",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Mobile banking transaction list behavior",
+    "tags": [
+      {
+        "name": "@mobile",
+        "line": 1
+      },
+      {
+        "name": "@ID-M7",
+        "line": 1
+      },
+      {
+        "name": "@transaction-list",
+        "line": 1
+      }
+    ],
+    "uri": "mobile\\features\\mobile_transaction_list.feature"
+  }
+]
