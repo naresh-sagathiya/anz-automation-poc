@@ -1,20 +1,22 @@
-import { Page } from '@playwright/test';
+/** Page object for creating a new ParaBank customer account. */
+import { Locator, Page } from '@playwright/test';
 
-import { BasePage } from './BasePage';
+import { BasePage } from './basePage';
+import { TestUtils } from '../support/webTestutils';
 
 export class RegisterPage extends BasePage {
-  readonly firstName;
-  readonly lastName;
-  readonly address;
-  readonly city;
-  readonly state;
-  readonly zipCode;
-  readonly phone;
-  readonly ssn;
-  readonly username;
-  readonly password;
-  readonly confirmPassword;
-  readonly registerButton;
+  readonly firstName: Locator;
+  readonly lastName: Locator;
+  readonly address: Locator;
+  readonly city: Locator;
+  readonly state: Locator;
+  readonly zipCode: Locator;
+  readonly phone: Locator;
+  readonly ssn: Locator;
+  readonly username: Locator;
+  readonly password: Locator;
+  readonly confirmPassword: Locator;
+  readonly registerButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -33,7 +35,7 @@ export class RegisterPage extends BasePage {
     this.registerButton = page.locator('input[value="Register"]');
   }
 
-  async register(data: any) {
+  async register(data: any, usernameOverride?: string): Promise<{ username: string; password: string }> {
     await this.firstName.fill(data.firstName);
     await this.lastName.fill(data.lastName);
     await this.address.fill(data.address);
@@ -43,8 +45,7 @@ export class RegisterPage extends BasePage {
     await this.phone.fill(data.phone);
     await this.ssn.fill(data.ssn);
 
-    // Generate unique username
-    const username = `${data.usernamePrefix}${Date.now()}`;
+    const username = usernameOverride ?? TestUtils.generateUniqueUsername(data.usernamePrefix);
     await this.username.fill(username);
     await this.password.fill(data.password);
     await this.confirmPassword.fill(data.confirmPassword);

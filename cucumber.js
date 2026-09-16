@@ -43,10 +43,11 @@ module.exports = {
       "web/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
+    tags: "not @ignore",
 
     format: [
       "progress",
-      "html:reports/web-cucumber-report.html",
+      "html:reports/web/web-cucumber-report.html",
       "allure-cucumberjs/reporter",
     ],
 

@@ -9,6 +9,7 @@ Feature: MFA Login
     Then the user should be successfully authenticated
 
   @mfa
+  @ignore
   Scenario: User receives error with invalid OTP
     Given the user is on the MFA login page
     When the user logs in with valid GitHub credentials

@@ -2,7 +2,7 @@ Feature: ParaBank account balances and transaction history
 
   Background:
     Given the customer is on the ParaBank home page
-    And the customer registers a new user using registration test data
+    And the customer logs in using the shared test user
 
   @w6 @balance-integrity
   Scenario: Reconcile the account balance across overview and statement

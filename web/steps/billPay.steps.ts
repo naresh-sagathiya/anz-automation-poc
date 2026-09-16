@@ -1,8 +1,8 @@
+/** Step definitions for successful, invalid, and duplicate bill-payment flows. */
 import { Given, Then, When } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
 import { BillPayDetails, BillPayPage } from '../pages/billPayPage';
 import { CustomWorld } from '../support/world';
-import billPayData from '../test_data/paraBankData.json';
+import billPayData from '../testData/paraBankData.json';
 
 const details = billPayData.billPay as BillPayDetails;
 
@@ -19,8 +19,9 @@ When('the customer submits the bill payment using test data', async function (th
 
 When('the customer submits a bill payment with amount {string}', async function (this: CustomWorld, amount: string) {
   const billPayPage = new BillPayPage(this.page);
-  await billPayPage.fillPayment(details, amount);
+  await billPayPage.fillPayment(details, amount, this.openedAccountId);
   await billPayPage.submitPayment();
+  this.paymentAmount = Number(amount);
 });
 
 When('the customer submits a bill payment without a payee name', async function (this: CustomWorld) {

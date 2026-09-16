@@ -1,23 +1,27 @@
+/** Cucumber hooks that create, reset, and close the browser lifecycle for web scenarios. */
 import { After, Before } from '@cucumber/cucumber';
 import { chromium, firefox, webkit } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
 import { CustomWorld } from '../support/world';
-import { TestUtils } from '../../utils/webTestutils';
+import { LoginPage } from '../pages/loginPage';
+import { TestUtils } from '../support/webTestutils';
 
+/** Starts the browser, creates the scenario context, and prepares the initial page. */
 Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
   const browserName = process.env.BROWSER?.toLowerCase();
+  const isHeadless = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+  
+  console.log(`Launching ${browserName} browser (headless: ${isHeadless})`);
  
   if (browserName === 'chromium') {
-    this.browser = await chromium.launch({headless: false});
+    this.browser = await chromium.launch({headless: isHeadless});
   } else if (browserName === 'webkit') {
-    this.browser = await webkit.launch({headless: false});
+    this.browser = await webkit.launch({headless: isHeadless});
   }else if (browserName === 'firefox') {
-    this.browser = await firefox.launch({headless: false});
+    this.browser = await firefox.launch({headless: isHeadless});
   } else {
-    throw new Error(`Unsupported browser: ${browserName}`);
+    throw new Error(`Unsupported browser: ${browserName}. BROWSER env var is: ${process.env.BROWSER}`);
   }
 
   // Create browser context
@@ -28,24 +32,22 @@ Before(async function (this: CustomWorld, scenario) {
 
   // Open ParaBank only if not an MFA test
   if (!scenario.pickle.tags.some(tag => tag.name === '@mfa')) {
+    console.log(`Navigating to ${process.env.WEB_BASE_URL}`);
     await this.page.goto(process.env.WEB_BASE_URL!);
   }
 });
 
+/** Captures failure evidence, logs out, and closes scenario resources. */
 After(async function (this: CustomWorld, scenario) {
   
   // Take a screenshot only when the scenario fails.
   if (scenario.result?.status === 'FAILED' && this.page && !this.page.isClosed()) {
     try {
-      const screenshotDir = path.join(process.cwd(), 'tests', 'reports', 'screenshots');
-      fs.mkdirSync(screenshotDir, { recursive: true });
-
-      const scenarioName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]/g, '_');
-      const screenshotPath = path.join(screenshotDir, `${scenarioName}.png`);
-      const screenshot = await this.page.screenshot({ path: screenshotPath, fullPage: true });
+      const scenarioName = scenario.pickle.name;
+      const screenshot = await TestUtils.screenshot(this.page, scenarioName);
 
       await this.attach(screenshot, 'image/png');
-      console.log(`Failure screenshot saved: ${screenshotPath}`);
+      console.log(`Failure screenshot saved: ${TestUtils.screenshotPath(scenarioName)}`);
     } catch (error) {
       // Screenshot failure should not hide the original test failure.
       console.log('Could not capture failure screenshot:', error);
@@ -55,7 +57,7 @@ After(async function (this: CustomWorld, scenario) {
   // Logout after every scenario.
   if (this.page && !this.page.isClosed()) {
     try {
-      await TestUtils.logout(this.page);
+      await new LoginPage(this.page).logout();
     } catch (error) {
       console.log('Logout skipped or failed.');
     }
@@ -63,7 +65,7 @@ After(async function (this: CustomWorld, scenario) {
 
   if (this.secondaryPage && !this.secondaryPage.isClosed()) {
     try {
-      await TestUtils.logout(this.secondaryPage);
+      await new LoginPage(this.secondaryPage).logout();
     } catch (error) {
       console.log('Secondary logout skipped or failed.');
     }

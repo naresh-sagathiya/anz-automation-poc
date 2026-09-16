@@ -1,3 +1,4 @@
+/** Step definitions for immediate fund-transfer setup, execution, and confirmation. */
 import {
   Given,
   When,

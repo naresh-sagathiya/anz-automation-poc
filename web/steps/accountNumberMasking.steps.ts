@@ -1,3 +1,4 @@
+/** Step definitions for account-number masking and evidence capture scenarios. */
 import { When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { AccountNumberMaskingPage } from '../pages/accountNumberMaskingPage';

@@ -1,15 +1,16 @@
-import { BasePage } from "./BasePage";
-import { Page,expect } from "@playwright/test";
+/** Page object for opening an additional bank account and reading its balance. */
+import { BasePage } from "./basePage";
+import { Locator, Page,expect } from "@playwright/test";
 
 export class OpenNewAccountPage extends BasePage {
 
-    readonly openAccountLink;
-    readonly accountType;
-    readonly fromAccount;
-    readonly openAccountButton;
-    readonly accountsuccessMessage;
-    readonly accountNumber;
-    readonly accountoverviewLink;
+    readonly openAccountLink: Locator;
+    readonly accountType: Locator;
+    readonly fromAccount: Locator;
+    readonly openAccountButton: Locator;
+    readonly accountsuccessMessage: Locator;
+    readonly accountNumber: Locator;
+    readonly accountoverviewLink: Locator;
 
     constructor(page:Page) {
         super(page);
@@ -22,7 +23,7 @@ export class OpenNewAccountPage extends BasePage {
         this.accountoverviewLink =page.getByRole('link', { name: 'Accounts Overview' });
     }
 
-    async openNewAccount(accountType = 'SAVINGS') {
+    async openNewAccount(accountType = 'SAVINGS'): Promise<string> {
         await this.openAccountLink.click();
         await this.page.waitForURL(/openaccount\.htm/);
 

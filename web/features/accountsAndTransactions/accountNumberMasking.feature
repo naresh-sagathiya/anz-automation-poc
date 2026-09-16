@@ -3,7 +3,7 @@ Feature: ParaBank account number display on Accounts Overview
   @account-number-visibility
   Scenario: Account number is displayed without a mask or reveal control
     Given the customer is on the ParaBank home page
-    When the customer registers a new user using registration test data
+    When the customer logs in using the shared test user
     And the customer navigates to Accounts Overview
     Then the first account number is visible on the overview page
     And the first account number is not masked

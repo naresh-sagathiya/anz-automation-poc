@@ -2,7 +2,7 @@ Feature: ParaBank bill payment
 
   Background:
     Given the customer is on the ParaBank home page
-    And the customer registers a new user using registration test data
+    And the customer logs in using the shared test user
 
   @bill-payment @smoke
   Scenario: Pay a bill with a valid amount

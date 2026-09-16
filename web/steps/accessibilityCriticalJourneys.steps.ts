@@ -1,3 +1,4 @@
+/** Step definitions for login-form and dashboard accessibility journeys. */
 import { Given, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { AccessibilityJourneyPage } from '../pages/accessibilityJourneyPage';

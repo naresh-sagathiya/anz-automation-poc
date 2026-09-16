@@ -9,6 +9,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/reports/web/
 /reports/api-server.log
 /reports/api-*.log
 /reports/api-cucumber-report-*.json

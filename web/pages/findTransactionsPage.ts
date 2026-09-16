@@ -1,5 +1,6 @@
-import { expect, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+/** Page object for searching transactions and extracting result details. */
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './basePage';
  
 export type PersonDetails = {
   firstName?: string;
@@ -14,11 +15,11 @@ export type PersonDetails = {
 };
  
 export class FindTransactionsPage extends BasePage {
-  readonly heading;
-  readonly account;
-  readonly amount;
-  readonly amountSearchButton;
-  readonly resultsTable;
+  readonly heading: Locator;
+  readonly account: Locator;
+  readonly amount: Locator;
+  readonly amountSearchButton: Locator;
+  readonly resultsTable: Locator;
  
   constructor(page: Page) {
     super(page);
@@ -29,14 +30,14 @@ export class FindTransactionsPage extends BasePage {
     this.resultsTable = page.locator('table').last();
   }
  
-  async open(accountId: string) {
+  async open(accountId: string): Promise<void> {
     await this.page.getByRole('link', { name: 'Find Transactions' }).click();
     await this.page.waitForURL(/findtrans\.htm/);
     await expect(this.heading).toBeVisible({ timeout: 15000 });
     await this.account.selectOption({ label: accountId });
   }
  
-  async searchByAmount(amount: string) {
+  async searchByAmount(amount: string): Promise<void> {
     await this.amount.fill(amount);
     await this.amountSearchButton.click();
     await expect(this.page.getByRole('heading', { name: 'Transaction Results' })).toBeVisible({ timeout: 15000 });
@@ -59,7 +60,10 @@ export class FindTransactionsPage extends BasePage {
     const details: PersonDetails = {};
     
     // Try to get person details from account information section
-    const accountInfo = await this.page.locator('[class*="account-info"], [class*="person-details"]').textContent();
+    const accountInfoLocator = this.page.locator('[class*="account-info"], [class*="person-details"]');
+    const accountInfo = (await accountInfoLocator.count()) > 0
+      ? await accountInfoLocator.first().textContent()
+      : null;
     if (accountInfo) {
       const nameMatch = accountInfo.match(/(?:Name|Person|Customer):\s*([A-Za-z\s]+)/i);
       if (nameMatch) {
@@ -94,14 +98,27 @@ export class FindTransactionsPage extends BasePage {
       )
     );
     
-    return rows.filter((cells) => cells.length >= 3).map((cells) => ({
-      date: cells[0] || '',
-      description: cells[1] || '',
-      amount: cells.slice(2)
-        .map((value) => Number(value.replace(/[^\\d.-]/g, '')))
-        .find((value) => Number.isFinite(value) && value > 0) || 0,
-      rawData: cells
-    }));
+    return rows.filter((cells) => cells.length >= 3).map((cells) => {
+      const debit = this.parseTransactionAmount(cells[2]);
+      const credit = this.parseTransactionAmount(cells[3]);
+      const amount = debit ?? credit ?? 0;
+
+      return {
+        date: cells[0] || '',
+        description: cells[1] || '',
+        debit,
+        credit,
+        amount,
+        transactionType: debit !== undefined ? 'DEBIT' : (credit !== undefined ? 'CREDIT' : 'OTHER'),
+        rawData: cells,
+      };
+    });
+  }
+
+  private parseTransactionAmount(value?: string): number | undefined {
+    if (!value) return undefined;
+    const amount = Number(value.replace(/[^\d.-]/g, ''));
+    return Number.isFinite(amount) && amount > 0 ? amount : undefined;
   }
  
   async verifyPersonDetailsPresent(): Promise<boolean> {
