@@ -30,6 +30,7 @@ export class CustomWorld extends World {
   };
   openedAccountId?: string;
   initialBalance?: number;
+  paymentAmount?: number;
   paymentRequestCount?: number;
   personDetails?: {
     firstName?: string;

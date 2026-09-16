@@ -35,7 +35,7 @@ export class RegisterPage extends BasePage {
     this.registerButton = page.locator('input[value="Register"]');
   }
 
-  async register(data: any): Promise<{ username: string; password: string }> {
+  async register(data: any, usernameOverride?: string): Promise<{ username: string; password: string }> {
     await this.firstName.fill(data.firstName);
     await this.lastName.fill(data.lastName);
     await this.address.fill(data.address);
@@ -45,7 +45,7 @@ export class RegisterPage extends BasePage {
     await this.phone.fill(data.phone);
     await this.ssn.fill(data.ssn);
 
-    const username = TestUtils.generateUniqueUsername(data.usernamePrefix);
+    const username = usernameOverride ?? TestUtils.generateUniqueUsername(data.usernamePrefix);
     await this.username.fill(username);
     await this.password.fill(data.password);
     await this.confirmPassword.fill(data.confirmPassword);

@@ -19,7 +19,7 @@ When('the customer registers a new user using registration test data', async fun
   console.log('Registration form submitted successfully');
 });
 
-Given('the customer logs out after registration', async function (this: CustomWorld) {
+Given('the customer logs out of ParaBank', async function (this: CustomWorld) {
   const logoutLink = this.page.getByRole('link', { name: /Log Out/i });
 
   await expect(logoutLink).toBeVisible();

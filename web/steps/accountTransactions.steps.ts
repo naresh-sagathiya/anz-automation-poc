@@ -28,13 +28,19 @@ When('the customer opens the first account from Accounts Overview', async functi
 });
  
 Then('the account balance should reconcile across the overview and statement', async function (this: CustomWorld) {
-  if (!this.openedAccountId || this.initialBalance === undefined) {
-    throw new Error('The initial account balance was not captured');
+  if (!this.openedAccountId || this.initialBalance === undefined || this.paymentAmount === undefined) {
+    throw new Error('The initial balance and payment amount were not captured');
   }
+
   const activity = new AccountActivityPage(this.page);
   const detailBalance = await activity.getAccountDetailBalance();
-  const calculatedBalance = await activity.calculateBalance(this.initialBalance);
-  expect(detailBalance).toBeCloseTo(calculatedBalance, 2);
+  const overview = new AccountOverviewPage(this.page);
+  await overview.open();
+  const overviewBalance = await overview.getBalance(this.openedAccountId);
+  const expectedBalance = this.initialBalance - this.paymentAmount;
+
+  expect(overviewBalance).toBeCloseTo(expectedBalance, 2);
+  expect(detailBalance).toBeCloseTo(overviewBalance, 2);
 });
  
 When('the customer searches the first account transactions for amount {string}', async function (this: CustomWorld, amount: string) {

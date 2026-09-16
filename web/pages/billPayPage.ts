@@ -55,7 +55,7 @@ export class BillPayPage extends BasePage {
     await expect(this.fromAccount.locator('option[value]:not([value=""])')).not.toHaveCount(0, { timeout: 15000 });
   }
 
-  async fillPayment(details: BillPayDetails, amount = details.amount): Promise<void> {
+  async fillPayment(details: BillPayDetails, amount = details.amount, sourceAccountId?: string): Promise<void> {
     await this.payeeName.fill(details.payeeName);
     await this.address.fill(details.address);
     await this.city.fill(details.city);
@@ -65,7 +65,12 @@ export class BillPayPage extends BasePage {
     await this.account.fill(details.account);
     await this.verifyAccount.fill(details.verifyAccount);
     await this.amount.fill(amount);
-    await this.fromAccount.selectOption({ index: 0 });
+    const firstAccountOption = this.fromAccount.locator('option[value]:not([value=""])').first();
+    const firstAccountId = sourceAccountId ?? await firstAccountOption.getAttribute('value');
+    if (!firstAccountId) {
+      throw new Error('No source account is available for bill payment');
+    }
+    await this.fromAccount.selectOption(firstAccountId);
   }
 
   async submitPayment(): Promise<void> {

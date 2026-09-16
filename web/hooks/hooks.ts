@@ -10,15 +10,18 @@ Before(async function (this: CustomWorld, scenario) {
 
   // Launch browser
   const browserName = process.env.BROWSER?.toLowerCase();
+  const isHeadless = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+  
+  console.log(`Launching ${browserName} browser (headless: ${isHeadless})`);
  
   if (browserName === 'chromium') {
-    this.browser = await chromium.launch({headless: false});
+    this.browser = await chromium.launch({headless: isHeadless});
   } else if (browserName === 'webkit') {
-    this.browser = await webkit.launch({headless: false});
+    this.browser = await webkit.launch({headless: isHeadless});
   }else if (browserName === 'firefox') {
-    this.browser = await firefox.launch({headless: false});
+    this.browser = await firefox.launch({headless: isHeadless});
   } else {
-    throw new Error(`Unsupported browser: ${browserName}`);
+    throw new Error(`Unsupported browser: ${browserName}. BROWSER env var is: ${process.env.BROWSER}`);
   }
 
   // Create browser context
@@ -29,6 +32,7 @@ Before(async function (this: CustomWorld, scenario) {
 
   // Open ParaBank only if not an MFA test
   if (!scenario.pickle.tags.some(tag => tag.name === '@mfa')) {
+    console.log(`Navigating to ${process.env.WEB_BASE_URL}`);
     await this.page.goto(process.env.WEB_BASE_URL!);
   }
 });

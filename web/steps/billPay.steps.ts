@@ -19,8 +19,9 @@ When('the customer submits the bill payment using test data', async function (th
 
 When('the customer submits a bill payment with amount {string}', async function (this: CustomWorld, amount: string) {
   const billPayPage = new BillPayPage(this.page);
-  await billPayPage.fillPayment(details, amount);
+  await billPayPage.fillPayment(details, amount, this.openedAccountId);
   await billPayPage.submitPayment();
+  this.paymentAmount = Number(amount);
 });
 
 When('the customer submits a bill payment without a payee name', async function (this: CustomWorld) {

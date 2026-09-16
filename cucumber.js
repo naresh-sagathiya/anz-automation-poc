@@ -27,6 +27,7 @@ module.exports = {
       "web/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
+    tags: "not @ignore",
 
     format: [
       "progress",

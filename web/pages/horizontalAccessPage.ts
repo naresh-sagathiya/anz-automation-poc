@@ -7,10 +7,10 @@ import { AccountOverviewPage } from './accountOverviewPage';
 export class HorizontalAccessPage {
   constructor(private readonly page: Page) {}
 
-  async registerUser(data: Record<string, string>): Promise<{ username: string; password: string }> {
+  async registerUser(data: Record<string, string>, username: string): Promise<{ username: string; password: string }> {
     await this.page.goto(process.env.WEB_BASE_URL!);
     await new LoginPage(this.page).openRegistration();
-    return new RegisterPage(this.page).register(data);
+    return new RegisterPage(this.page).register(data, username);
   }
 
   async getFirstAccountId(): Promise<string> {
