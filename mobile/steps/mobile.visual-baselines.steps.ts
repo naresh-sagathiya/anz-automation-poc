@@ -72,14 +72,33 @@ async function loginToDashboard(page: Page): Promise<void> {
   const loginPage = new MobileLoginPage(page);
   await loginPage.open();
 
+  if (/overview\.htm/.test(page.url())) {
+    return;
+  }
+
   const username = process.env.PARABANK_USER || 'john';
   const password = process.env.PARABANK_PASS || 'demo';
 
-  await page.locator('input[name="username"]').fill(username);
-  await page.locator('input[name="password"]').fill(password);
-  await page.locator('input[value="Log In"]').click();
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    await page.locator('input[name="username"]').waitFor({ state: 'visible', timeout: 15000 });
+    await page.locator('input[name="username"]').fill(username);
+    await page.locator('input[name="password"]').fill(password);
+    await page.locator('input[value="Log In"]').click();
 
-  await page.waitForURL(/overview\.htm/, { timeout: 10000 });
+    const redirected = await page
+      .waitForURL(/overview\.htm/, { timeout: 15000 })
+      .then(() => true, () => false);
+    if (redirected) {
+      return;
+    }
+
+    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
+    if (/overview\.htm/.test(page.url())) {
+      return;
+    }
+  }
+
+  throw new Error(`Mobile login did not reach the dashboard: ${page.url()}`);
 }
 
 When('I capture the mobile dashboard visual baseline', async function (this: MobileWorld) {
@@ -93,7 +112,9 @@ When('I capture the mobile dashboard visual baseline', async function (this: Mob
 
 When('I capture the mobile transfer visual baseline', async function (this: MobileWorld) {
   try {
-    await loginToDashboard(this.page);
+    if (!/overview\.htm/.test(this.page.url())) {
+      await loginToDashboard(this.page);
+    }
     await this.page.getByRole('link', { name: 'Transfer Funds' }).click();
     await expect(this.page).toHaveURL(/transfer\.htm/);
     await compareVisualBaseline(this, 'transfer');

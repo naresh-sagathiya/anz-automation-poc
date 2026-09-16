@@ -1,4 +1,4 @@
-@mobile @ID-M2 @mfa-login
+@mobile @ID-M2 @mfa-login @external
 Feature: Banking Scenario - Login and MFA on mobile
   In order to verify mobile login and OTP handling on narrow screens
   As a mobile banking user
