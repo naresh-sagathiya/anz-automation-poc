@@ -4,7 +4,7 @@ Feature: Banking payment API
     Given the banking API is available
     And I am authenticated as "alice"
 
-  @A8 @A9
+  @A8 @A9 
   Scenario: Payment and idempotency prevent duplicate debit
     When I create a payment of 10.25 with idempotency key "same-key"
     And I repeat the payment with idempotency key "same-key"

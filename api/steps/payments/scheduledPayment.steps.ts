@@ -2,7 +2,7 @@ import { Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { scheduledPaymentSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseSchema } from "../../../utils/schema";
+import { parseSchema } from "../../support/schema";
 
 When("I create a scheduled payment for tomorrow", async function (this: CustomWorld) {
   this.response = await this.scheduledPaymentService.create(this.accessToken, {

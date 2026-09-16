@@ -2,8 +2,8 @@ import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { errorSchema, paymentSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseIsoDate } from "../../../utils/date";
-import { isoDateSchema, parseSchema } from "../../../utils/schema";
+import { parseIsoDate } from "../../../utils/dateUtils";
+import { isoDateSchema, parseSchema } from "../../support/schema";
 
 When(
   "I create a payment of {float} with idempotency key {string}",

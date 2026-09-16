@@ -11,6 +11,7 @@ export interface LoginUser {
 }
 
 export interface LoginResponse {
+  outputDir: string;
   data: Record<string, string | number | boolean>;
   fileName: string;
   accessToken: string;

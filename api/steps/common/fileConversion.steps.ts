@@ -1,8 +1,8 @@
-import { Given, Then, When } from "@cucumber/cucumber";
+import { Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { CustomWorld } from "../support/world";
+import { CustomWorld } from "../../support/world";
 
 When(
   "I convert the following text to JSON with file name {string} and output directory {string}",
@@ -48,12 +48,7 @@ Then(
 Then(
   "the generated JSON file should exist in the local output folder",
   function (this: CustomWorld) {
-    const filePath = path.join(
-      __dirname,
-      "..",
-      "locales",
-      this.responseBody.fileName,
-    );
+    const filePath = path.join(this.responseBody.outputDir, this.responseBody.fileName);
 
     expect(existsSync(filePath)).toBeTruthy();
 
