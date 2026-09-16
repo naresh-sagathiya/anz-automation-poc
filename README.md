@@ -214,6 +214,19 @@ The Android scenarios use Appium's `mobile: deepLink` command for Chrome launch,
 npm run test:android
 ```
 
+### ABC Bank native login
+
+The ABC Bank APK is launched with Appium on the `emulator-5554` device. Set the credentials and the authenticator enrollment secret in the local PowerShell session; the test generates the current TOTP code at runtime and never writes it to the repository:
+
+```powershell
+$env:ABC_USERNAME = "test8@gmail.com"
+$env:ABC_PASSWORD = "<password>"
+$env:ABC_TOTP_SECRET = "<base32-enrollment-secret>"
+npm run test:android:abc -- --tags "@login"
+```
+
+`ABC_TOTP_SECRET` is the Base32 setup key from the authenticator enrollment QR/setup screen, not a changing six-digit code. For manual verification, use the `@manual-verification` tag; the test stops on the verification screen without entering or clicking `VERIFY`.
+
 ### Pixel 10 Pro Fold (Android 16)
 
 The Pixel 10 Pro Fold AVD is supported with these properties:
@@ -249,6 +262,46 @@ npm run test:android:fold -- --tags @chrome
 The emulator must have Chrome installed. The Android flow uses coordinate-based interactions, so display size and Chrome state can affect the test.
 
 If PowerShell cannot find `adb`, add the Android SDK `platform-tools` directory to `PATH` or use the full path to `adb.exe`. The default Windows location is usually `%LOCALAPPDATA%\Android\Sdk\platform-tools`.
+
+### My Banking App native Android flow
+
+The sample [MyBankingAppTests](https://github.com/wswebcreation/MyBankingAppTests) repository provides
+`MyBankingApp.apk`. Download it into `apps\MyBankingApp.apk`, or set `ANDROID_APP_PATH` to another
+local APK path. The native flow uses the sample app's package and accessibility IDs:
+
+```powershell
+New-Item -ItemType Directory -Force apps | Out-Null
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/wswebcreation/MyBankingAppTests/main/apps/MyBankingApp.apk" `
+  -OutFile "apps\MyBankingApp.apk"
+npm run appium:start:android
+```
+
+Run the native scenario separately from the Chrome scenarios:
+
+```powershell
+$env:ANDROID_APP_PATH = (Resolve-Path "apps\MyBankingApp.apk").Path
+npm run test:android:mybanking
+```
+
+To run the native scenario on the three configured emulators in parallel, ensure the APK is
+available at the same path for all workers and run:
+
+```powershell
+npm run test:android:mybanking:parallel
+```
+
+Override the emulator definitions with `name:udid:androidVersion:appiumPort` entries when needed:
+
+```powershell
+$env:ANDROID_DEVICES = "Pixel_10_Pro:emulator-5554:14:4723,Pixel_6:emulator-5556:17:4725,Pixel_10:emulator-5558:14:4727"
+npm run test:android:mybanking:parallel
+```
+
+The native smoke scenario verifies that the APK launches and reaches the registered-device scan
+screen. The sample's QR-image injection and biometric commands are Sauce Labs-specific and are
+not enabled by this local flow; add a provider-specific step before automating the remaining
+registration and biometric screens.
 
 ## Reports and Artifacts
 

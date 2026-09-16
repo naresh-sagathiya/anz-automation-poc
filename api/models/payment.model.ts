@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isoDateSchema } from "../../utils/schema";
+import { isoDateSchema } from "../support/schema";
 export const paymentSchema = z
   .object({
     paymentId: z.string(),
@@ -69,5 +69,31 @@ export const transactionPageSchema = z
     page: z.number(),
     pageSize: z.number(),
     total: z.number(),
+  })
+  .strict();
+
+export const scheduledPaymentSchema = z
+  .object({
+    scheduledPaymentId: z.string(),
+    status: z.enum(["SCHEDULED", "CANCELLED"]),
+    amount: z.number(),
+    currency: z.literal("AUD"),
+    fromAccountId: z.string(),
+    toAccountId: z.string(),
+    scheduledFor: isoDateSchema,
+    reference: z.string(),
+    createdAt: isoDateSchema,
+  })
+  .strict();
+
+export const statementSchema = z
+  .object({
+    statementId: z.string(),
+    accountId: z.string(),
+    periodStart: isoDateSchema,
+    periodEnd: isoDateSchema,
+    openingBalance: z.number(),
+    closingBalance: z.number(),
+    transactions: z.array(transactionSchema),
   })
   .strict();

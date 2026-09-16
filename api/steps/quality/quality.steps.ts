@@ -11,10 +11,9 @@ import {
   errorSchema,
 } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseIsoDate } from "../../../utils/date";
-import { isoDateSchema, parseSchema } from "../../../utils/schema";
-import { assertDoesNotContainSecrets } from "../../../utils/fileValidation";
-import { writeTextFile } from "../../../utils/data";
+import { parseIsoDate } from "../../../utils/dateUtils";
+import { isoDateSchema, parseSchema } from "../../support/schema";
+import { assertDoesNotContainSecrets,  writeTextFile } from "../../../utils/fileUtils";
 
 When(
   "I request the configured customer accounts",
@@ -121,10 +120,11 @@ When(
       ).json(),
       "rate limit",
     );
+    this.schemaSweepCompleted = true;
   },
 );
-Then("every banking endpoint response passes its schema", function () {
-  expect(true).toBeTruthy();
+Then("every banking endpoint response passes its schema", function (this: CustomWorld) {
+  expect(this.schemaSweepCompleted).toBeTruthy();
 });
 When(
   "I call the rate limited endpoint with retry key {string}",

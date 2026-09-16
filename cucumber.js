@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const mobileFormat = [
-  "progress",
-  "html:reports/mobile-cucumber-report.html",
+  "./mobile/support/quietProgressFormatter.js",
+  `html:reports/${process.env.MOBILE_REPORT_FILE || "mobile-cucumber-report"}.html`,
 ];
 
 module.exports = {
@@ -14,6 +14,22 @@ module.exports = {
     requireModule: ["tsx/cjs"],
 
     format: ["progress", "html:reports/api-cucumber-report.html"],
+
+    publishQuiet: true,
+  },
+
+  "api-ci": {
+    paths: [],
+
+    require: ["api/steps/**/*.ts", "api/support/**/*.ts"],
+
+    requireModule: ["tsx/cjs"],
+
+    format: [
+      "progress",
+      `json:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.json`,
+      `html:reports/api-cucumber-report-${process.env.API_SHARD_INDEX || "local"}.html`,
+    ],
 
     publishQuiet: true,
   },
@@ -51,18 +67,39 @@ module.exports = {
 
     format: mobileFormat,
 
+    tags: "not @external",
+
     publishQuiet: true,
   },
 
   android: {
-    paths: ["android/features/**/*.feature"],
+    paths: ["mobile/android/features/**/*.feature"],
 
-    require: ["android/steps/**/*.ts", "android/support/**/*.ts"],
+    require: ["mobile/android/steps/**/*.ts", "mobile/android/support/**/*.ts"],
 
     requireModule: ["tsx/cjs"],
 
     format: ["progress", "html:reports/android-cucumber-report.html"],
 
+    publishQuiet: true,
+  },
+
+  "android-abc": {
+    paths: ["mobile/android-abc/features/**/*.feature"],
+    require: [
+      "mobile/android-abc/steps/**/*.ts",
+      "mobile/android-mybanking/support/world.ts",
+    ],
+    requireModule: ["tsx/cjs"],
+    format: ["progress", "html:reports/android-abc-cucumber-report.html"],
+    publishQuiet: true,
+  },
+
+  "android-mybanking": {
+    paths: ["mobile/android-mybanking/features/**/*.feature"],
+    require: ["mobile/android-mybanking/steps/**/*.ts", "mobile/android-mybanking/support/**/*.ts"],
+    requireModule: ["tsx/cjs"],
+    format: ["progress", "html:reports/android-mybanking-cucumber-report.html"],
     publishQuiet: true,
   },
 };

@@ -2,7 +2,7 @@ import { When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { payeeSchema } from "../../models/payment.model";
 import { CustomWorld } from "../../support/world";
-import { parseSchema } from "../../../utils/schema";
+import { parseSchema } from "../../support/schema";
 
 When("I create a valid payee", async function (this: CustomWorld) {
   this.payeePayload = {

@@ -3,7 +3,8 @@
     "api/features/**/*.feature",
     "web/features/**/*.feature",
     "mobile/features/**/*.feature",
-    "android/features/**/*.feature"
+    "mobile/android/features/**/*.feature",
+    "mobile/android-mybanking/features/**/*.feature"
   ],
   "cucumber.glue": [
     "api/steps/**/*.ts",
@@ -12,7 +13,9 @@
     "web/support/**/*.ts",
     "mobile/steps/**/*.ts",
     "mobile/support/**/*.ts",
-    "android/steps/**/*.ts",
-    "android/support/**/*.ts"
+    "mobile/android/steps/**/*.ts",
+    "mobile/android/support/**/*.ts",
+    "mobile/android-mybanking/steps/**/*.ts",
+    "mobile/android-mybanking/support/**/*.ts"
   ]
 }

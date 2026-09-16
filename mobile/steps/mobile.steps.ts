@@ -4,6 +4,7 @@ import { MobileWorld } from '../support/world';
 import { MobileLoginPage } from '../pages/MobileLoginPage';
 import { MobileTransferPage } from '../pages/MobileTransferPage';
 import { installOfflineMobileMocks, offlineMobileUrl } from '../mocks/mobileMocks';
+import { mobileConfig } from '../config';
 
 // Type augmentation for world
 declare module '@cucumber/cucumber' {
@@ -24,11 +25,7 @@ After(async function (this: MobileWorld) {
 });
 
 Given('I open the parabank mobile site', async function (this: MobileWorld) {
-  const apiBaseUrl = process.env.API_BASE_URL;
-  const derivedBaseUrl = apiBaseUrl ? apiBaseUrl.replace(/\/services\/bank\/?$/, '') : undefined;
-  const mobileBaseUrl = process.env.MOBILE_BASE_URL || process.env.PARABANK_BASE_URL || derivedBaseUrl || 'https://parabank.parasoft.com/parabank';
-
-  await this.page.goto(mobileBaseUrl, {
+  await this.page.goto(mobileConfig.baseUrl, {
     waitUntil: 'domcontentloaded',
     timeout: 30000,
   });
@@ -53,23 +50,15 @@ Then('the offline mobile page should not request the live backend', async functi
 });
 
 Given('I login with valid mobile credentials', async function (this: MobileWorld) {
-  const user = process.env.PARABANK_USER || 'john';
-  const pass = process.env.PARABANK_PASS || 'demo';
-  const page = this.page;
-
-  await page.fill('input[name="username"]', user);
-  await page.fill('input[name="password"]', pass);
-  await page.click('input[value="Log In"]');
-
-  await page.waitForSelector('text=Accounts Overview', { timeout: 20000 }).catch(() => {
-    // fallback: some pages load differently; allow the page to settle before continuing
-  });
+  const loginPage = new MobileLoginPage(this.page);
+  await loginPage.login(mobileConfig.username, mobileConfig.password);
+  await expect(this.page).toHaveURL(/overview\.htm/, { timeout: 20000 });
 });
 
 When('I navigate to the Transfer Funds page', async function (this: MobileWorld) {
   const page = this.page;
-  await page.click('text=Transfer Funds');
-  await page.waitForURL(/transfer\.htm/, { timeout: 20000 });
+  await this.page.getByRole('link', { name: 'Transfer Funds' }).click();
+  await expect(this.page).toHaveURL(/transfer\.htm/, { timeout: 20000 });
 });
 
 When('I submit a transfer of {string} from {string} to {string}', async function (this: MobileWorld, amount: string, from: string, to: string) {
@@ -79,9 +68,7 @@ When('I submit a transfer of {string} from {string} to {string}', async function
 });
 
 Then('the transfer completes and confirmation is visible without scrolling', async function (this: MobileWorld) {
-  const page = this.page;
-  await page.waitForSelector('text=Transfer Complete', { timeout: 20000 });
-  const confirmation = page.locator('text=Transfer Complete').first();
+  const confirmation = this.page.getByText('Transfer Complete').first();
   await expect(confirmation).toBeVisible();
   const box = await confirmation.boundingBox();
   expect(box).not.toBeNull();
@@ -93,38 +80,35 @@ Then('the transfer completes and confirmation is visible without scrolling', asy
 
 Then('the amount field accepts numeric input on mobile', async function (this: MobileWorld) {
   const page = this.page;
-  await page.goto('https://parabank.parasoft.com/parabank/transfer.htm', { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.fill('#amount', '100.00');
-  const amount = await page.locator('#amount').inputValue();
+  await this.page.goto(`${mobileConfig.baseUrl}/transfer.htm`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await this.page.locator('#amount').fill('100.00');
+  const amount = await this.page.locator('#amount').inputValue();
   expect(amount).toBe('100.00');
 });
 
 When('I navigate to the Add Payee page', async function (this: MobileWorld) {
-  const page = this.page;
-  await page.click('text=Bill Pay');
-  await page.waitForURL(/billpay\.htm/, { timeout: 20000 });
+  await this.page.getByRole('link', { name: 'Bill Pay' }).click();
+  await expect(this.page).toHaveURL(/billpay\.htm/, { timeout: 20000 });
 });
 
 When('I add a payee with name {string} and phone {string} and account {string}', async function (this: MobileWorld, name: string, phone: string, account: string) {
-  const page = this.page;
-  await page.fill('input[name="payee.name"]', name);
-  await page.fill('input[name="payee.address.street"]', '123 Test St');
-  await page.fill('input[name="payee.address.city"]', 'Sydney');
-  await page.fill('input[name="payee.address.state"]', 'NSW');
-  await page.fill('input[name="payee.address.zipCode"]', '2000');
-  await page.fill('input[name="payee.phoneNumber"]', phone);
-  await page.fill('input[name="payee.accountNumber"]', account);
-  await page.fill('input[name="verifyAccount"]', account);
-  await page.fill('input[name="amount"]', '25.00');
-  await page.selectOption('select[name="fromAccountId"]', { index: 0 });
-  await page.click('input[value="Send Payment"]');
+  await this.page.locator('input[name="payee.name"]').fill(name);
+  await this.page.locator('input[name="payee.address.street"]').fill('123 Test St');
+  await this.page.locator('input[name="payee.address.city"]').fill('Sydney');
+  await this.page.locator('input[name="payee.address.state"]').fill('NSW');
+  await this.page.locator('input[name="payee.address.zipCode"]').fill('2000');
+  await this.page.locator('input[name="payee.phoneNumber"]').fill(phone);
+  await this.page.locator('input[name="payee.accountNumber"]').fill(account);
+  await this.page.locator('input[name="verifyAccount"]').fill(account);
+  await this.page.locator('input[name="amount"]').fill('25.00');
+  await this.page.locator('select[name="fromAccountId"]').selectOption({ index: 0 });
+  await this.page.locator('input[value="Send Payment"]').click();
 });
 
 Then('the payee form accepts input correctly', async function (this: MobileWorld) {
-  const page = this.page;
-  const name = await page.locator('input[name="payee.name"]').inputValue();
-  const phone = await page.locator('input[name="payee.phoneNumber"]').inputValue();
-  const account = await page.locator('input[name="payee.accountNumber"]').inputValue();
+  const name = await this.page.locator('input[name="payee.name"]').inputValue();
+  const phone = await this.page.locator('input[name="payee.phoneNumber"]').inputValue();
+  const account = await this.page.locator('input[name="payee.accountNumber"]').inputValue();
 
   expect(name).toBe('My Payee');
   expect(phone).toBe('1234567890');
@@ -132,7 +116,6 @@ Then('the payee form accepts input correctly', async function (this: MobileWorld
 });
 
 Then('inline validation is visible on a narrow screen', async function (this: MobileWorld) {
-  const page = this.page;
-  await page.click('input[value="Send Payment"]');
-  await expect(page.locator('text=Payee name is required.')).toBeVisible();
+  await this.page.locator('input[value="Send Payment"]').click();
+  await expect(this.page.getByText('Payee name is required.')).toBeVisible();
 });

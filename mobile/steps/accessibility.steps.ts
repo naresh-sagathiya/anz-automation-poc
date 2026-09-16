@@ -1,6 +1,9 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
+import { Page } from 'playwright';
 import { MobileWorld } from '../support/world';
+import { mobileConfig } from '../config';
 
 type AccessibilityScanState = {
   lastSummary: {
@@ -23,18 +26,16 @@ function getAccessibilityState(world: MobileWorld): AccessibilityScanState {
   return scoped.accessibilityScanState;
 }
 
-async function runScan(page: any, screen: string) {
-  const axe = await import('@axe-core/playwright');
-  const AxeBuilder = axe.default || axe.AxeBuilder;
+async function runScan(page: Page, screen: string) {
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
 
-  const violations = result.violations.map((violation: any) => ({
+  const violations = result.violations.map((violation) => ({
     id: violation.id,
     impact: violation.impact || 'unknown',
     description: violation.help || violation.helpUrl || violation.id,
-    nodes: violation.nodes?.length || 0,
+    nodes: violation.nodes.length,
   }));
 
   const critical = violations.filter((item) => item.impact === 'critical').length;
@@ -53,7 +54,7 @@ When('I run a WCAG 2.1 AA accessibility scan on the mobile {string} page', async
   const state = getAccessibilityState(this);
 
   if (screen === 'login') {
-    await this.page.goto(process.env.MOBILE_BASE_URL || process.env.PARABANK_BASE_URL || 'https://parabank.parasoft.com/parabank', {
+    await this.page.goto(mobileConfig.baseUrl, {
       waitUntil: 'domcontentloaded',
       timeout: 30000,
     });

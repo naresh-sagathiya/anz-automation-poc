@@ -264,6 +264,34 @@
 				"@ID-M14"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "start-abc-appium-4735",
+			"type": "shell",
+			"command": "npx appium --port 4735",
+			"options": {
+				"env": {
+					"ANDROID_HOME": "C:\\Users\\kothamasuhema.kumar\\AppData\\Local\\Android\\Sdk",
+					"ANDROID_SDK_ROOT": "C:\\Users\\kothamasuhema.kumar\\AppData\\Local\\Android\\Sdk",
+					"JAVA_HOME": "C:\\Program Files\\Android\\Android Studio\\jbr"
+				}
+			},
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "run-abc-login-headed",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": ["run", "test:android:abc:headed"],
+			"options": {
+				"env": {
+					"APPIUM_PORT": "4735",
+					"ABC_USERNAME": "${env:ABC_USERNAME}",
+					"ABC_PASSWORD": "${env:ABC_PASSWORD}",
+					"ABC_TOTP_SECRET": "${env:ABC_TOTP_SECRET}"
+				}
+			}
 		}
 	]
 }

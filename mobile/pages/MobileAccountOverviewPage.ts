@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export class MobileAccountOverviewPage {
   readonly openNewAccountLink: Locator;
@@ -21,20 +21,21 @@ export class MobileAccountOverviewPage {
     this.logoutLink = page.getByRole('link', { name: 'Log Out' });
   }
 
-  async verifyNavigationMenu(): Promise<void> {
-    await expect(this.openNewAccountLink).toBeVisible();
-    await expect(this.accountsOverviewLink).toBeVisible();
-    await expect(this.transferFundsLink).toBeVisible();
-    await expect(this.billPayLink).toBeVisible();
-    await expect(this.findTransactionsLink).toBeVisible();
-    await expect(this.updateContactInfoLink).toBeVisible();
-    await expect(this.requestLoanLink).toBeVisible();
-    await expect(this.logoutLink).toBeVisible();
+  navigationLinks(): Locator[] {
+    return [
+      this.openNewAccountLink,
+      this.accountsOverviewLink,
+      this.transferFundsLink,
+      this.billPayLink,
+      this.findTransactionsLink,
+      this.updateContactInfoLink,
+      this.requestLoanLink,
+      this.logoutLink,
+    ];
   }
 
-  async navigateTo(link: Locator, urlPattern: RegExp): Promise<void> {
+  async navigateTo(link: Locator): Promise<void> {
     await link.click();
-    await expect(this.page).toHaveURL(urlPattern);
   }
 
   async hasHorizontalScroll(): Promise<boolean> {

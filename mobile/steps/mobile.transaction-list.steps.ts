@@ -24,7 +24,7 @@ function getM7State(world: MobileWorld): M7State {
 Given('I open the mobile transaction list screen for ID-M7', async function (this: MobileWorld) {
   const pageModel = new MobileTransactionsPage(this.page);
   await pageModel.openViaLogin();
-  await pageModel.expectOnActivityPage();
+  expect(pageModel.isOnActivityPage()).toBe(true);
 
   const state = getM7State(this);
   state.initialCount = await pageModel.getRenderedCount();
@@ -88,7 +88,7 @@ Then('the transaction list contains no duplicate rows after lazy-load', async fu
   }
 
   for (const shot of state.snapshots || []) {
-    await pageModel.expectNoDuplicateRows(shot.signatures);
+    expect(await pageModel.hasDuplicateRows(shot.signatures)).toBe(false);
   }
 });
 
@@ -119,7 +119,7 @@ Then('refresh resets the list and keeps data consistent', async function (this: 
   const scrollTop = await pageModel.getPageScrollTop();
   const uniqueIds = new Set(afterRefreshIds);
 
-  await pageModel.expectOnActivityPage();
+  expect(pageModel.isOnActivityPage()).toBe(true);
   expect(state.preRefreshScrollTop).toBeDefined();
   expect(scrollTop).toBeLessThanOrEqual(state.preRefreshScrollTop!);
   expect(uniqueIds.size).toBeLessThanOrEqual(afterRefreshIds.length);

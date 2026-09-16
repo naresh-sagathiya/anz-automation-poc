@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow deterministic test fixtures and generated reports"
+paths = [
+  '''^reports/''',
+  '''^api/locales/''',
+]

@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 import { MobileWorld } from '../support/world';
 import { MobileLoginPage } from '../pages/MobileLoginPage';
 import { MobileRegistrationData, MobileRegistrationPage } from '../pages/MobileRegistrationPage';
+import { mobileConfig } from '../config';
 
 const registrationData: MobileRegistrationData = {
   firstName: 'Mobile',
@@ -32,7 +33,7 @@ When('I register a new mobile customer', { timeout: 60000 }, async function (thi
 });
 
 Then('mobile registration should complete successfully', async function (this: MobileWorld) {
-  await new MobileRegistrationPage(this.page).verifyRegistrationSuccess();
+  await expect(this.page.locator('h1.title')).toContainText('Welcome', { timeout: 20000 });
 });
 
 Then('the mobile page should have no horizontal scroll', async function (this: MobileWorld) {
@@ -43,7 +44,7 @@ Then('the mobile page should have no horizontal scroll', async function (this: M
 });
 
 Then('the mobile amount field should support numeric input', async function (this: MobileWorld) {
-  await this.page.goto('https://parabank.parasoft.com/parabank/transfer.htm', {
+  await this.page.goto(`${mobileConfig.baseUrl}/transfer.htm`, {
     waitUntil: 'domcontentloaded',
     timeout: 30000,
   });

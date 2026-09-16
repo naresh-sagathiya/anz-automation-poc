@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export interface MobileRegistrationData {
   firstName: string;
@@ -23,7 +23,7 @@ export class MobileRegistrationPage {
 
   async open(): Promise<void> {
     await this.page.getByRole('link', { name: 'Register' }).click();
-    await expect(this.page).toHaveURL(/register\.htm/);
+    await this.page.waitForURL(/register\.htm/);
   }
 
   async register(data: MobileRegistrationData): Promise<void> {
@@ -41,24 +41,17 @@ export class MobileRegistrationPage {
     await this.page.locator('input[value="Register"]').click();
   }
 
-  async verifyRegistrationSuccess(): Promise<void> {
-    await expect(this.page.locator('h1.title')).toContainText('Welcome', { timeout: 20000 });
-  }
-
-  async verifyFieldsAreVisibleWithoutClipping(): Promise<void> {
+  async fieldBounds(): Promise<Array<{ x: number; right: number }>> {
     const fields = this.page.locator('input');
     const count = await fields.count();
+    const bounds: Array<{ x: number; right: number }> = [];
     for (let index = 0; index < count; index += 1) {
       const field = fields.nth(index);
       if (await field.isVisible()) {
         const box = await field.boundingBox();
-        expect(box).not.toBeNull();
-        if (box) {
-          const viewport = this.page.viewportSize();
-          expect(box.x).toBeGreaterThanOrEqual(0);
-          expect(box.x + box.width).toBeLessThanOrEqual(viewport?.width ?? 0);
-        }
+        if (box) bounds.push({ x: box.x, right: box.x + box.width });
       }
     }
+    return bounds;
   }
 }

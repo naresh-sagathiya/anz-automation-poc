@@ -12,8 +12,12 @@ export class MobileTransferPage {
       return !!fromSelect && !!toSelect && fromSelect.options.length > 1 && toSelect.options.length > 1;
     }, { timeout: 30000 });
 
-    const actualFromValues = await this.page.locator('#fromAccountId option').evaluateAll((opts) => opts.map((o) => o.value));
-    const actualToValues = await this.page.locator('#toAccountId option').evaluateAll((opts) => opts.map((o) => o.value));
+    const actualFromValues = await this.page.locator('#fromAccountId option').evaluateAll((opts) =>
+      opts.map((option) => (option as HTMLOptionElement).value),
+    );
+    const actualToValues = await this.page.locator('#toAccountId option').evaluateAll((opts) =>
+      opts.map((option) => (option as HTMLOptionElement).value),
+    );
 
     const resolvedFrom = actualFromValues.includes(fromAccount) ? fromAccount : actualFromValues[1] || actualFromValues[0];
     const resolvedTo = actualToValues.includes(toAccount) && toAccount !== resolvedFrom ? toAccount : actualToValues.find((value) => value !== resolvedFrom) || actualToValues[1] || actualToValues[0];

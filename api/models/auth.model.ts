@@ -7,9 +7,11 @@ export interface LoginUser {
   userId: string;
   username: string;
   customerId: string;
+  role: "CUSTOMER" | "OPERATIONS";
 }
 
 export interface LoginResponse {
+  outputDir: string;
   data: Record<string, string | number | boolean>;
   fileName: string;
   accessToken: string;
