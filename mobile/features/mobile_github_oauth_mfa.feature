@@ -24,7 +24,7 @@ Feature: Mobile GitHub OAuth authentication with MFA
     When I deny the GitHub OAuth request
     Then the mobile login error should be displayed
 
-  @real-oauth
+  @real-oauth @external
   Scenario: Real GitHub OAuth smoke reaches the mobile dashboard
     Given the real GitHub OAuth environment is configured
     When I open the real mobile GitHub OAuth authorization URL

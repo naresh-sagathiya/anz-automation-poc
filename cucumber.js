@@ -66,6 +66,8 @@ module.exports = {
 
     format: mobileFormat,
 
+    tags: "not @external",
+
     publishQuiet: true,
   },
 
